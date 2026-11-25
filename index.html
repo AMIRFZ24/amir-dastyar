@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark" />
 <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
 <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)" />
-<meta name="site-version" content="3.36" />
+<meta name="site-version" content="3.37" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
@@ -1122,6 +1122,29 @@ html.card-drag-lock{overscroll-behavior:none}
 html.card-drag-lock .feat{touch-action:none!important}
 html.card-drag-lock .feat-grid{touch-action:none}
 .feat.lifted{border-color:var(--accent)}
+/* === v3.37: every feature grows — extra detail cells, full converter, news tools, calculator memory/history, azan detail grid, note pins, expense summary, calendar converter, PDF options, text-size & accent settings === */
+.wx-advice{line-height:1.95}
+.wx-advice b{color:var(--accent)}
+.conv-swap{width:100%;min-height:50px;border-radius:14px;border:1.5px solid transparent;background:var(--tg-card);box-shadow:var(--tg-shadow);font-weight:900;color:var(--accent);font-size:1rem}
+.conv-swap:active{transform:scale(.97)}
+.conv-words{font-size:.86rem;color:var(--muted);margin-top:6px;line-height:1.8}
+.news-tools{display:grid;gap:10px;margin-bottom:12px}
+.news-count{font-size:.82rem;color:var(--faint);font-weight:700}
+.calc-mem{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:9px}
+.calc-mem button{min-height:44px;border-radius:13px;border:1.5px solid transparent;background:var(--tg-card);box-shadow:var(--tg-shadow);color:var(--muted);font-weight:900;font-size:.9rem}
+.calc-mem button:active{transform:scale(.93)}
+.calc-mem button.has{color:var(--accent)}
+.hist-item{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;padding:10px 14px;border:none;background:transparent;background-image:linear-gradient(var(--line),var(--line));background-size:calc(100% - 28px) 1px;background-position:bottom center;background-repeat:no-repeat;color:var(--ink);font-weight:700;font-size:.92rem;text-align:right;min-height:46px;line-height:1.6;direction:ltr}
+.hist-item:last-child{background-image:none}
+.hist-item:active{transform:scale(.985)}
+.hist-item .hv{font-weight:900;color:var(--accent);white-space:nowrap}
+.az-rem{display:block;font-size:.74rem;color:var(--faint);font-weight:700}
+.azan-row.next .az-rem{color:var(--accent)}
+.note-card.pinned{border-color:#f59e0b;background:linear-gradient(180deg,rgba(245,158,11,.08),transparent),var(--tg-card)}
+.note-card .npin{color:#d97706;background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.4)}
+.pdf-move{display:flex;gap:6px;position:absolute;bottom:6px;inset-inline-end:6px}
+.pdf-move button{width:30px;height:30px;min-height:30px;border-radius:50%;border:1.5px solid var(--line);background:rgba(255,255,255,.92);color:#131a26;font-weight:900;display:grid;place-items:center;font-size:.8rem;padding:0}
+.pdf-move button:active{transform:scale(.9)}
 </style>
 </head>
 <body>
@@ -1131,7 +1154,7 @@ html.card-drag-lock .feat-grid{touch-action:none}
     <div class="upd-hero">
       <img class="site-logo site-logo-sm" src="data:image/webp;base64,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" alt="لوگوی AMIR Dastyar" />
       <div class="upd-name">AMIR Dastyar</div>
-      <span class="upd-ver">نسخه ۳٫۳۶</span>
+      <span class="upd-ver">نسخه ۳٫۳۷</span>
       <p class="upd-sub">سایت در حال آماده‌سازی است؛ چند لحظه صبر کنید تا همه ابزارها بارگذاری شوند.</p>
     </div>
     <div class="upd-load" id="bootLoad">
@@ -1178,7 +1201,7 @@ html.card-drag-lock .feat-grid{touch-action:none}
   </div>
   <div class="edit-bar" id="editBar" hidden><span>حالت ویرایش کارت‌ها — برای جابه‌جایی، هر کارت را کمی نگه دارید و بعد بکشید؛ کشیدن سریع فقط صفحه را اسکرول می‌کند.</span><button type="button" id="editDone">تمام شد</button></div>
 
-  <footer>نسخه ۳٫۳۶ • <span dir="ltr" style="font-weight:700">Created by Amir</span> • © ۱۴۰۵</footer>
+  <footer>نسخه ۳٫۳۷ • <span dir="ltr" style="font-weight:700">Created by Amir</span> • © ۱۴۰۵</footer>
 </main>
 
 <!-- BOTTOM LIQUID-GLASS CAPSULE NAV -->
@@ -1209,7 +1232,12 @@ html.card-drag-lock .feat-grid{touch-action:none}
     <div class="wx-cell"><span>کیفیت هوا</span><b id="wxAqi">—</b></div>
     <div class="wx-cell"><span>طلوع آفتاب</span><b id="wxSr">—</b></div>
     <div class="wx-cell"><span>غروب آفتاب</span><b id="wxSs">—</b></div>
+    <div class="wx-cell"><span>نقطه شبنم</span><b id="wxDew">—</b></div>
+    <div class="wx-cell"><span>تندباد</span><b id="wxGust">—</b></div>
+    <div class="wx-cell"><span>دید افقی</span><b id="wxVis">—</b></div>
+    <div class="wx-cell"><span>طول روز</span><b id="wxDayLen">—</b></div>
   </div>
+  <div class="result show wx-advice" id="wxAdvice"></div>
   <div class="wx-sec">📈 نمودار دمای امروز (ساعتی)</div>
   <div class="chart-box"><svg id="wxChart" viewBox="0 0 320 110" width="100%" role="img" aria-label="نمودار دمای ساعتی" style="display:block"></svg></div>
   <div class="chart-tip" id="wxChartTip"></div>
@@ -1231,17 +1259,39 @@ html.card-drag-lock .feat-grid{touch-action:none}
   <h4>💱 مبدل سریع همین ارز</h4>
   <div class="form-grid"><label class="f">مبلغ<input type="text" inputmode="decimal" id="curQuickAmt" value="۱۰۰" /></label><label class="f">جهت تبدیل<select id="curQuickDir"><option value="toToman">ارز به تومان</option><option value="fromToman">تومان به ارز</option></select></label></div>
   <div class="result show" id="curQuickRes"></div>
+  <h4>🔄 مبدل کامل ارزها</h4>
+  <div class="form-grid">
+    <label class="f full">مبلغ<input type="text" inputmode="decimal" id="convAmt" value="۱" /></label>
+    <label class="f">از ارز<select id="convFrom"></select></label>
+    <label class="f">به ارز<select id="convTo"></select></label>
+  </div>
+  <button class="conv-swap" id="convSwap" type="button" style="margin-top:10px">⇅ جابه‌جایی مبدأ و مقصد</button>
+  <div class="result show" id="convRes"></div>
+  <div class="conv-words" id="convWords"></div>
 </template>
 
 
 <template id="tpl-news">
+  <div class="news-tools">
+    <label class="f">جستجو در تیترها<input type="text" id="newsSearch" placeholder="بخشی از تیتر خبر…" /></label>
+    <div class="seg small" id="newsSrcSeg"><button data-s="all" class="sel" type="button">همه منابع</button><button data-s="ایرنا" type="button">ایرنا</button><button data-s="ارزبین" type="button">ارزبین</button></div>
+    <div class="news-count" id="newsCount"></div>
+  </div>
   <div id="newsList"></div>
+  <a class="btn" href="https://www.irna.ir/" target="_blank" rel="noopener" style="margin-top:6px">📰 همه خبرها در سایت ایرنا</a>
 </template>
 
 <template id="tpl-gpa">
   <div id="gpaRows"></div>
   <button class="btn" id="gpaAdd" type="button" style="width:100%;justify-content:center">➕ افزودن درس</button>
   <div class="result show" id="gpaResult"></div>
+  <h4>🎓 معدل کل و هدف</h4>
+  <div class="form-grid">
+    <label class="f">واحد گذرانده تا حالا<input type="text" inputmode="numeric" id="gpaPrevUnits" placeholder="مثلاً ۶۰" /></label>
+    <label class="f">معدل کل تا حالا<input type="text" inputmode="decimal" id="gpaPrevAvg" placeholder="مثلاً ۱۶٫۵۰" /></label>
+    <label class="f full">معدل کل هدف<input type="text" inputmode="decimal" id="gpaTarget" placeholder="مثلاً ۱۷" /></label>
+  </div>
+  <div class="result show" id="gpaExtra">اگر معدل و واحد ترم‌های قبل را وارد کنید، معدل کل‌تان هم این‌جا حساب می‌شود.</div>
 </template>
 
 <template id="tpl-calculator">
@@ -1261,6 +1311,12 @@ html.card-drag-lock .feat-grid{touch-action:none}
     <button data-k="neg">±</button><button data-k="d:0">0</button><button data-k="dot">.</button><button data-k="eq" class="eq">=</button>
     <button data-k="lp" class="op">(</button><button data-k="rp" class="op">)</button><button data-k="op:/" class="op">÷</button><button data-k="ans" class="op">Ans</button>
   </div>
+  <div class="calc-mem" id="calcMem">
+    <button data-m="mc" type="button">MC</button><button data-m="mr" type="button">MR</button><button data-m="mplus" type="button">M+</button><button data-m="mminus" type="button">M−</button><button data-m="copy" type="button">📋 کپی</button>
+  </div>
+  <h4>🕘 تاریخچه محاسبات</h4>
+  <div id="calcHistBox" class="cd-list" style="margin-top:0"></div>
+  <button class="btn" id="calcHistClear" type="button" style="margin-top:10px">🗑️ پاک‌کردن تاریخچه</button>
 </template>
 
 <template id="tpl-notes">
@@ -1274,7 +1330,11 @@ html.card-drag-lock .feat-grid{touch-action:none}
     <button class="btn" id="noteClear" type="button">پاک‌کردن فرم</button>
   </div>
   <h4>📒 یادداشت‌های من</h4>
-  <label class="f">جستجو در یادداشت‌ها<input type="text" id="noteSearch" placeholder="بخشی از عنوان یا متن…" /></label>
+  <div class="form-grid">
+    <label class="f">جستجو در یادداشت‌ها<input type="text" id="noteSearch" placeholder="بخشی از عنوان یا متن…" /></label>
+    <label class="f">مرتب‌سازی<select id="noteSort"><option value="new">تازه‌ترین اول</option><option value="old">قدیمی‌ترین اول</option><option value="title">بر اساس عنوان</option></select></label>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><span class="news-count" id="noteTotal"></span><button class="btn" id="noteExportAll" type="button" style="width:auto;min-height:42px;padding:8px 16px">⬇️ دانلود همه</button></div>
   <div id="noteList" style="margin-top:12px"></div>
 </template>
 
@@ -1283,6 +1343,13 @@ html.card-drag-lock .feat-grid{touch-action:none}
   <div class="azan-scene sky-day" id="azScene"><div class="az-anim" id="azAnim" aria-hidden="true"></div><div class="azan-arc"></div><div class="azan-sun" id="azSun"></div><div class="azan-moon" id="azMoon" hidden></div><div class="azan-mosque" aria-hidden="true">🕌</div></div>
   <div style="text-align:center"><div style="color:var(--muted);font-weight:700" id="azToday">—</div><div style="font-weight:900;font-size:1.1rem" id="azNextName">—</div><div class="azan-count" id="azCount">--:--:--</div><div class="progress" style="max-width:340px;margin:6px auto 0"><i id="azProg"></i></div></div>
   <div id="azList" style="margin-top:16px"></div>
+  <h4>🌙 جزئیات بیشتر امروز</h4>
+  <div class="wx-grid" style="margin-top:0">
+    <div class="wx-cell"><span>نیمه‌شب شرعی</span><b id="azMid">—</b></div>
+    <div class="wx-cell"><span>طول روزه (صبح تا مغرب)</span><b id="azFast">—</b></div>
+    <div class="wx-cell"><span>شروع ثلث آخر شب</span><b id="azThird">—</b></div>
+    <div class="wx-cell"><span>طول روز (طلوع تا غروب)</span><b id="azDayLen">—</b></div>
+  </div>
 </template>
 
 <template id="tpl-expenses">
@@ -1300,9 +1367,12 @@ html.card-drag-lock .feat-grid{touch-action:none}
   <button class="btn primary" id="expAdd" type="button" style="margin-top:12px">➕ ثبت تراکنش</button>
   <h4>📊 هزینه‌ها بر اساس دسته‌بندی</h4>
   <div id="expCats"></div>
+  <div class="result show" id="expSummary"></div>
   <h4>🧾 تراکنش‌ها</h4>
-  <div class="seg small" id="expFilter"><button data-f="all" class="sel">همه</button><button data-f="out">هزینه‌ها</button><button data-f="in">درآمدها</button></div>
+  <label class="f">جستجو در تراکنش‌ها<input type="text" id="expSearch" placeholder="بخشی از عنوان یا دسته…" /></label>
+  <div class="seg small" id="expFilter" style="margin-top:10px"><button data-f="all" class="sel">همه</button><button data-f="out">هزینه‌ها</button><button data-f="in">درآمدها</button></div>
   <div id="expList" style="margin-top:8px"></div>
+  <button class="btn" id="expCsv" type="button" style="margin-top:12px">⬇️ دانلود تراکنش‌ها (CSV)</button>
   <label class="f" style="margin-top:16px">سقف بودجه ماهانه (تومان)<input type="text" inputmode="decimal" id="expBudget" placeholder="مثلاً ۱۰٬۰۰۰٬۰۰۰" /></label>
   <div class="progress" style="margin-top:10px"><i id="expBudgetBar"></i></div>
   <div class="result show" id="expBudgetRes">سقفی ثبت نشده است.</div>
@@ -1310,6 +1380,8 @@ html.card-drag-lock .feat-grid{touch-action:none}
 
 <template id="tpl-calendar">
   <div class="result show" id="calToday" style="margin-top:0"></div>
+  <div class="result show" id="calDiff" style="margin-top:10px"></div>
+  <button class="btn" id="calGoToday" type="button" style="margin-top:10px">📍 رفتن به امروز</button>
   <div class="form-grid" style="margin-top:14px">
     <label class="f">ماه<select id="calMonthSel"></select></label>
     <label class="f">سال<input type="text" inputmode="numeric" id="calYearIn" /></label>
@@ -1328,6 +1400,16 @@ html.card-drag-lock .feat-grid{touch-action:none}
     </div>
     <p class="cal-ev-note">رویدادها روی همین دستگاه ذخیره می‌شوند و بعد از بستن سایت هم باقی می‌مانند.</p>
   </div>
+  <h4>🔄 مبدل تاریخ</h4>
+  <label class="f">تاریخ میلادی<input type="date" id="convGDate" dir="ltr" /></label>
+  <div class="result show" id="convGRes">یک تاریخ میلادی انتخاب کنید تا معادل شمسی‌اش را ببینید.</div>
+  <div class="form-grid" style="margin-top:14px">
+    <label class="f">روز شمسی<input type="text" inputmode="numeric" id="convJD" placeholder="۴" /></label>
+    <label class="f">ماه شمسی<select id="convJM"></select></label>
+    <label class="f">سال شمسی<input type="text" inputmode="numeric" id="convJY" placeholder="۱۴۰۵" /></label>
+  </div>
+  <button class="btn primary" id="convJBtn" type="button" style="margin-top:12px">تبدیل به میلادی</button>
+  <div class="result" id="convJRes"></div>
 </template>
 
 <template id="tpl-profile"><div id="profileArea"></div></template>
@@ -1343,6 +1425,20 @@ html.card-drag-lock .feat-grid{touch-action:none}
     <button data-v="off"><span class="set-ic ic-palette-off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M5.8 5.8l12.4 12.4" stroke-linecap="round"/></svg></span>خاموش</button>
     <button data-v="on"><span class="set-ic ic-palette"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-.9 2-1.9 0-.8-.6-1.3-.6-2.1 0-.9.7-1.5 1.8-1.5H17a4.5 4.5 0 0 0 4.5-4.5C21.5 6.6 17.2 3 12 3z" stroke-linejoin="round"/><circle cx="7.5" cy="10.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="12" cy="7.3" r="1.15" fill="currentColor" stroke="none"/><circle cx="16.5" cy="10.5" r="1.15" fill="currentColor" stroke="none"/></svg></span>روشن</button>
   </div>
+  <h4>🔠 اندازه متن</h4>
+  <div class="seg seg-list" id="segFs">
+    <button data-v="15"><span class="set-ic ic-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 19 12 5l7 14M7.5 14h9"/></svg></span>کوچک</button>
+    <button data-v="16"><span class="set-ic ic-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19 12 4l8 15M6.8 13.5h10.4"/></svg></span>معمولی</button>
+    <button data-v="18"><span class="set-ic ic-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 20 12 3l9 17M6 14h12"/></svg></span>بزرگ</button>
+  </div>
+  <h4>🖌️ رنگ اصلی</h4>
+  <div class="swatches" id="accentSw">
+    <button data-a="#0a84ff" data-b="#38a8e8" style="background:linear-gradient(135deg,#0a84ff,#38a8e8)" type="button" aria-label="آبی"></button>
+    <button data-a="#0e9f8a" data-b="#0b7ea8" style="background:linear-gradient(135deg,#0e9f8a,#0b7ea8)" type="button" aria-label="سبزآبی"></button>
+    <button data-a="#7c3aed" data-b="#4f46e5" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)" type="button" aria-label="بنفش"></button>
+    <button data-a="#e0247c" data-b="#f97316" style="background:linear-gradient(135deg,#e0247c,#f97316)" type="button" aria-label="صورتی نارنجی"></button>
+    <button data-a="#059669" data-b="#65a30d" style="background:linear-gradient(135deg,#059669,#65a30d)" type="button" aria-label="سبز"></button>
+  </div>
   <button class="btn" id="custReset" type="button" style="margin-top:18px;width:100%;justify-content:center">↩️ بازگشت به پیش‌فرض</button>
 </template>
 
@@ -1350,7 +1446,7 @@ html.card-drag-lock .feat-grid{touch-action:none}
   <div class="upd-hero">
     <div class="upd-icon" aria-hidden="true"><span class="upd-ring"></span><span class="upd-ring r2"></span><span class="upd-core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6.5 11 12 5.5 17.5 11"/><path d="M5 21h14" stroke-width="2.4"/></svg></span><span class="upd-dot"></span></div>
     <div class="upd-name">AMIR Dastyar</div>
-    <span class="upd-ver">نسخه ۳٫۳۶</span>
+    <span class="upd-ver">نسخه ۳٫۳۷</span>
     <p class="upd-sub">برای دریافت تازه‌ترین امکانات و بهبودها، آپدیت را بررسی کنید.</p>
   </div>
   <div class="upd-load" id="updLoad" hidden>
@@ -1358,12 +1454,24 @@ html.card-drag-lock .feat-grid{touch-action:none}
     <div class="upd-bar"><i id="updProg"></i></div>
     <div class="upd-steps"><span>اتصال</span><span>بررسی نسخه</span><span>دریافت اطلاعات</span><span>آماده‌سازی</span></div>
   </div>
-  <div class="upd-done" id="updDone" hidden><span class="upd-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>سایت شما به‌روز است؛ نسخه ۳٫۳۶ آخرین نسخه است.</span></div>
+  <div class="upd-done" id="updDone" hidden><span class="upd-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>سایت شما به‌روز است؛ نسخه ۳٫۳۷ آخرین نسخه است.</span></div>
   <button class="btn primary" id="updCheck" type="button" style="width:100%;justify-content:center;margin-top:14px">🔄 بررسی و آپدیت</button>
   <div id="updChangelogWrap">
   <h4>📣 تازه‌های سایت</h4>
   <div class="update-list">
-    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۳۶ — جدید</span><h3>رفرشِ آپدیت‌آور و استانِ ذخیره‌شده</h3><time>۴ آذر ۱۴۰۵</time><ul><li>با هر بار رفرش یا بارگذاری دوبارهٔ سایت، نسخهٔ تازه همان لحظه و بدون کش از سرور گرفته می‌شود؛ اگر نسخهٔ تازه‌تری منتشر شده باشد، پنجرهٔ شیشه‌ای آپدیت خودکار نمایش داده می‌شود و رفرش دیگر آن را پنهان نمی‌کند. دکمهٔ «آپدیت الان» هم صفحه را بدون کش بارگذاری می‌کند تا نسخهٔ تازه حتماً فعال شود.</li><li>استان انتخابی شما در پنجره‌های «آب و هوا» و «اذان ایران» ذخیره می‌شود؛ بعد از بارگذاری دوبارهٔ صفحه یا آپدیت سایت، هر پنجره با همان استانی که آخرین بار انتخاب کرده بودید باز می‌شود.</li><li>پنجرهٔ «آب و هوا» حالا همیشه از بالا باز می‌شود و موقع باز شدن دیگر خودش به پایین اسکرول نمی‌شود.</li></ul></div>
+    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۳۷ — جدید</span><h3>همهٔ قابلیت‌ها پرامکانات‌تر شدند</h3><time>۴ آذر ۱۴۰۵</time><ul>
+<li><b>آب و هوا:</b> جزئیات کامل‌تر برای هر استان — نقطهٔ شبنم، تندباد، دید افقی، طول روز، سرعت باد به متر بر ثانیه و یک کادر «پیشنهاد امروز» که بر اساس دما، UV، کیفیت هوا و احتمال بارش می‌گوید امروز چه بپوشید و چه احتیاطی لازم است.</li>
+<li><b>نرخ ارز:</b> ۸ ارز تازه اضافه شد (دلار کانادا، دلار استرالیا، فرانک سوئیس، ین ژاپن، یوان چین، ریال عربستان، دینار کویت و روبل روسیه) و یک «مبدل کامل» با انتخاب ارز مبدأ و مقصد، دکمهٔ جابه‌جایی و نمایش نتیجه به حروف.</li>
+<li><b>اخبار:</b> تیترهای بیشتر از ایرنا، جستجو در تیترها و فیلتر بر اساس منبع خبر.</li>
+<li><b>اذان ایران:</b> نیمه‌شب شرعی، طول روزه، شروع ثلث آخر شب و زمان مانده تا هر اذان کنار ساعتش.</li>
+<li><b>محاسبه معدل:</b> معدل به حروف و درصد، هشدار مشروطی، محاسبهٔ معدل کل با ترم‌های قبل و میانگین لازم برای رسیدن به معدل هدف.</li>
+<li><b>ماشین حساب:</b> دکمه‌های حافظه (MC/MR/M+/M−)، تاریخچهٔ کامل محاسبات با امکان استفادهٔ دوباره و دکمهٔ کپی نتیجه.</li>
+<li><b>دفتر یادداشت:</b> سنجاق‌کردن یادداشت مهم، مرتب‌سازی، شمارش واژه‌ها و دانلود همهٔ یادداشت‌ها در یک فایل.</li>
+<li><b>مدیریت خرج:</b> تاریخ شمسی هر تراکنش، جستجو در تراکنش‌ها، خلاصهٔ کامل (تعداد تراکنش، بزرگ‌ترین هزینه، میانگین هزینه و درصد پس‌انداز) و خروجی CSV.</li>
+<li><b>تقویم شمسی:</b> مبدل تاریخ میلادی ↔ شمسی، دکمهٔ «امروز» و نمایش فاصلهٔ روز انتخاب‌شده تا امروز.</li>
+<li><b>تبدیل عکس به PDF:</b> اندازهٔ A5، انتخاب کیفیت، نام دلخواه فایل و جابه‌جایی ترتیب عکس‌ها.</li>
+<li><b>تنظیمات:</b> انتخاب اندازهٔ متن و رنگ اصلی سایت؛ پروفایل هم دکمهٔ کپی نام و بیو گرفت.</li>
+</ul></div>
   </div>
   <button class="btn primary" id="updSeenBtn" type="button" style="margin-top:4px">متوجه شدم</button>
   </div>
@@ -1371,7 +1479,19 @@ html.card-drag-lock .feat-grid{touch-action:none}
 
 <template id="tpl-changelog">
   <div class="update-list">
-    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۳۶ — جدید</span><h3>رفرشِ آپدیت‌آور و استانِ ذخیره‌شده</h3><time>۴ آذر ۱۴۰۵</time><ul><li>با هر بار رفرش یا بارگذاری دوبارهٔ سایت، نسخهٔ تازه همان لحظه و بدون کش از سرور گرفته می‌شود؛ اگر نسخهٔ تازه‌تری منتشر شده باشد، پنجرهٔ شیشه‌ای آپدیت خودکار نمایش داده می‌شود و رفرش دیگر آن را پنهان نمی‌کند. دکمهٔ «آپدیت الان» هم صفحه را بدون کش بارگذاری می‌کند تا نسخهٔ تازه حتماً فعال شود.</li><li>استان انتخابی شما در پنجره‌های «آب و هوا» و «اذان ایران» ذخیره می‌شود؛ بعد از بارگذاری دوبارهٔ صفحه یا آپدیت سایت، هر پنجره با همان استانی که آخرین بار انتخاب کرده بودید باز می‌شود.</li><li>پنجرهٔ «آب و هوا» حالا همیشه از بالا باز می‌شود و موقع باز شدن دیگر خودش به پایین اسکرول نمی‌شود.</li></ul></div>
+    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۳۷ — جدید</span><h3>همهٔ قابلیت‌ها پرامکانات‌تر شدند</h3><time>۴ آذر ۱۴۰۵</time><ul>
+<li><b>آب و هوا:</b> جزئیات کامل‌تر برای هر استان — نقطهٔ شبنم، تندباد، دید افقی، طول روز، سرعت باد به متر بر ثانیه و یک کادر «پیشنهاد امروز» که بر اساس دما، UV، کیفیت هوا و احتمال بارش می‌گوید امروز چه بپوشید و چه احتیاطی لازم است.</li>
+<li><b>نرخ ارز:</b> ۸ ارز تازه اضافه شد (دلار کانادا، دلار استرالیا، فرانک سوئیس، ین ژاپن، یوان چین، ریال عربستان، دینار کویت و روبل روسیه) و یک «مبدل کامل» با انتخاب ارز مبدأ و مقصد، دکمهٔ جابه‌جایی و نمایش نتیجه به حروف.</li>
+<li><b>اخبار:</b> تیترهای بیشتر از ایرنا، جستجو در تیترها و فیلتر بر اساس منبع خبر.</li>
+<li><b>اذان ایران:</b> نیمه‌شب شرعی، طول روزه، شروع ثلث آخر شب و زمان مانده تا هر اذان کنار ساعتش.</li>
+<li><b>محاسبه معدل:</b> معدل به حروف و درصد، هشدار مشروطی، محاسبهٔ معدل کل با ترم‌های قبل و میانگین لازم برای رسیدن به معدل هدف.</li>
+<li><b>ماشین حساب:</b> دکمه‌های حافظه (MC/MR/M+/M−)، تاریخچهٔ کامل محاسبات با امکان استفادهٔ دوباره و دکمهٔ کپی نتیجه.</li>
+<li><b>دفتر یادداشت:</b> سنجاق‌کردن یادداشت مهم، مرتب‌سازی، شمارش واژه‌ها و دانلود همهٔ یادداشت‌ها در یک فایل.</li>
+<li><b>مدیریت خرج:</b> تاریخ شمسی هر تراکنش، جستجو در تراکنش‌ها، خلاصهٔ کامل (تعداد تراکنش، بزرگ‌ترین هزینه، میانگین هزینه و درصد پس‌انداز) و خروجی CSV.</li>
+<li><b>تقویم شمسی:</b> مبدل تاریخ میلادی ↔ شمسی، دکمهٔ «امروز» و نمایش فاصلهٔ روز انتخاب‌شده تا امروز.</li>
+<li><b>تبدیل عکس به PDF:</b> اندازهٔ A5، انتخاب کیفیت، نام دلخواه فایل و جابه‌جایی ترتیب عکس‌ها.</li>
+<li><b>تنظیمات:</b> انتخاب اندازهٔ متن و رنگ اصلی سایت؛ پروفایل هم دکمهٔ کپی نام و بیو گرفت.</li>
+</ul></div>
   </div>
 </template>
 
@@ -1380,8 +1500,12 @@ html.card-drag-lock .feat-grid{touch-action:none}
   <input type="file" id="pdfFile" accept="image/*" multiple style="display:none" />
   <div class="pdf-grid" id="pdfGrid"></div>
   <div class="empty-state" id="pdfEmpty">هنوز عکسی انتخاب نشده است.</div>
+  <label class="f" style="margin-top:14px">نام فایل PDF<input type="text" id="pdfName" placeholder="amir-dastyar-photos" dir="ltr" /></label>
+  <div class="news-count" id="pdfCount" style="margin-top:8px"></div>
   <h4>⚙️ اندازه صفحه</h4>
-  <div class="seg" id="pdfSizeSeg"><button data-v="a4" class="sel" type="button">A4</button><button data-v="fit" type="button">هم‌اندازه عکس</button></div>
+  <div class="seg" id="pdfSizeSeg"><button data-v="a4" class="sel" type="button">A4</button><button data-v="a5" type="button">A5</button><button data-v="fit" type="button">هم‌اندازه عکس</button></div>
+  <h4>🗜️ کیفیت عکس‌ها</h4>
+  <div class="seg" id="pdfQualSeg"><button data-v="high" class="sel" type="button">بالا (حجم بیشتر)</button><button data-v="mid" type="button">متوسط (حجم کمتر)</button></div>
   <button class="btn primary" id="pdfMake" type="button" style="margin-top:16px">📄 ساخت PDF و دانلود</button>
   <div class="result" id="pdfRes"></div>
 </template>
@@ -1465,8 +1589,11 @@ var LS_KEYS={notes:"amir-dastyar-notes-v1",expenses:"amir-dastyar-expenses-v1",p
   var s=LS.get(LS_KEYS.settings); if(!s)return;
   if(s.theme==="dark"||s.theme==="light")root.setAttribute("data-theme",s.theme);
   if(s.samsung)root.setAttribute("data-samsung","on");
+  /* v3.37: text size + accent colour are part of the saved settings too */
+  if(s.fs)root.style.setProperty("--fs",s.fs+"px");
+  if(s.accent){ root.style.setProperty("--accent",s.accent); if(s.accent2)root.style.setProperty("--accent2",s.accent2); }
 })();
-function saveSettings(){ var t=root.getAttribute("data-theme"); LS.set(LS_KEYS.settings,{theme:(t==="dark"||t==="light")?t:null,samsung:root.getAttribute("data-samsung")==="on"}); }
+function saveSettings(){ var t=root.getAttribute("data-theme"); var fs=root.style.getPropertyValue("--fs"); LS.set(LS_KEYS.settings,{theme:(t==="dark"||t==="light")?t:null,samsung:root.getAttribute("data-samsung")==="on",fs:fs?parseInt(fs,10):null,accent:root.style.getPropertyValue("--accent")||null,accent2:root.style.getPropertyValue("--accent2")||null}); }
 /* PROVINCE PICKS — v3.36: the province chosen in the weather window and in the azan window is saved on this device, so after a reload or a site update each window reopens on the province the user last picked there instead of the default. Stored as {wx:<index into PROV>,az:<index into PROV>}; anything missing or out of range falls back to 0 (Tehran). */
 function provCount(){ return (typeof PROV!=="undefined"&&PROV&&PROV.length)?PROV.length:31; }
 function savedProvIdx(kind){
@@ -2065,6 +2192,33 @@ function paintWx(idx){
   document.getElementById("wxPres").textContent=faNum(w.pres)+" هکتوپاسکال";
   document.getElementById("wxAqi").textContent=w.aqi;
   document.getElementById("wxSr").textContent=w.sr; document.getElementById("wxSs").textContent=w.ss;
+  /* v3.37 — more detail: dew point (Magnus formula from the real temperature + humidity, or the live API value when a refresh brought one), today's strongest gust, visibility (live value, else an estimate from the condition, marked ≈), the length of the day from the real sunrise/sunset, and a plain-language «پیشنهاد امروز» built from temperature, UV, air quality and rain chance */
+  (function(){
+    var dew=w.dew;
+    if(dew==null){ var a=17.27,b=237.7,al=a*w.t/(b+w.t)+Math.log(Math.max(1,w.hum)/100); dew=Math.round(b*al/(a-al)*10)/10; }
+    var dewEl=document.getElementById("wxDew"); if(dewEl)dewEl.textContent=faAmt(dew)+"°";
+    var gustEl=document.getElementById("wxGust");
+    if(gustEl){ var g=w.gust; if(g==null&&w.wkW&&w.wkW[0])g=Math.round(w.wkW[0]*1.5); gustEl.textContent=g?("≈ "+faNum(g)+" کم/س"):"—"; }
+    var visEl=document.getElementById("wxVis");
+    if(visEl){ if(w.vis!=null)visEl.textContent=faAmt(Math.round(w.vis/100)/10)+" کیلومتر"; else { var vm={sun:25,part:20,cloud:15,fog:1.5,rain:8,snow:4,sleet:6}[w.cond]||15; visEl.textContent="≈ "+faAmt(vm)+" کیلومتر"; } }
+    var srM=skyMin(w.sr),ssM=skyMin(w.ss),dl=ssM-srM;
+    var dlEl=document.getElementById("wxDayLen"); if(dlEl&&dl>0)dlEl.textContent=faNum(Math.floor(dl/60))+" ساعت و "+faNum(dl%60)+" دقیقه";
+    var adv=[];
+    if(w.t>=32)adv.push("هوا <b>گرم</b> است؛ لباس روشن و نخی بپوشید و آب کافی بنوشید.");
+    else if(w.t>=24)adv.push("هوا <b>گرم و مطبوع</b> است؛ یک لایه لباس سبک کافی است.");
+    else if(w.t>=15)adv.push("هوا <b>معتدل</b> است؛ یک ژاکت سبک برای صبح و عصر همراه داشته باشید.");
+    else if(w.t>=5)adv.push("هوا <b>سرد</b> است؛ لباس گرم و چندلایه بپوشید.");
+    else adv.push("هوا <b>خیلی سرد</b> است؛ کاپشن ضخیم، کلاه و دستکش لازم است.");
+    var uvN=parseInt(enNum(String(w.uv).replace(/[^0-9]/g,"")),10);
+    if(!isNaN(uvN)&&uvN>=6)adv.push("شاخص UV بالاست؛ <b>ضدآفتاب و عینک آفتابی</b> فراموش نشود.");
+    else if(!isNaN(uvN)&&uvN>=3)adv.push("UV متوسط است؛ اگر مدت زیادی بیرون می‌مانید ضدآفتاب بزنید.");
+    var aqiN=parseInt(enNum(String(w.aqi).replace(/[^0-9]/g,"")),10);
+    if(!isNaN(aqiN)&&aqiN>150)adv.push("کیفیت هوا <b>ناسالم</b> است؛ ماسک بزنید و ورزش در فضای باز را کمتر کنید.");
+    else if(!isNaN(aqiN)&&aqiN>100)adv.push("هوا برای گروه‌های حساس ناسالم است؛ اگر حساسیت دارید ماسک همراه داشته باشید.");
+    if(pop>=50)adv.push("احتمال بارش زیاد است ("+faNum(pop)+"٪)؛ <b>چتر</b> همراه داشته باشید.");
+    else if(pop>=25)adv.push("احتمال بارش هست ("+faNum(pop)+"٪)؛ چتر کوچک همراه‌تان باشد.");
+    var advEl=document.getElementById("wxAdvice"); if(advEl)advEl.innerHTML="🧭 <b>پیشنهاد امروز در "+esc(w.c)+":</b> "+adv.join(" ");
+  })();
   var hrs=hourlyFor(w);
   WXCTX.hrs=hrs;
   var hh=document.getElementById("wxHourly"); hh.innerHTML="";
@@ -2131,7 +2285,15 @@ var CURR=[
  {code:"AED",name:"درهم امارات",sym:"د.إ",price:77250,chg:4.5,h7:[73297, 73422, 73509, 73496, 73440, 73923, 77250],h30:[68910, 70895, 70853, 71431, 71740, 72298, 72597, 73020, 73422, 73440, 77250]},
  {code:"TRY",name:"لیر ترکیه",sym:"₺",price:5619,chg:4.6,h7:[5344, 5344, 5349, 5350, 5340, 5372, 5619],h30:[5092, 5224, 5216, 5251, 5252, 5294, 5292, 5328, 5344, 5340, 5619]},
  {code:"GOLD",name:"طلای ۱۸ عیار (گرم)",sym:"طلا",price:25387400,chg:5.1,h7:[24683879, 23542543, 23453447, 23478955, 24036409, 24155471, 25387400],h30:[25019353, 25614905, 24998383, 26555786, 26343468, 26511058, 25402328, 25566999, 23542543, 24036409, 25387400]},
- {code:"COIN",name:"سکه امامی",sym:"سکه",price:262066650,chg:4.0,h7:[254804410, 243022735, 242103023, 242366335, 248120768, 249349810, 262066650],h30:[258267409, 264415117, 258050942, 274127554, 271935858, 273665840, 262220747, 263920598, 243022735, 248120768, 262066650]}
+ {code:"COIN",name:"سکه امامی",sym:"سکه",price:262066650,chg:4.0,h7:[254804410, 243022735, 242103023, 242366335, 248120768, 249349810, 262066650],h30:[258267409, 264415117, 258050942, 274127554, 271935858, 273665840, 262220747, 263920598, 243022735, 248120768, 262066650]},
+ {code:"CAD",name:"دلار کانادا",sym:"C$",price:203200,chg:4.5,h7:[192435, 192762, 192989, 192955, 192809, 194079, 203200],h30:[180916, 186127, 186019, 187535, 188345, 189811, 190596, 191706, 192762, 192809, 203200]},
+ {code:"AUD",name:"دلار استرالیا",sym:"A$",price:187500,chg:4.3,h7:[177567, 177868, 178078, 178046, 177912, 179083, 187500],h30:[166938, 171746, 171646, 173046, 173793, 175146, 175870, 176894, 177868, 177912, 187500]},
+ {code:"CHF",name:"فرانک سوئیس",sym:"CHF",price:354400,chg:4.9,h7:[335625, 336194, 336591, 336531, 336277, 338491, 354400],h30:[315535, 324622, 324434, 327079, 328492, 331049, 332417, 334353, 336194, 336277, 354400]},
+ {code:"JPY",name:"ین ژاپن (۱۰۰ ین)",sym:"¥",price:181100,chg:4.4,h7:[171506, 171797, 172000, 171969, 171839, 172971, 181100],h30:[161240, 165884, 165787, 167139, 167861, 169167, 169867, 170856, 171797, 171839, 181100]},
+ {code:"CNY",name:"یوان چین",sym:"¥",price:39900,chg:4.6,h7:[37786, 37850, 37895, 37888, 37860, 38109, 39900],h30:[35524, 36548, 36526, 36824, 36983, 37271, 37425, 37643, 37850, 37860, 39900]},
+ {code:"SAR",name:"ریال عربستان",sym:"ر.س",price:75700,chg:4.7,h7:[71690, 71811, 71896, 71883, 71829, 72302, 75700],h30:[67398, 69339, 69299, 69864, 70166, 70712, 71004, 71418, 71811, 71829, 75700]},
+ {code:"KWD",name:"دینار کویت",sym:"د.ک",price:923300,chg:4.7,h7:[874387, 875870, 876904, 876748, 876085, 881854, 923300],h30:[822046, 845722, 845231, 852122, 855804, 862464, 866029, 871073, 875870, 876085, 923300]},
+ {code:"RUB",name:"روبل روسیه",sym:"₽",price:3620,chg:3.9,h7:[3428, 3434, 3438, 3437, 3435, 3458, 3620],h30:[3223, 3316, 3314, 3341, 3355, 3381, 3395, 3415, 3434, 3435, 3620]}
 ];
 /* Real icon for every rate: the currency's own flag (drawn as SVG), a gold-bar stack for gold, a gold coin for Emami coin */
 var CURR_ICONS={
@@ -2141,7 +2303,15 @@ GBP:'<svg viewBox="0 0 48 48" role="img" aria-label="پرچم انگلیس — �
 AED:'<svg viewBox="0 0 48 48" role="img" aria-label="پرچم امارات — درهم"><rect width="48" height="48" fill="#fff"/><rect width="48" height="16" fill="#00732f"/><rect y="32" width="48" height="16" fill="#000"/><rect width="15" height="48" fill="#e43137"/></svg>',
 TRY:'<svg viewBox="0 0 48 48" role="img" aria-label="پرچم ترکیه — لیر"><rect width="48" height="48" fill="#e30a17"/><circle cx="19" cy="24" r="11.5" fill="#fff"/><circle cx="21.8" cy="24" r="9.2" fill="#e30a17"/><polygon fill="#fff" points="36,17.5 37.6,21.8 42.2,21.9 38.6,24.7 39.8,29.1 36,26.5 32.2,29.1 33.4,24.7 29.8,21.9 34.4,21.8"/></svg>',
 GOLD:'<svg viewBox="0 0 48 48" role="img" aria-label="شمش طلا"><rect width="48" height="48" fill="#fef3c7"/><g stroke="#92400e" stroke-width="1.1" stroke-linejoin="round"><polygon points="19,11 29,11 32,18 16,18" fill="#fcd34d"/><polygon points="10,21 20,21 23,28 7,28" fill="#f59e0b"/><polygon points="28,21 38,21 41,28 25,28" fill="#fbbf24"/><polygon points="10,31 20,31 23,38 7,38" fill="#fbbf24"/><polygon points="28,31 38,31 41,38 25,38" fill="#f59e0b"/></g><path d="M19 13.5h9M11 23.5h7M29 23.5h7" stroke="#fff7cc" stroke-width="1.6" stroke-linecap="round"/></svg>',
-COIN:'<svg viewBox="0 0 48 48" role="img" aria-label="سکه طلای امامی"><rect width="48" height="48" fill="#fffbeb"/><circle cx="24" cy="24" r="19" fill="#f59e0b" stroke="#92400e" stroke-width="1.4"/><circle cx="24" cy="24" r="15.5" fill="#fbbf24" stroke="#fde68a" stroke-width="2" stroke-dasharray="2.5 3"/><circle cx="24" cy="24" r="11" fill="#fcd34d" stroke="#92400e" stroke-width=".8"/><text x="24" y="28.5" font-size="9.5" font-weight="900" fill="#92400e" text-anchor="middle">سکه</text></svg>'
+COIN:'<svg viewBox="0 0 48 48" role="img" aria-label="سکه طلای امامی"><rect width="48" height="48" fill="#fffbeb"/><circle cx="24" cy="24" r="19" fill="#f59e0b" stroke="#92400e" stroke-width="1.4"/><circle cx="24" cy="24" r="15.5" fill="#fbbf24" stroke="#fde68a" stroke-width="2" stroke-dasharray="2.5 3"/><circle cx="24" cy="24" r="11" fill="#fcd34d" stroke="#92400e" stroke-width=".8"/><text x="24" y="28.5" font-size="9.5" font-weight="900" fill="#92400e" text-anchor="middle">سکه</text></svg>',
+CAD:'<svg viewBox="0 0 48 48" role="img" aria-label="پرچم کانادا — دلار کانادا"><rect width="48" height="48" fill="#fff"/><rect width="13" height="48" fill="#d52b1e"/><rect x="35" width="13" height="48" fill="#d52b1e"/><path d="M24 12l2.2 4.4 3.4-1.6-1.2 4.6 4-1-2.8 3.8 2 1.8-5.2.6.8 4.4-3.2-2.4-3.2 2.4.8-4.4-5.2-.6 2-1.8-2.8-3.8 4 1-1.2-4.6 3.4 1.6z" fill="#d52b1e"/></svg>',
+AUD:'<svg viewBox="0 0 48 48" role="img" aria-label="پرچم استرالیا — دلار استرالیا"><rect width="48" height="48" fill="#00247d"/><rect width="24" height="24" fill="#012169"/><path d="M0 0L24 24M24 0L0 24" stroke="#fff" stroke-width="4.5"/><path d="M0 0L24 24M24 0L0 24" stroke="#C8102E" stroke-width="1.8"/><rect x="10" width="4" height="24" fill="#fff"/><rect y="10" width="24" height="4" fill="#fff"/><rect x="11" width="2.4" height="24" fill="#C8102E"/><rect y="11" width="24" height="2.4" fill="#C8102E"/><g fill="#fff"><circle cx="36" cy="10" r="1.8"/><circle cx="41" cy="20" r="1.8"/><circle cx="34" cy="30" r="1.8"/><circle cx="42" cy="38" r="1.8"/><circle cx="30" cy="42" r="1.8"/><circle cx="12" cy="36" r="2.6"/></g></svg>',
+CHF:'<svg viewBox="0 0 48 48" role="img" aria-label="پرچم سوئیس — فرانک"><rect width="48" height="48" fill="#da291c"/><path d="M20 12h8v8h8v8h-8v8h-8v-8h-8v-8h8z" fill="#fff"/></svg>',
+JPY:'<svg viewBox="0 0 48 48" role="img" aria-label="پرچم ژاپن — ین"><rect width="48" height="48" fill="#fff"/><circle cx="24" cy="24" r="10" fill="#bc002d"/></svg>',
+CNY:'<svg viewBox="0 0 48 48" role="img" aria-label="پرچم چین — یوان"><rect width="48" height="48" fill="#de2910"/><g fill="#ffde00"><polygon points="10,7 11.8,12 17,12.2 12.9,15.4 14.3,20.4 10,17.4 5.7,20.4 7.1,15.4 3,12.2 8.2,12"/><circle cx="21" cy="8" r="1.4"/><circle cx="24" cy="12" r="1.4"/><circle cx="24" cy="17" r="1.4"/><circle cx="21" cy="21" r="1.4"/></g></svg>',
+SAR:'<svg viewBox="0 0 48 48" role="img" aria-label="پرچم عربستان — ریال"><rect width="48" height="48" fill="#006c35"/><rect x="9" y="15" width="30" height="5" rx="2.5" fill="#fff" opacity=".9"/><rect x="7" y="30" width="34" height="3.4" rx="1.7" fill="#fff"/></svg>',
+KWD:'<svg viewBox="0 0 48 48" role="img" aria-label="پرچم کویت — دینار"><rect width="48" height="48" fill="#fff"/><rect width="48" height="16" fill="#007a3d"/><rect y="32" width="48" height="16" fill="#ce1126"/><polygon points="0,0 15,16 15,32 0,48" fill="#000"/></svg>',
+RUB:'<svg viewBox="0 0 48 48" role="img" aria-label="پرچم روسیه — روبل"><rect width="48" height="48" fill="#fff"/><rect y="16" width="48" height="16" fill="#0039a6"/><rect y="32" width="48" height="16" fill="#d52b1e"/></svg>'
 };
 var CURCTX={name:"",data:[],labels:[],sel:0,color:"#059669",range:7};
 function initCurrency(){
@@ -2184,6 +2354,20 @@ function initCurrency(){
   var qAmt=document.getElementById("curQuickAmt"),qDir=document.getElementById("curQuickDir"),qRes=document.getElementById("curQuickRes");
   function quick(){var c=CURR[selIdx];var a=parseNum(qAmt.value);if(isNaN(a)){qRes.innerHTML="مبلغ معتبر وارد کنید.";return;}if(qDir.value==="toToman"){qRes.innerHTML="<span class='big'>"+groupFa(a,2)+"</span> "+esc(c.name)+" = <span class='big'>"+groupFa(Math.round(a*c.price))+" تومان</span>";}else{qRes.innerHTML="<span class='big'>"+groupFa(a)+"</span> تومان = <span class='big'>"+groupFa(a/c.price,4)+"</span> "+esc(c.name);}}
   qAmt.addEventListener("input",quick); qDir.addEventListener("change",quick);
+  /* v3.37 — full converter: any currency (or Toman) to any other, a swap button, and the Toman result also spelled out in Persian words */
+  var convAmt=document.getElementById("convAmt"),convFrom=document.getElementById("convFrom"),convTo=document.getElementById("convTo"),convRes=document.getElementById("convRes"),convWords=document.getElementById("convWords");
+  function convFill(sel,def){ sel.innerHTML=""; var o0=document.createElement("option"); o0.value="TOMAN"; o0.textContent="تومان ایران"; sel.appendChild(o0); CURR.forEach(function(c){ var o=document.createElement("option"); o.value=c.code; o.textContent=c.name+" ("+c.code+")"; sel.appendChild(o); }); sel.value=def; if(sel._gsBtn)syncGsBtn(sel); }
+  function convRate(code){ if(code==="TOMAN")return 1; var c=CURR.filter(function(x){return x.code===code;})[0]; return c?c.price:1; }
+  function convName(code){ if(code==="TOMAN")return "تومان"; var c=CURR.filter(function(x){return x.code===code;})[0]; return c?c.name:code; }
+  function doConv(){
+    var a=parseNum(convAmt.value);
+    if(isNaN(a)){ convRes.innerHTML="مبلغ معتبر وارد کنید."; convWords.textContent=""; return; }
+    var toman=a*convRate(convFrom.value);
+    var out=toman/convRate(convTo.value);
+    convRes.innerHTML="<span class='big'>"+groupFa(a,2)+"</span> "+esc(convName(convFrom.value))+" = <span class='big'>"+groupFa(Math.round(out*10000)/10000, convTo.value==="TOMAN"?0:4)+"</span> "+esc(convName(convTo.value));
+    convWords.textContent=(convTo.value==="TOMAN"&&Math.round(out)>=1&&Math.round(out)<1e15)?("به حروف: "+numWords(Math.round(out))+" تومان"):(convFrom.value==="TOMAN"&&Math.round(a)>=1&&Math.round(a)<1e15?("مبلغ مبدأ به حروف: "+numWords(Math.round(a))+" تومان"):"");
+  }
+  if(convFrom&&convTo){ convFill(convFrom,"USD"); convFill(convTo,"TOMAN"); convAmt.addEventListener("input",doConv); convFrom.addEventListener("change",doConv); convTo.addEventListener("change",doConv); document.getElementById("convSwap").addEventListener("click",function(){ var v=convFrom.value; convFrom.value=convTo.value; convTo.value=v; if(convFrom._gsBtn)syncGsBtn(convFrom); if(convTo._gsBtn)syncGsBtn(convTo); doConv(); }); doConv(); }
   document.getElementById("curRangeSeg").querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){range=+b.getAttribute("data-r");selPt=-1;document.getElementById("curRangeSeg").querySelectorAll("button").forEach(function(x){x.classList.toggle("sel",x===b);});drawChart();});});
   renderList(); drawChart();
   window.__curRefresh=function(){ renderList(); drawChart(); };
@@ -2217,7 +2401,7 @@ function curTargets(j){
   if(!CURSPREAD)CURSPREAD=(283900*10)/u.irr;
   var sp=CURSPREAD;
   function t(v){ return v?Math.round(u.irr*sp/v/100)*10:0; }
-  return { date:j.date||"", USD:Math.round(u.irr*sp/100)*10, EUR:t(u.eur), GBP:t(u.gbp), AED:t(u.aed), TRY:t(u.try), GOLD:u.xau?Math.round((u.irr*sp/u.xau)/31.1035*0.75/10):0 };
+  return { date:j.date||"", USD:Math.round(u.irr*sp/100)*10, EUR:t(u.eur), GBP:t(u.gbp), AED:t(u.aed), TRY:t(u.try), GOLD:u.xau?Math.round((u.irr*sp/u.xau)/31.1035*0.75/10):0, CAD:t(u.cad), AUD:t(u.aud), CHF:t(u.chf), JPY:u.jpy?Math.round(u.irr*sp/u.jpy)*10:0, CNY:t(u.cny), SAR:t(u.sar), KWD:t(u.kwd), RUB:t(u.rub) };
 }
 function applyCurr(j,pj){
   var t=curTargets(j); if(!t)return false;
@@ -2263,6 +2447,11 @@ function applyWx(idx,j){
   if(cu.surface_pressure!=null)w.pres=String(Math.round(cu.surface_pressure));
   if(dl.sunrise&&dl.sunrise[0])w.sr=faClock(dl.sunrise[0]);
   if(dl.sunset&&dl.sunset[0])w.ss=faClock(dl.sunset[0]);
+  /* v3.37: live dew point, gusts and visibility join the refresh when the API returns them */
+  if(cu.dew_point_2m!=null)w.dew=Math.round(cu.dew_point_2m*10)/10;
+  if(cu.wind_gusts_10m!=null)w.gust=Math.round(cu.wind_gusts_10m);
+  else if(dl.wind_gusts_10m_max&&dl.wind_gusts_10m_max[0]!=null)w.gust=Math.round(dl.wind_gusts_10m_max[0]);
+  if(j.hourly&&j.hourly.visibility&&j.hourly.time){ var vh=-1,nowIso=new Date().toISOString().slice(0,13); for(var vi=0;vi<j.hourly.time.length;vi++){ if(j.hourly.time[vi].slice(0,13)<=nowIso)vh=vi; else break; } if(vh>=0&&j.hourly.visibility[vh]!=null)w.vis=j.hourly.visibility[vh]; }
   if(j.hourly&&j.hourly.time&&j.hourly.temperature_2m&&dl.time){
     var st=-1; for(var i=0;i<j.hourly.time.length;i++){ if(j.hourly.time[i].indexOf(dl.time[0])===0){ st=i; break; } }
     if(st>=0&&j.hourly.temperature_2m.length>=st+24){ var hr=[]; for(var h=0;h<24;h++)hr.push(Math.round(j.hourly.temperature_2m[st+h])); w.hr=hr; }
@@ -2282,7 +2471,7 @@ function applyWx(idx,j){
 }
 function refreshWeather(idx,alsoPaint){
   var ll=PROVLL[idx]; if(!ll)return;
-  var url="https://api.open-meteo.com/v1/forecast?latitude="+ll[0]+"&longitude="+ll[1]+"&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m&hourly=temperature_2m&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,precipitation_sum,snowfall_sum,precipitation_probability_max,wind_speed_10m_max&timezone=Asia%2FTehran&forecast_days=7";
+  var url="https://api.open-meteo.com/v1/forecast?latitude="+ll[0]+"&longitude="+ll[1]+"&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,dew_point_2m,wind_gusts_10m&hourly=temperature_2m,visibility&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,precipitation_sum,snowfall_sum,precipitation_probability_max,wind_speed_10m_max,wind_gusts_10m_max&timezone=Asia%2FTehran&forecast_days=7";
   fetchJsonT(url,15000).then(function(j){
     if(applyWx(idx,j)){ LIVE.wxOk=true; LIVE.wxAt=Date.now(); if(alsoPaint&&window.__wxRefresh)window.__wxRefresh(); }
   }).catch(function(){}).then(function(){ paintLiveNotes(); });
@@ -2306,15 +2495,57 @@ var NEWS=[
  {t:"جانشین فراجا: نیروی انتظامی برای مقابله با تهدیدها آماده است",s:"ایرنا",time:"۴ آذر ۱۴۰۵",u:"https://www.irna.ir/news/86332177/%D8%AC%D8%A7%D9%86%D8%B4%DB%8C%D9%86-%D9%81%D8%B1%D8%A7%D8%AC%D8%A7-%D9%86%DB%8C%D8%B1%D9%88%DB%8C-%D8%A7%D9%86%D8%AA%D8%B8%D8%A7%D9%85%DB%8C-%D8%A8%D8%B1%D8%A7%DB%8C-%D9%85%D9%82%D8%A7%D8%A8%D9%84%D9%87-%D8%A8%D8%A7-%D8%AA%D9%87%D8%AF%DB%8C%D8%AF%D9%87%D8%A7-%D8%A2%D9%85%D8%A7%D8%AF%D9%87-%D8%A7%D8%B3%D8%AA"},
  {t:"هنرمندان درباره عمو رضای مهربان سینما چه گفتند؟",s:"ایرنا",time:"۴ آذر ۱۴۰۵",u:"https://www.irna.ir/news/86332277/%D9%87%D9%86%D8%B1%D9%85%D9%86%D8%AF%D8%A7%D9%86-%D8%AF%D8%B1%D8%A8%D8%A7%D8%B1%D9%87-%D8%B9%D9%85%D9%88-%D8%B1%D8%B6%D8%A7%DB%8C-%D9%85%D9%87%D8%B1%D8%A8%D8%A7%D9%86-%D8%B3%DB%8C%D9%86%D9%85%D8%A7-%DA%86%D9%87-%DA%AF%D9%81%D8%AA%D9%86%D8%AF"},
  {t:"وداع با سنگربان فوتبال؛ پیکر میلاد فراهانی در امامزاده طاهر (ع) کرج آرام گرفت",s:"ایرنا",time:"۴ آذر ۱۴۰۵",u:"https://www.irna.ir/news/86332175/%D9%88%D8%AF%D8%A7%D8%B9-%D8%A8%D8%A7-%D8%B3%D9%86%DA%AF%D8%B1%D8%A8%D8%A7%D9%86-%D9%81%D9%88%D8%AA%D8%A8%D8%A7%D9%84-%D9%BE%DB%8C%DA%A9%D8%B1-%D9%85%DB%8C%D9%84%D8%A7%D8%AF-%D9%81%D8%B1%D8%A7%D9%87%D8%A7%D9%86%DB%8C-%D8%AF%D8%B1-%D8%A7%D9%85%D8%A7%D9%85%D8%B2%D8%A7%D8%AF%D9%87-%D8%B7%D8%A7%D9%87%D8%B1-%D8%B9"},
- {t:"دلار ۲۸۴ هزار تومانی و رکوردشکنی تاریخی اونس طلا در بازار امروز",s:"ارزبین",time:"۴ آذر ۱۴۰۵",u:"https://arzbin.com/"}
+ {t:"دلار ۲۸۴ هزار تومانی و رکوردشکنی تاریخی اونس طلا در بازار امروز",s:"ارزبین",time:"۴ آذر ۱۴۰۵",u:"https://arzbin.com/"},
+ {t:"ایران کوچک، گنج پنهان گردشگری",s:"ایرنا",time:"۴ آذر ۱۴۰۵",u:"https://www.irna.ir/"},
+ {t:"زیتون و اقتصاد طارم؛ از باغداری تا سرمایه‌گذاری",s:"ایرنا",time:"۴ آذر ۱۴۰۵",u:"https://www.irna.ir/"},
+ {t:"کرمانشاه، بازیگر اصلی تجارت زمینی با عراق؛ سهم ۴۱ درصدی و صادرات ۱.۴ میلیارد دلاری در ۷ ماه",s:"ایرنا",time:"۴ آذر ۱۴۰۵",u:"https://www.irna.ir/"},
+ {t:"عبور خودروهای قرچک از زیر راه‌آهن؛ انتظار ۱۰ ساله مردم چه زمانی به پایان می‌رسد؟",s:"ایرنا",time:"۴ آذر ۱۴۰۵",u:"https://www.irna.ir/"},
+ {t:"تصاویر مشترک، منافع متفاوت؛ پیام نشست شنجن برای تهران",s:"ایرنا",time:"۴ آذر ۱۴۰۵",u:"https://www.irna.ir/"}
 ];
-function initNews(){var list=document.getElementById("newsList");var NIC='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M4 5h13v14H4zM17 9h3v10h-3"/><path d="M7 9h7M7 12h7M7 15h4" stroke-linecap="round"/></svg>';NEWS.forEach(function(n){var a=document.createElement("a");a.className="news-item";a.href=n.u;a.target="_blank";a.rel="noopener";a.innerHTML="<span class='news-ic'>"+NIC+"</span><span class='news-txt'><b>"+n.t+"</b><small><span class='src'>"+n.s+"</span> • "+n.time+"</small></span>";list.appendChild(a);});}
+function initNews(){
+  var list=document.getElementById("newsList"),search=document.getElementById("newsSearch"),countEl=document.getElementById("newsCount"),srcFilter="all";
+  var NIC='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M4 5h13v14H4zM17 9h3v10h-3"/><path d="M7 9h7M7 12h7M7 15h4" stroke-linecap="round"/></svg>';
+  function render(){
+    var q=(search.value||"").trim();
+    var items=NEWS.filter(function(n){ return (srcFilter==="all"||n.s===srcFilter)&&(!q||n.t.indexOf(q)>-1); });
+    list.innerHTML="";
+    if(!items.length){ list.innerHTML="<div class='empty-state'>خبری با این جستجو پیدا نشد.</div>"; }
+    items.forEach(function(n){ var a=document.createElement("a"); a.className="news-item"; a.href=n.u; a.target="_blank"; a.rel="noopener"; a.innerHTML="<span class='news-ic'>"+NIC+"</span><span class='news-txt'><b>"+esc(n.t)+"</b><small><span class='src'>"+esc(n.s)+"</span> • "+esc(n.time)+"</small></span>"; list.appendChild(a); });
+    if(countEl)countEl.textContent=faNum(items.length)+" خبر از "+faNum(NEWS.length)+" خبر امروز • "+faNum(NEWS.filter(function(n){return n.s==="ایرنا";}).length)+" خبر از ایرنا";
+  }
+  if(search)search.addEventListener("input",render);
+  var seg=document.getElementById("newsSrcSeg");
+  if(seg)seg.querySelectorAll("button").forEach(function(b){ b.addEventListener("click",function(){ srcFilter=b.getAttribute("data-s"); seg.querySelectorAll("button").forEach(function(x){ x.classList.toggle("sel",x===b); }); render(); }); });
+  render();
+}
 
 /* GPA */
 function initGPA(){
   var rows=document.getElementById("gpaRows"),res=document.getElementById("gpaResult");
   function addRow(n,u,g){var d=document.createElement("div");d.className="gpa-row";d.innerHTML="<label class='f'>نام درس<input type='text' class='g-name' placeholder='مثلاً ریاضی عمومی' value='"+(n||"")+"' /></label><label class='f'>واحد<input type='text' inputmode='numeric' class='g-unit' placeholder='۳' value='"+(u||"")+"' /></label><label class='f'>نمره<input type='text' inputmode='decimal' class='g-grade' placeholder='۱۷٫۵' value='"+(g||"")+"' /></label><button type='button' class='del' aria-label='حذف'>✕</button>";d.querySelector(".del").addEventListener("click",function(){d.remove();calc();});d.querySelectorAll("input").forEach(function(i){i.addEventListener("input",calc);});rows.appendChild(d);}
-  function calc(){var sum=0,units=0,count=0;rows.querySelectorAll(".gpa-row").forEach(function(r){var u=parseNum(r.querySelector(".g-unit").value),g=parseNum(r.querySelector(".g-grade").value);if(!isNaN(u)&&!isNaN(g)&&u>0&&g>=0&&g<=20){sum+=u*g;units+=u;count++;}});if(!units){res.innerHTML="حداقل یک درس با واحد و نمره وارد کنید.";return;}var avg=sum/units;var st=avg>=17?"🌟 ممتاز":avg>=14?"✅ خوب":avg>=12?"🟡 متوسط":"🔴 نیازمند تلاش بیشتر";res.innerHTML="معدل ترم: <span class='big'>"+faNum(avg.toFixed(2))+"</span> از ۲۰<br/>معادل GPA: <b>"+faNum(((avg/20)*4).toFixed(2))+"</b> از ۴ • واحدها: <b>"+faNum(units)+"</b> • درس: <b>"+faNum(count)+"</b><br/>وضعیت: "+st;}
+  var prevU=document.getElementById("gpaPrevUnits"),prevA=document.getElementById("gpaPrevAvg"),tgtIn=document.getElementById("gpaTarget"),extra=document.getElementById("gpaExtra");
+  [prevU,prevA,tgtIn].forEach(function(el){ if(el)el.addEventListener("input",calc); });
+  function letterOf(a){ return a>=17?"A":a>=16?"B+":a>=14?"B":a>=13?"C+":a>=12?"C":a>=10?"D":"F"; }
+  function calc(){var sum=0,units=0,count=0;rows.querySelectorAll(".gpa-row").forEach(function(r){var u=parseNum(r.querySelector(".g-unit").value),g=parseNum(r.querySelector(".g-grade").value);if(!isNaN(u)&&!isNaN(g)&&u>0&&g>=0&&g<=20){sum+=u*g;units+=u;count++;}});if(!units){res.innerHTML="حداقل یک درس با واحد و نمره وارد کنید.";if(extra)extra.textContent="اگر معدل و واحد ترم‌های قبل را وارد کنید، معدل کل‌تان هم این‌جا حساب می‌شود.";return;}var avg=sum/units;var st=avg>=17?"🌟 ممتاز":avg>=14?"✅ خوب":avg>=12?"🟡 متوسط":"🔴 نیازمند تلاش بیشتر";
+    res.innerHTML="معدل ترم: <span class='big'>"+faNum(avg.toFixed(2))+"</span> از ۲۰ ("+faNum((avg*5).toFixed(1))+"٪)<br/>معادل GPA: <b>"+faNum(((avg/20)*4).toFixed(2))+"</b> از ۴ • معدل به حروف: <b>"+letterOf(avg)+"</b><br/>واحدها: <b>"+faNum(units)+"</b> • درس: <b>"+faNum(count)+"</b><br/>وضعیت: "+st+(avg<12?"<br/>⚠️ معدل زیر ۱۲ یعنی <b>مشروطی</b> این ترم.":"");
+    if(extra){
+      var pu=parseNum(prevU.value),pa=parseNum(prevA.value),tg=parseNum(tgtIn.value),lines=[];
+      if(!isNaN(pu)&&pu>0&&!isNaN(pa)&&pa>=0&&pa<=20){
+        var cum=(pa*pu+sum)/(pu+units);
+        lines.push("معدل کل شما تا پایان این ترم: <span class='big'>"+faNum(cum.toFixed(2))+"</span> از ۲۰ ("+letterOf(cum)+") • مجموع واحدها: <b>"+faNum(pu+units)+"</b>");
+        if(!isNaN(tg)&&tg>0&&tg<=20){
+          var need=(tg*(pu+units)-pa*pu)/units;
+          if(need>20)lines.push("🎯 برای رسیدن به معدل کل <b>"+faNum(tg.toFixed(2))+"</b>، این ترم باید میانگین <b>"+faNum(need.toFixed(2))+"</b> بگیرید که از ۲۰ بیشتر است؛ هدف را کمی پایین‌تر بیاورید یا ترم‌های بیشتری فرصت بدهید.");
+          else if(need<=0)lines.push("🎯 معدل کل‌تان همین حالا از هدف <b>"+faNum(tg.toFixed(2))+"</b> بالاتر است؛ آفرین!");
+          else lines.push("🎯 برای رسیدن به معدل کل <b>"+faNum(tg.toFixed(2))+"</b>، این ترم باید میانگین <b>"+faNum(need.toFixed(2))+"</b> بگیرید.");
+        }
+      } else if(!isNaN(tg)&&tg>0&&tg<=20){
+        var needT=(tg*(units)-sum+ (tg*0))/units; /* without previous terms, target applies to this term's remaining? fall back to simple note */
+        lines.push("🎯 هدفتان برای این ترم <b>"+faNum(tg.toFixed(2))+"</b> است و معدل فعلی‌تان <b>"+faNum(avg.toFixed(2))+"</b>؛ برای محاسبه دقیق‌تر، واحد و معدل ترم‌های قبل را هم وارد کنید.");
+      }
+      extra.innerHTML=lines.length?lines.join("<br/>"):"اگر معدل و واحد ترم‌های قبل را وارد کنید، معدل کل‌تان هم این‌جا حساب می‌شود.";
+    }
+  }
   document.getElementById("gpaAdd").addEventListener("click",function(){addRow();});
   addRow("ریاضی عمومی","۳","");addRow("برنامه‌نویسی","۳","");addRow("زبان عمومی","۲","");calc();
 }
@@ -2398,13 +2629,27 @@ function calcEvaluate(src,degMode){
 }
 function initCalculator(){
   var exprEl=document.getElementById("calcExpr"),valEl=document.getElementById("calcVal"),histEl=document.getElementById("calcHist");
-  var expr="",deg=true,justEq=false,hist=[];
+  var expr="",deg=true,justEq=false,hist=[],mem=0,memSet=false;
+  var histBox=document.getElementById("calcHistBox");
   function fmt(v){ if(!isFinite(v))return "خطا"; return String(Math.round(v*1e10)/1e10); }
+  function renderHist(){
+    if(!histBox)return;
+    if(!hist.length){ histBox.innerHTML="<div class='empty-state'>هنوز محاسبه‌ای انجام نشده است.</div>"; return; }
+    histBox.innerHTML="";
+    hist.slice(-10).reverse().forEach(function(h){
+      var parts=h.split(" = ");
+      var b=document.createElement("button"); b.type="button"; b.className="hist-item";
+      b.innerHTML="<span>"+esc(parts[0]||h)+"</span><span class='hv'>= "+esc(parts[1]||"")+"</span>";
+      b.addEventListener("click",function(){ if(parts[1]){ expr=parts[1]; justEq=false; render(); } });
+      histBox.appendChild(b);
+    });
+  }
   function render(){
     exprEl.textContent=(expr||"0").replace(/\*/g,"×").replace(/\//g,"÷");
     if(!expr){ valEl.textContent="0"; }
     else { try{ valEl.textContent=fmt(calcEvaluate(expr,deg)); }catch(e){ valEl.textContent="…"; } }
     histEl.innerHTML=hist.slice(-3).map(function(h){return esc(h);}).join("<br/>");
+    renderHist();
   }
   function press(k){
     if(k==="clear"){ expr=""; justEq=false; }
@@ -2433,6 +2678,22 @@ function initCalculator(){
   document.getElementById("calcSci").querySelectorAll("button").forEach(function(b){ b.addEventListener("click",function(){ press(b.getAttribute("data-k")); }); });
   var seg=document.getElementById("calcModeSeg"),sci=document.getElementById("calcSci");
   seg.querySelectorAll("button").forEach(function(b){ b.addEventListener("click",function(){ seg.querySelectorAll("button").forEach(function(x){ x.classList.toggle("sel",x===b); }); sci.style.display=b.getAttribute("data-m")==="sci"?"grid":"none"; }); });
+  /* v3.37 — memory keys + copy + clearable full history */
+  var memRow=document.getElementById("calcMem");
+  function curVal(){ try{ return expr?calcEvaluate(expr,deg):0; }catch(e){ return NaN; } }
+  function syncMem(){ if(!memRow)return; memRow.querySelectorAll("button").forEach(function(b){ b.classList.toggle("has",memSet&&(b.getAttribute("data-m")==="mr"||b.getAttribute("data-m")==="mc")); }); }
+  if(memRow)memRow.querySelectorAll("button").forEach(function(b){ b.addEventListener("click",function(){
+    var k=b.getAttribute("data-m"),v=curVal();
+    if(k==="mc"){ mem=0; memSet=false; showToast("حافظه پاک شد."); }
+    else if(k==="mr"){ if(!memSet){ showToast("حافظه خالی است."); return; } if(justEq){expr="";justEq=false;} expr+=fmt(mem); }
+    else if(k==="mplus"){ if(isNaN(v)){ showToast("⚠️ اول یک عدد یا محاسبه وارد کنید."); return; } mem=(memSet?mem:0)+v; memSet=true; showToast("به حافظه اضافه شد: "+fmt(mem)); }
+    else if(k==="mminus"){ if(isNaN(v)){ showToast("⚠️ اول یک عدد یا محاسبه وارد کنید."); return; } mem=(memSet?mem:0)-v; memSet=true; showToast("از حافظه کم شد: "+fmt(mem)); }
+    else if(k==="copy"){ var txt=valEl.textContent; if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(function(){ showToast("📋 نتیجه کپی شد: "+txt); },function(){ showToast("کپی ممکن نشد."); }); else showToast("کپی در این مرورگر ممکن نیست."); return; }
+    syncMem(); render();
+  }); });
+  var hcBtn=document.getElementById("calcHistClear");
+  if(hcBtn)hcBtn.addEventListener("click",function(){ hist=[]; render(); showToast("تاریخچه پاک شد."); });
+  syncMem();
   render();
 }
 
@@ -2442,22 +2703,39 @@ var NOTES=[],noteEditId=null,noteSeq=0;
 function saveNotes(){ LS.set(LS_KEYS.notes,{items:NOTES,seq:noteSeq}); }
 function initNotes(){
   var tIn=document.getElementById("noteTitle"),bIn=document.getElementById("noteBody"),cnt=document.getElementById("noteCount"),list=document.getElementById("noteList"),search=document.getElementById("noteSearch"),saveBtn=document.getElementById("noteSave");
-  function updCount(){ cnt.textContent=faNum(bIn.value.length)+" نویسه"; }
+  var sortSel=document.getElementById("noteSort"),totalEl=document.getElementById("noteTotal");
+  function updCount(){ var w=bIn.value.trim()?bIn.value.trim().split(/\s+/).length:0; cnt.textContent=faNum(bIn.value.length)+" نویسه • "+faNum(w)+" واژه"; }
   bIn.addEventListener("input",updCount);
+  function dl(name,text){ var blob=new Blob([text],{type:"text/plain;charset=utf-8"}); var url=URL.createObjectURL(blob); var a=document.createElement("a"); a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(url); },800); }
   function render(){
     var q=(search.value||"").trim();
     var items=NOTES.filter(function(n){ return !q||n.title.indexOf(q)>-1||n.body.indexOf(q)>-1; });
+    var mode=sortSel?sortSel.value:"new";
+    items=items.slice();
+    if(mode==="new")items.reverse();
+    if(mode==="title")items.sort(function(a,b){ return a.title<b.title?-1:a.title>b.title?1:0; });
+    /* pinned notes always float to the top, whatever the sort */
+    items.sort(function(a,b){ return (b.pin?1:0)-(a.pin?1:0); });
+    if(totalEl)totalEl.textContent=faNum(NOTES.length)+" یادداشت • "+faNum(NOTES.filter(function(n){return n.pin;}).length)+" سنجاق‌شده";
     if(!items.length){ list.innerHTML="<div class='empty-state'>"+(NOTES.length?"یادداشتی با این جستجو پیدا نشد.":"هنوز یادداشتی ندارید؛ اولین یادداشت را بنویسید.")+"</div>"; return; }
     list.innerHTML="";
-    items.slice().reverse().forEach(function(n){
-      var d=document.createElement("div"); d.className="note-card";
-      d.innerHTML="<h5>"+esc(n.title)+"</h5><p>"+esc(n.body)+"</p><div class='nmeta'><time>"+esc(n.when)+"</time><span class='nact'><button type='button' class='nedit'>ویرایش</button><button type='button' class='ndl'>دانلود</button><button type='button' class='ndel'>✕ حذف</button></span></div>";
+    items.forEach(function(n){
+      var d=document.createElement("div"); d.className="note-card"+(n.pin?" pinned":"");
+      d.innerHTML="<h5>"+(n.pin?"📌 ":"")+esc(n.title)+"</h5><p>"+esc(n.body)+"</p><div class='nmeta'><time>"+esc(n.when)+"</time><span class='nact'><button type='button' class='npin'>"+(n.pin?"برداشتن سنجاق":"سنجاق")+"</button><button type='button' class='nedit'>ویرایش</button><button type='button' class='ndl'>دانلود</button><button type='button' class='ndel'>✕ حذف</button></span></div>";
+      d.querySelector(".npin").addEventListener("click",function(){ n.pin=!n.pin; saveNotes(); render(); });
       d.querySelector(".nedit").addEventListener("click",function(){ noteEditId=n.id; tIn.value=n.title; bIn.value=n.body; updCount(); saveBtn.textContent="💾 ذخیره تغییرات"; box.scrollTop=0; tIn.focus(); });
-      d.querySelector(".ndl").addEventListener("click",function(){ var blob=new Blob([n.title+"\n\n"+n.body],{type:"text/plain;charset=utf-8"}); var url=URL.createObjectURL(blob); var a=document.createElement("a"); a.href=url; a.download="note.txt"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(url); },800); });
+      d.querySelector(".ndl").addEventListener("click",function(){ dl("note.txt",n.title+"\n\n"+n.body); });
       d.querySelector(".ndel").addEventListener("click",function(){ NOTES=NOTES.filter(function(x){ return x.id!==n.id; }); if(noteEditId===n.id){ noteEditId=null; saveBtn.textContent="💾 ذخیره یادداشت"; } saveNotes(); render(); });
       list.appendChild(d);
     });
   }
+  if(sortSel)sortSel.addEventListener("change",render);
+  var expAll=document.getElementById("noteExportAll");
+  if(expAll)expAll.addEventListener("click",function(){
+    if(!NOTES.length){ showToast("⚠️ هنوز یادداشتی ندارید."); return; }
+    var txt=NOTES.map(function(n,i){ return (i+1)+". "+n.title+"  ("+n.when+")\n"+n.body; }).join("\n\n————————\n\n");
+    dl("amir-dastyar-notes.txt",txt); showToast("⬇️ همه یادداشت‌ها دانلود شد.");
+  });
   saveBtn.addEventListener("click",function(){
     var title=tIn.value.trim(),body=bIn.value.trim();
     if(!title&&!body){ showToast("⚠️ اول عنوان یا متنی بنویسید."); return; }
@@ -2465,7 +2743,7 @@ function initNotes(){
     var now=new Date(); var tj=d2j(g2d(now.getFullYear(),now.getMonth()+1,now.getDate()));
     var when=faNum(tj.jd)+" "+JMNAME[tj.jm-1]+" "+faNum(tj.jy)+" — "+faNum(String(now.getHours()).padStart(2,"0"))+":"+faNum(String(now.getMinutes()).padStart(2,"0"));
     if(noteEditId!==null){ var n=NOTES.filter(function(x){ return x.id===noteEditId; })[0]; if(n){ n.title=title; n.body=body; n.when=when; } noteEditId=null; saveBtn.textContent="💾 ذخیره یادداشت"; showToast("✅ یادداشت ویرایش شد."); }
-    else { NOTES.push({id:++noteSeq,title:title,body:body,when:when}); showToast("✅ یادداشت ذخیره شد."); }
+    else { NOTES.push({id:++noteSeq,title:title,body:body,when:when,pin:false}); showToast("✅ یادداشت ذخیره شد."); }
     saveNotes(); tIn.value=""; bIn.value=""; updCount(); render();
   });
   document.getElementById("noteClear").addEventListener("click",function(){ tIn.value=""; bIn.value=""; noteEditId=null; saveBtn.textContent="💾 ذخیره یادداشت"; updCount(); });
@@ -2494,8 +2772,20 @@ function initAzan(){
     var now=new Date(); var tj=d2j(g2d(now.getFullYear(),now.getMonth()+1,now.getDate()));
     document.getElementById("azToday").textContent=FA_WD[now.getDay()]+" "+faNum(tj.jd)+" "+JMNAME[tj.jm-1]+" "+faNum(tj.jy)+" — "+w.c+" ("+w.p+")";
     var list=document.getElementById("azList"); list.innerHTML="";
-    var rows=[];
-    times.forEach(function(t,i){ var d=document.createElement("div"); d.className="azan-row"; d.innerHTML="<span style='font-weight:800'>"+names[i]+"</span><span class='at'>"+azFmt(t)+"</span>"; list.appendChild(d); rows.push(d); });
+    var rows=[],remEls=[];
+    times.forEach(function(t,i){ var d=document.createElement("div"); d.className="azan-row"; d.innerHTML="<span style='font-weight:800'>"+names[i]+"<span class='az-rem'></span></span><span class='at'>"+azFmt(t)+"</span>"; list.appendChild(d); rows.push(d); remEls.push(d.querySelector(".az-rem")); });
+    /* v3.37 — today's extra details, all computed from the same real prayer times: Islamic midnight (halfway from Maghrib to next Fajr), the fast length (Fajr→Maghrib), the start of the last third of the night, and the day length (sunrise→sunset) */
+    (function(){
+      function durTxt(mins){ return faNum(Math.floor(mins/60))+" ساعت و "+faNum(Math.round(mins%60))+" دقیقه"; }
+      var mid=((times[5]+(times[0]+1440))/2)%1440;
+      var nightLen=(times[0]+1440)-times[5];
+      var third=(times[5]+nightLen*2/3)%1440;
+      var midEl=document.getElementById("azMid"),fastEl=document.getElementById("azFast"),thirdEl=document.getElementById("azThird"),dayEl=document.getElementById("azDayLen");
+      if(midEl)midEl.textContent=azFmt(Math.round(mid));
+      if(fastEl)fastEl.textContent=durTxt(times[5]-times[0]);
+      if(thirdEl)thirdEl.textContent=azFmt(Math.round(third));
+      if(dayEl)dayEl.textContent=durTxt(times[4]-times[1]);
+    })();
     var countEl=document.getElementById("azCount"),nameEl=document.getElementById("azNextName"),progEl=document.getElementById("azProg"),sunEl=document.getElementById("azSun");
     var sceneEl=document.getElementById("azScene"),animEl=document.getElementById("azAnim"),moonEl=document.getElementById("azMoon"),lastPhase="";
     if(sunEl&&!sunEl.firstChild){ var r8=""; for(var ri=0;ri<8;ri++)r8+='<i style="transform:rotate('+(ri*45)+'deg)"></i>'; sunEl.innerHTML='<span class="rays">'+r8+'</span>'; }
@@ -2513,6 +2803,12 @@ function initAzan(){
       var nextT=ni<times.length?times[ni]:times[0]+1440;
       var nextName=ni<names.length?names[ni]:names[0];
       rows.forEach(function(r,i){ r.classList.toggle("next",i===(ni<times.length?ni:0)); });
+      remEls.forEach(function(el,i){
+        if(!el)return;
+        var diff=times[i]-cur;
+        if(diff>0){ var dh=Math.floor(diff/60),dm=Math.floor(diff%60); el.textContent=dh>0?("مانده: "+faNum(dh)+" ساعت و "+faNum(dm)+" دقیقه"):("مانده: "+faNum(dm)+" دقیقه"); }
+        else el.textContent="گذشته است";
+      });
       nameEl.textContent="تا "+nextName+" ("+w.c+")";
       var remainMs=Math.max(0,(nextT-cur)*60000);
       var rh=Math.floor(remainMs/3600000),rm=Math.floor(remainMs%3600000/60000),rs=Math.floor(remainMs%60000/1000);
@@ -2548,6 +2844,8 @@ var EXP=[],expSeq=0,expBudgetVal=0;
 function saveExpenses(){ LS.set(LS_KEYS.expenses,{items:EXP,seq:expSeq,budget:expBudgetVal}); }
 function initExpenses(){
   var tIn=document.getElementById("expTitle"),aIn=document.getElementById("expAmount"),typeSel=document.getElementById("expType"),catSel=document.getElementById("expCat"),list=document.getElementById("expList"),catsEl=document.getElementById("expCats"),filter="all";
+  var searchEl=document.getElementById("expSearch"),summaryEl=document.getElementById("expSummary");
+  if(searchEl)searchEl.addEventListener("input",function(){ render(); });
   function totals(){ var inc=0,out=0; EXP.forEach(function(e){ if(e.type==="in")inc+=e.amt; else out+=e.amt; }); return {inc:inc,out:out,bal:inc-out}; }
   function render(){
     var t=totals();
@@ -2562,13 +2860,28 @@ function initExpenses(){
       catsEl.innerHTML="";
       keys.forEach(function(k){ var pct=t.out?Math.round(cats[k]/t.out*100):0; var r=document.createElement("div"); r.className="cat-bar"; r.title="برای دیدن جزئیات هزینه‌ها بزنید"; r.innerHTML="<span>"+esc(k)+"</span><span class='cat-track'><span class='cat-fill' style='width:"+pct+"%'></span></span><span style='text-align:left;font-weight:800'>"+groupFa(cats[k])+"</span>"; r.addEventListener("click",function(){ openExpDetail(keys,cats,t.out,k); }); catsEl.appendChild(r); });
     }
-    var items=EXP.filter(function(e){ return filter==="all"||e.type===filter; });
-    if(!items.length){ list.innerHTML="<div class='empty-state'>تراکنشی این‌جا نیست؛ اولین تراکنش را ثبت کنید.</div>"; }
+    /* v3.37 — a compact summary of everything recorded so far */
+    if(summaryEl){
+      if(!EXP.length)summaryEl.innerHTML="هنوز تراکنشی ثبت نشده است؛ با ثبت اولین درآمد یا هزینه، خلاصه و آمار این‌جا می‌آید.";
+      else{
+        var outs=EXP.filter(function(e){return e.type==="out";}),ins=EXP.filter(function(e){return e.type==="in";});
+        var big=outs.length?outs.reduce(function(a,b){return b.amt>a.amt?b:a;},outs[0]):null;
+        var avgOut=outs.length?Math.round(t.out/outs.length):0;
+        var savePct=t.inc>0?Math.round(t.bal/t.inc*100):null;
+        summaryEl.innerHTML="🧮 <b>"+faNum(EXP.length)+"</b> تراکنش ("+faNum(ins.length)+" درآمد • "+faNum(outs.length)+" هزینه)"
+          +(big?"<br/>💸 بزرگ‌ترین هزینه: <b>"+esc(big.title)+"</b> — "+groupFa(big.amt)+" تومان ("+esc(big.cat)+")":"")
+          +(outs.length?"<br/>📊 میانگین هر هزینه: <b>"+groupFa(avgOut)+" تومان</b>":"")
+          +(savePct!==null?"<br/>🐷 نرخ پس‌انداز: <b>"+faNum(savePct)+"٪</b> از درآمد":"");
+      }
+    }
+    var q=searchEl?(searchEl.value||"").trim():"";
+    var items=EXP.filter(function(e){ return (filter==="all"||e.type===filter)&&(!q||e.title.indexOf(q)>-1||e.cat.indexOf(q)>-1); });
+    if(!items.length){ list.innerHTML="<div class='empty-state'>"+(q||filter!=="all"?"تراکنشی با این فیلتر پیدا نشد.":"تراکنشی این‌جا نیست؛ اولین تراکنش را ثبت کنید.")+"</div>"; }
     else {
       list.innerHTML="";
       items.slice().reverse().forEach(function(e){
         var d=document.createElement("div"); d.className="exp-row";
-        d.innerHTML="<span><b>"+esc(e.title)+"</b><br/><small style='color:var(--faint)'>"+esc(e.cat)+" • "+(e.type==="in"?"درآمد":"هزینه")+"</small></span><span style='display:flex;align-items:center;gap:9px'><span class='eamt' style='color:"+(e.type==="in"?"#059669":"#dc2626")+"'>"+(e.type==="in"?"＋":"－")+" "+groupFa(e.amt)+" تومان</span><button type='button' class='exp-del' aria-label='حذف تراکنش'>✕</button></span>";
+        d.innerHTML="<span><b>"+esc(e.title)+"</b><br/><small style='color:var(--faint)'>"+esc(e.cat)+" • "+(e.type==="in"?"درآمد":"هزینه")+(e.when?" • "+esc(e.when):"")+"</small></span><span style='display:flex;align-items:center;gap:9px'><span class='eamt' style='color:"+(e.type==="in"?"#059669":"#dc2626")+"'>"+(e.type==="in"?"＋":"－")+" "+groupFa(e.amt)+" تومان</span><button type='button' class='exp-del' aria-label='حذف تراکنش'>✕</button></span>";
         d.querySelector(".exp-del").addEventListener("click",function(){ EXP=EXP.filter(function(x){ return x.id!==e.id; }); saveExpenses(); render(); });
         list.appendChild(d);
       });
@@ -2586,7 +2899,9 @@ function initExpenses(){
     var amt=parseNum(aIn.value);
     if(isNaN(amt)||amt<=0){ showToast("⚠️ مبلغ معتبر وارد کنید."); return; }
     var title=tIn.value.trim()||catSel.value;
-    EXP.push({id:++expSeq,title:title,amt:Math.round(amt),type:typeSel.value,cat:catSel.value});
+    var nw=new Date(); var tj2=d2j(g2d(nw.getFullYear(),nw.getMonth()+1,nw.getDate()));
+    var whenStr=faNum(tj2.jd)+" "+JMNAME[tj2.jm-1]+" "+faNum(tj2.jy);
+    EXP.push({id:++expSeq,title:title,amt:Math.round(amt),type:typeSel.value,cat:catSel.value,when:whenStr});
     saveExpenses();
     tIn.value=""; aIn.value="";
     showToast("✅ تراکنش ثبت شد.");
@@ -2596,6 +2911,16 @@ function initExpenses(){
   var bIn=document.getElementById("expBudget");
   if(expBudgetVal>0)bIn.value=groupFa(expBudgetVal);
   bIn.addEventListener("input",function(){ var v=parseNum(bIn.value); expBudgetVal=isNaN(v)?0:v; saveExpenses(); render(); });
+  var csvBtn=document.getElementById("expCsv");
+  if(csvBtn)csvBtn.addEventListener("click",function(){
+    if(!EXP.length){ showToast("⚠️ هنوز تراکنشی ندارید."); return; }
+    function q2(x){ return '"'+String(x==null?"":x).replace(/"/g,'""')+'"'; }
+    var rows=[["عنوان","مبلغ (تومان)","نوع","دسته‌بندی","تاریخ"].map(q2).join(",")];
+    EXP.forEach(function(e){ rows.push([e.title,e.amt,e.type==="in"?"درآمد":"هزینه",e.cat,e.when||""].map(q2).join(",")); });
+    var blob=new Blob(["\ufeff"+rows.join("\r\n")],{type:"text/csv;charset=utf-8"});
+    var url=URL.createObjectURL(blob); var a=document.createElement("a"); a.href=url; a.download="amir-dastyar-expenses.csv"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(url); },800);
+    showToast("⬇️ فایل CSV تراکنش‌ها دانلود شد.");
+  });
   render();
 }
 
@@ -2688,7 +3013,35 @@ function initCalendar(){
     }
     showOccasion();
     renderEvents();
+    /* v3.37: how far the selected day sits from today */
+    var diffEl=document.getElementById("calDiff");
+    if(diffEl){
+      var dd=j2d(selY,selM,selD)-j2d(todayJ.jy,todayJ.jm,todayJ.jd);
+      var dowS=(firstDow(selY,selM)+selD-1)%7;
+      var base="روز انتخاب‌شده: <span class='big'>"+DOW[dowS]+" "+faNum(selD)+" "+JMNAME[selM-1]+" "+faNum(selY)+"</span>";
+      diffEl.innerHTML=base+(dd===0?" — <b>امروز</b> است 🎉":dd>0?" — <b>"+faNum(dd)+" روز</b> مانده است":" — <b>"+faNum(-dd)+" روز</b> گذشته است");
+    }
   }
+  var goTodayBtn=document.getElementById("calGoToday");
+  if(goTodayBtn)goTodayBtn.addEventListener("click",function(){ viewY=todayJ.jy; viewM=todayJ.jm; selY=todayJ.jy; selM=todayJ.jm; selD=todayJ.jd; render(); });
+  /* v3.37 — date converter both ways, on the same Jalali math the calendar itself uses */
+  var convG=document.getElementById("convGDate"),convGRes=document.getElementById("convGRes");
+  if(convG)convG.addEventListener("change",function(){
+    if(!convG.value){ convGRes.textContent="یک تاریخ میلادی انتخاب کنید تا معادل شمسی‌اش را ببینید."; return; }
+    var pp=convG.value.split("-"); var gy=+pp[0],gm=+pp[1],gd=+pp[2];
+    var tj=d2j(g2d(gy,gm,gd)); var dt=new Date(gy,gm-1,gd);
+    convGRes.innerHTML=faNum(gd)+" "+GMNAME[gm-1]+" "+faNum(gy)+" میلادی = <span class='big'>"+FA_WD[dt.getDay()]+" "+faNum(tj.jd)+" "+JMNAME[tj.jm-1]+" "+faNum(tj.jy)+"</span> شمسی";
+  });
+  var convJM=document.getElementById("convJM");
+  if(convJM){ JMNAME.forEach(function(n,i){ var o=document.createElement("option"); o.value=i+1; o.textContent=n; convJM.appendChild(o); }); convJM.value=String(todayJ.jm); var jdIn=document.getElementById("convJD"),jyIn=document.getElementById("convJY"); if(jdIn)jdIn.value=faNum(todayJ.jd); if(jyIn)jyIn.value=faNum(todayJ.jy); }
+  var convJBtn=document.getElementById("convJBtn");
+  if(convJBtn)convJBtn.addEventListener("click",function(){
+    var jd=parseNum(document.getElementById("convJD").value),jy=parseNum(document.getElementById("convJY").value),jm=+convJM.value;
+    var resJ=document.getElementById("convJRes"); resJ.classList.add("show");
+    if(isNaN(jd)||isNaN(jy)||jd<1||jd>31||jy<1200||jy>1600){ resJ.textContent="روز و سال شمسی معتبر وارد کنید."; return; }
+    var g=d2g(j2d(Math.round(jy),jm,Math.round(jd))); var dt2=new Date(g.gy,g.gm-1,g.gd);
+    resJ.innerHTML=faNum(Math.round(jd))+" "+JMNAME[jm-1]+" "+faNum(Math.round(jy))+" شمسی = <span class='big'>"+FA_WD[dt2.getDay()]+" "+faNum(g.gd)+" "+GMNAME[g.gm-1]+" "+faNum(g.gy)+"</span> میلادی";
+  });
   document.getElementById("calPrev").addEventListener("click",function(){ viewM--; if(viewM<1){ viewM=12; viewY--; } render(); });
   document.getElementById("calNext").addEventListener("click",function(){ viewM++; if(viewM>12){ viewM=1; viewY++; } render(); });
   mSel.addEventListener("change",function(){ viewM=+mSel.value; render(); });
@@ -2715,14 +3068,18 @@ function initCalendar(){
 var PDFIMGS=[];
 function loadImgEl(url){ return new Promise(function(res,rej){ var im=new Image(); im.onload=function(){res(im);}; im.onerror=function(){rej(new Error("img"));}; im.src=url; }); }
 function initImgPdf(){
-  var grid=document.getElementById("pdfGrid"),empty=document.getElementById("pdfEmpty"),fileIn=document.getElementById("pdfFile"),res=document.getElementById("pdfRes"),sizeMode="a4";
+  var grid=document.getElementById("pdfGrid"),empty=document.getElementById("pdfEmpty"),fileIn=document.getElementById("pdfFile"),res=document.getElementById("pdfRes"),sizeMode="a4",qualMode="high";
+  var countEl=document.getElementById("pdfCount");
   function render(){
     grid.innerHTML="";
     empty.style.display=PDFIMGS.length?"none":"block";
+    if(countEl)countEl.textContent=PDFIMGS.length?("📄 "+faNum(PDFIMGS.length)+" عکس = "+faNum(PDFIMGS.length)+" صفحه PDF • با دکمه‌های ‹ › ترتیب صفحه‌ها را عوض کنید"):"";
     PDFIMGS.forEach(function(it,i){
       var d=document.createElement("div"); d.className="pdf-thumb";
-      d.innerHTML="<img src='"+it.url+"' alt='عکس "+faNum(i+1)+" برای PDF' /><span class='pdf-num'>"+faNum(i+1)+"</span><button type='button' class='pdf-del' aria-label='حذف عکس'>✕</button>";
+      d.innerHTML="<img src='"+it.url+"' alt='عکس "+faNum(i+1)+" برای PDF' /><span class='pdf-num'>"+faNum(i+1)+"</span><button type='button' class='pdf-del' aria-label='حذف عکس'>✕</button><span class='pdf-move'><button type='button' class='pm-prev' aria-label='صفحه قبل'>‹</button><button type='button' class='pm-next' aria-label='صفحه بعد'>›</button></span>";
       d.querySelector(".pdf-del").addEventListener("click",function(){ URL.revokeObjectURL(it.url); PDFIMGS.splice(i,1); render(); });
+      d.querySelector(".pm-prev").addEventListener("click",function(){ if(i<=0)return; var t=PDFIMGS[i-1]; PDFIMGS[i-1]=PDFIMGS[i]; PDFIMGS[i]=t; render(); });
+      d.querySelector(".pm-next").addEventListener("click",function(){ if(i>=PDFIMGS.length-1)return; var t=PDFIMGS[i+1]; PDFIMGS[i+1]=PDFIMGS[i]; PDFIMGS[i]=t; render(); });
       grid.appendChild(d);
     });
   }
@@ -2735,6 +3092,8 @@ function initImgPdf(){
     render();
   });
   document.getElementById("pdfSizeSeg").querySelectorAll("button").forEach(function(b){ b.addEventListener("click",function(){ sizeMode=b.getAttribute("data-v"); document.getElementById("pdfSizeSeg").querySelectorAll("button").forEach(function(x){ x.classList.toggle("sel",x===b); }); }); });
+  var qualSeg=document.getElementById("pdfQualSeg");
+  if(qualSeg)qualSeg.querySelectorAll("button").forEach(function(b){ b.addEventListener("click",function(){ qualMode=b.getAttribute("data-v"); qualSeg.querySelectorAll("button").forEach(function(x){ x.classList.toggle("sel",x===b); }); }); });
   document.getElementById("pdfMake").addEventListener("click",function(){
     if(!PDFIMGS.length){ showToast("⚠️ اول دست‌کم یک عکس انتخاب کنید."); return; }
     if(!(window.jspdf&&window.jspdf.jsPDF)){ showToast("⚠️ کتابخانه ساخت PDF بارگذاری نشد؛ اتصال اینترنت را بررسی کنید."); return; }
@@ -2743,19 +3102,21 @@ function initImgPdf(){
     PDFIMGS.slice().forEach(function(it){
       chain=chain.then(function(){
         return loadImgEl(it.url).then(function(im){
-          var scale=Math.min(1,2000/Math.max(im.naturalWidth,im.naturalHeight));
+          var capPx=qualMode==="mid"?1400:2000,jq=qualMode==="mid"?0.72:0.92;
+          var scale=Math.min(1,capPx/Math.max(im.naturalWidth,im.naturalHeight));
           var cw=Math.max(1,Math.round(im.naturalWidth*scale)),ch=Math.max(1,Math.round(im.naturalHeight*scale));
           var cv=document.createElement("canvas"); cv.width=cw; cv.height=ch;
           cv.getContext("2d").drawImage(im,0,0,cw,ch);
-          var data=cv.toDataURL("image/jpeg",0.92),ratio=im.naturalHeight/im.naturalWidth;
+          var data=cv.toDataURL("image/jpeg",jq),ratio=im.naturalHeight/im.naturalWidth;
           if(sizeMode==="fit"){
             var pw=210,ph=Math.min(420,Math.max(60,Math.round(210*ratio))),ori=ph>=pw?"portrait":"landscape";
             if(!doc)doc=new JsPDF({unit:"mm",format:[pw,ph],orientation:ori}); else doc.addPage([pw,ph],ori);
             doc.addImage(data,"JPEG",0,0,pw,ph);
           }else{
-            var land=im.naturalWidth>im.naturalHeight,PW=land?297:210,PH=land?210:297,ori2=land?"landscape":"portrait";
-            if(!doc)doc=new JsPDF({unit:"mm",format:"a4",orientation:ori2}); else doc.addPage("a4",ori2);
-            var aw=PW-20,ah=PH-20,w=aw,h=w*ratio;
+            var fmt=sizeMode==="a5"?"a5":"a4",baseW=sizeMode==="a5"?148:210,baseH=sizeMode==="a5"?210:297;
+            var land=im.naturalWidth>im.naturalHeight,PW=land?baseH:baseW,PH=land?baseW:baseH,ori2=land?"landscape":"portrait";
+            if(!doc)doc=new JsPDF({unit:"mm",format:fmt,orientation:ori2}); else doc.addPage(fmt,ori2);
+            var aw=PW-16,ah=PH-16,w=aw,h=w*ratio;
             if(h>ah){ h=ah; w=h/ratio; }
             doc.addImage(data,"JPEG",(PW-w)/2,(PH-h)/2,w,h);
           }
@@ -2764,7 +3125,7 @@ function initImgPdf(){
       });
     });
     chain.then(function(){
-      if(doc&&pages){ doc.save("amir-dastyar-photos.pdf"); res.innerHTML="✅ PDF ساخته و دانلود شد — <b>"+faNum(pages)+"</b> صفحه از "+faNum(PDFIMGS.length)+" عکس."; showToast("📄 PDF آماده و دانلود شد."); }
+      if(doc&&pages){ var nmEl=document.getElementById("pdfName"); var nm=(nmEl&&nmEl.value.trim())?nmEl.value.trim().replace(/[^\w\- ]+/g,""):"amir-dastyar-photos"; if(!/\.pdf$/i.test(nm))nm+=".pdf"; doc.save(nm); res.innerHTML="✅ PDF ساخته و دانلود شد — <b>"+faNum(pages)+"</b> صفحه از "+faNum(PDFIMGS.length)+" عکس."; showToast("📄 PDF آماده و دانلود شد."); }
       else res.textContent="ساخت PDF ناموفق بود؛ عکس‌ها را دوباره انتخاب کنید.";
     }).catch(function(){ res.textContent="ساخت PDF ناموفق بود؛ عکس‌ها را دوباره انتخاب کنید."; });
   });
@@ -2821,7 +3182,9 @@ function renderProfileView(area){
   area.innerHTML="<div class='profile-view'><div class='p-avatar' style='background:var(--accent)'>"+av+"</div>"+
   "<div style='font-size:1.3rem;font-weight:900'>"+esc(profile.name)+"</div>"+
   (profile.bio?"<p style='color:var(--muted);max-width:420px;margin:10px auto 0'>"+esc(profile.bio)+"</p>":"")+
-  "<div class='btn-row'><button class='btn' id='pEdit' type='button'>✏️ ویرایش / عکس تازه</button><button class='btn' id='pDelete' type='button'>🗑️ حذف پروفایل</button></div></div>";
+  "<div class='btn-row'><button class='btn' id='pEdit' type='button'>✏️ ویرایش / عکس تازه</button><button class='btn' id='pCopy' type='button'>📋 کپی نام و بیو</button><button class='btn' id='pDelete' type='button'>🗑️ حذف پروفایل</button></div></div>";
+  var cpBtn=area.querySelector("#pCopy");
+  if(cpBtn)cpBtn.addEventListener("click",function(){ var txt=profile.name+(profile.bio?"\n"+profile.bio:""); if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(function(){ showToast("📋 نام و بیو کپی شد."); },function(){ showToast("کپی ممکن نشد."); }); else showToast("کپی در این مرورگر ممکن نیست."); });
   area.querySelector("#pDelete").addEventListener("click",function(){profile=null;profileImgUrl=null;tempProfileImg=null;saveProfile();syncNavProfile();showToast("پروفایل حذف شد.");initProfile();});
   area.querySelector("#pEdit").addEventListener("click",function(){var keep=profile;tempProfileImg=profileImgUrl;profile=null;initProfile();var a=document.getElementById("profileArea");a.querySelector("#pName").value=keep.name;a.querySelector("#pBio").value=keep.bio;});
 }
@@ -2831,12 +3194,18 @@ function currentTheme(){var t=root.getAttribute("data-theme");if(t)return t;retu
 function syncThemeSeg(){var seg=document.getElementById("segTheme");if(!seg)return;var v=root.getAttribute("data-theme")||"auto";seg.querySelectorAll("button").forEach(function(b){b.classList.toggle("sel",b.getAttribute("data-v")===v);});}
 function syncPaletteSeg(){var seg=document.getElementById("segPalette");if(!seg)return;var v=root.getAttribute("data-samsung")==="on"?"on":"off";seg.querySelectorAll("button").forEach(function(b){b.classList.toggle("sel",b.getAttribute("data-v")===v);});}
 function setSamsung(on){ if(on)root.setAttribute("data-samsung","on"); else root.removeAttribute("data-samsung"); saveSettings(); syncPaletteSeg(); }
+function syncFsSeg(){var seg=document.getElementById("segFs");if(!seg)return;var v=root.style.getPropertyValue("--fs");var cur=v?String(parseInt(v,10)):"16";seg.querySelectorAll("button").forEach(function(b){b.classList.toggle("sel",b.getAttribute("data-v")===cur);});}
+function syncAccentSw(){var sw=document.getElementById("accentSw");if(!sw)return;var cur=root.style.getPropertyValue("--accent");sw.querySelectorAll("button").forEach(function(b){b.classList.toggle("sel",!!cur&&b.getAttribute("data-a")===cur);});}
 function initCustomize(){
   syncThemeSeg();
   syncPaletteSeg();
+  syncFsSeg();
+  syncAccentSw();
   document.getElementById("segTheme").querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){var v=b.getAttribute("data-v");if(v==="auto")root.removeAttribute("data-theme");else root.setAttribute("data-theme",v);syncThemeSeg();saveSettings();});});
   document.getElementById("segPalette").querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){var on=b.getAttribute("data-v")==="on";setSamsung(on);showToast(on?"🎨 پالت رنگی روشن شد.":"پالت رنگی خاموش شد.");});});
-  document.getElementById("custReset").addEventListener("click",function(){root.removeAttribute("data-theme");root.removeAttribute("data-samsung");root.style.removeProperty("--accent");root.style.removeProperty("--accent2");saveSettings();closeModal();showToast("↩️ تنظیمات به پیش‌فرض برگشت.");});
+  document.getElementById("segFs").querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){root.style.setProperty("--fs",b.getAttribute("data-v")+"px");syncFsSeg();saveSettings();showToast("🔠 اندازه متن تغییر کرد.");});});
+  document.getElementById("accentSw").querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){root.style.setProperty("--accent",b.getAttribute("data-a"));root.style.setProperty("--accent2",b.getAttribute("data-b"));syncAccentSw();saveSettings();showToast("🖌️ رنگ اصلی سایت عوض شد.");});});
+  document.getElementById("custReset").addEventListener("click",function(){root.removeAttribute("data-theme");root.removeAttribute("data-samsung");root.style.removeProperty("--accent");root.style.removeProperty("--accent2");root.style.removeProperty("--fs");saveSettings();closeModal();showToast("↩️ تنظیمات به پیش‌فرض برگشت.");});
 }
 
 /* UPDATE WINDOW — modern hero with a unique animated icon; checking shows an animated update loading screen (spinner, live percent, shimmer progress bar, step tracker) and ends on a green success check */
@@ -2984,7 +3353,7 @@ function openExpDetail(keys,cats,totalOut,tappedKey){
 }
 
 /* ===== SITE-UPDATE PROMPT (v3.19, refresh-proof since v3.36) — the page re-reads its own published file cache-free the moment it loads and on every refresh, restore and refocus; when a newer version number shows up there, a glass window in the site's own style appears and the user updates manually with its button (a cache-free reload). «بعداً» dismisses it only in memory, so a real refresh always checks again and can bring the prompt back. ===== */
-var SITE_VERSION="3.36";
+var SITE_VERSION="3.37";
 var VER_KEY="amir-dastyar-site-version";
 var uvBack=document.getElementById("uvBack"),uvShownFor=null,uvDismissed=false;
 function verFa(v){ return faNum(String(v).replace(".", "٫")); }
