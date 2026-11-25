@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark" />
 <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
 <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)" />
-<meta name="site-version" content="3.27" />
+<meta name="site-version" content="3.28" />
 <title>AMIR Dastyar | امیر دستیار</title>
 <meta name="description" content="AMIR Dastyar — دستیار کاربردی ایران: آب‌وهوای استان‌ها با نمودار، نرخ ارز و طلا، اخبار، معدل دانشگاهی و ابزارها." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1097,7 +1097,14 @@ a.feat{text-decoration:none}
 /* The currency window's manual refresh button carries a refresh icon next to its label */
 .live-note button{display:inline-flex;align-items:center;gap:5px;background:var(--tg-card)}
 /* v3.27: the currency window's refresh button is icon-only — a round button showing just the refresh glyph, no text label */
-#curLiveNote button{width:34px;height:34px;min-height:34px;padding:0;justify-content:center;border-radius:50%}
+#curLiveNote button,#wxLiveNote button{width:34px;height:34px;min-height:34px;padding:0;justify-content:center;border-radius:50%}
+/* === v3.28: «فیلم و سریال» external card (Film2Media) + VPN warning window in the update prompt's exact style === */
+.feat[data-ext="film"] .fic{background:linear-gradient(145deg,#fb4d6d,#c2183f)}
+:root[data-samsung="on"] .feat[data-ext="film"] .fic{background:linear-gradient(145deg,#ffe0e6,#ffb3c6)}
+/* The VPN warning reuses .uv-back/.uv-card wholesale (same backdrop, glass card and spring entrance as the site-update prompt); only its hero icon takes a warm amber tone */
+.vpn-icon .upd-ring{border-color:rgba(249,115,22,.45)}
+.vpn-icon .upd-ring.r2{border-top-color:#f97316;border-bottom-color:rgba(249,115,22,.35)}
+.vpn-icon .upd-core{background:linear-gradient(145deg,#ffb03a,#f97316);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -10px 18px rgba(0,0,0,.16),0 16px 32px rgba(249,115,22,.35)}
 </style>
 </head>
 <body>
@@ -1107,7 +1114,7 @@ a.feat{text-decoration:none}
     <div class="upd-hero">
       <div class="upd-icon" aria-hidden="true"><span class="upd-ring"></span><span class="upd-ring r2"></span><span class="upd-core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6.5 11 12 5.5 17.5 11"/><path d="M5 21h14" stroke-width="2.4"/></svg></span><span class="upd-dot"></span></div>
       <div class="upd-name">AMIR Dastyar</div>
-      <span class="upd-ver">نسخه ۳٫۲۷</span>
+      <span class="upd-ver">نسخه ۳٫۲۸</span>
       <p class="upd-sub">سایت در حال آماده‌سازی است؛ چند لحظه صبر کنید تا همه ابزارها بارگذاری شوند.</p>
     </div>
     <div class="upd-load" id="bootLoad">
@@ -1140,10 +1147,11 @@ a.feat{text-decoration:none}
     <button class="feat glass" data-open="imgpdf"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.8"><path d="M6 3h8l4 4v14H6z" stroke-linejoin="round"/><path d="M14 3v4h4" stroke-linejoin="round"/><circle cx="10.2" cy="11.5" r="1.3"/><path d="M8 17.5l2.8-2.8 1.9 1.9 2.1-2.1 1.2 1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>تبدیل عکس به PDF</h3></button>
     <a class="feat glass ext-card" data-ext="charge" href="https://724.ir/topup" target="_blank" rel="noopener"><span class="ext-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="#0e9f8a" stroke-width="1.8"><rect x="2.5" y="8" width="16" height="9" rx="2.5"/><path d="M21.5 11v3" stroke-linecap="round"/><path d="M11.2 9.4 8.7 12.7h2l-1.1 2.9 3.2-3.7h-2.1l1-2.5z" fill="#f59e0b" stroke="none"/></svg></span><h3>خرید شارژ</h3></a>
     <a class="feat glass ext-card" data-ext="internet" href="https://724.ir/internet" target="_blank" rel="noopener"><span class="ext-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5S9.5 5.8 12 3.5z" stroke-linejoin="round"/></svg></span><h3>خرید بسته اینترنت</h3></a>
+    <a class="feat glass ext-card" data-ext="film" href="https://www.myf2ms.top/" target="_blank" rel="noopener"><span class="ext-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="#c2183f" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3.5"/><path d="M10.2 9.4v5.2c0 .5.6.9 1.1.6l4-2.6c.4-.3.4-.9 0-1.2l-4-2.6c-.5-.3-1.1.1-1.1.6z" fill="#fff" stroke="none"/></svg></span><h3>فیلم و سریال</h3></a>
   </div>
   <div class="edit-bar" id="editBar" hidden><span>حالت ویرایش کارت‌ها — هر کارت را بگیرید و بکشید تا جایش عوض شود.</span><button type="button" id="editDone">تمام شد</button></div>
 
-  <footer>نسخه ۳٫۲۷ • <span dir="ltr" style="font-weight:700">Created by Amir</span> • © ۱۴۰۵</footer>
+  <footer>نسخه ۳٫۲۸ • <span dir="ltr" style="font-weight:700">Created by Amir</span> • © ۱۴۰۵</footer>
 </main>
 
 <!-- BOTTOM LIQUID-GLASS CAPSULE NAV -->
@@ -1315,7 +1323,7 @@ a.feat{text-decoration:none}
   <div class="upd-hero">
     <div class="upd-icon" aria-hidden="true"><span class="upd-ring"></span><span class="upd-ring r2"></span><span class="upd-core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6.5 11 12 5.5 17.5 11"/><path d="M5 21h14" stroke-width="2.4"/></svg></span><span class="upd-dot"></span></div>
     <div class="upd-name">AMIR Dastyar</div>
-    <span class="upd-ver">نسخه ۳٫۲۷</span>
+    <span class="upd-ver">نسخه ۳٫۲۸</span>
     <p class="upd-sub">برای دریافت تازه‌ترین امکانات و بهبودها، آپدیت را بررسی کنید.</p>
   </div>
   <div class="upd-load" id="updLoad" hidden>
@@ -1323,12 +1331,12 @@ a.feat{text-decoration:none}
     <div class="upd-bar"><i id="updProg"></i></div>
     <div class="upd-steps"><span>اتصال</span><span>بررسی نسخه</span><span>دریافت اطلاعات</span><span>آماده‌سازی</span></div>
   </div>
-  <div class="upd-done" id="updDone" hidden><span class="upd-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>سایت شما به‌روز است؛ نسخه ۳٫۲۷ آخرین نسخه است.</span></div>
+  <div class="upd-done" id="updDone" hidden><span class="upd-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>سایت شما به‌روز است؛ نسخه ۳٫۲۸ آخرین نسخه است.</span></div>
   <button class="btn primary" id="updCheck" type="button" style="width:100%;justify-content:center;margin-top:14px">🔄 بررسی و آپدیت</button>
   <div id="updChangelogWrap">
   <h4>📣 تازه‌های سایت</h4>
   <div class="update-list">
-    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۲۷ — جدید</span><h3>رفع مشکل جابه‌جایی کارت‌ها</h3><time>۴ آذر ۱۴۰۵</time><ul><li>سیستم جابه‌جایی کارت‌ها در حالت ویرایش از نو ساخته شد؛ حالا کارت دقیقاً زیر انگشت حرکت می‌کند و کارت‌ها دیگر روی هم نمی‌افتند و جایشان به‌هم نمی‌ریزد.</li><li>بخش تازه‌سازی در پنجرهٔ آب و هوا به بالای پنجره منتقل شد.</li><li>دکمهٔ تازه‌سازی در پنجرهٔ نرخ ارز فقط آیکون شد و عبارت «تازه‌سازی خودکار هر … دقیقه» از ردیف وضعیت پنجره‌ها حذف شد.</li></ul></div>
+    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۲۸ — جدید</span><h3>کارت فیلم و سریال و هشدار VPN</h3><time>۴ آذر ۱۴۰۵</time><ul><li>کارت تازهٔ «فیلم و سریال» اضافه شد؛ با لمس آن سایت فیلم 2 مدیا باز می‌شود.</li><li>اگر سایت بدون VPN در دسترس نباشد، پنجرهٔ هشدار «لطفاً VPN رو روشن کن» نمایش داده می‌شود تا با روشن کردن VPN دوباره تلاش کنید.</li><li>بررسی آپدیت سریع‌تر و مطمئن‌تر شد؛ نسخهٔ تازه بدون کش مرورگر و CDN دریافت می‌شود و به‌محض پیدا شدن، اعلان آپدیت می‌آید.</li><li>در پنجرهٔ آب و هوا متن وضعیت «زنده • آخرین آپدیت ساعت …» حذف شد و دکمهٔ تازه‌سازی هم مثل نرخ ارز فقط آیکون شد.</li></ul></div>
   </div>
   <button class="btn primary" id="updSeenBtn" type="button" style="margin-top:4px">متوجه شدم</button>
   </div>
@@ -1336,7 +1344,7 @@ a.feat{text-decoration:none}
 
 <template id="tpl-changelog">
   <div class="update-list">
-    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۲۷ — جدید</span><h3>رفع مشکل جابه‌جایی کارت‌ها</h3><time>۴ آذر ۱۴۰۵</time><ul><li>سیستم جابه‌جایی کارت‌ها در حالت ویرایش از نو ساخته شد؛ حالا کارت دقیقاً زیر انگشت حرکت می‌کند و کارت‌ها دیگر روی هم نمی‌افتند و جایشان به‌هم نمی‌ریزد.</li><li>بخش تازه‌سازی در پنجرهٔ آب و هوا به بالای پنجره منتقل شد.</li><li>دکمهٔ تازه‌سازی در پنجرهٔ نرخ ارز فقط آیکون شد و عبارت «تازه‌سازی خودکار هر … دقیقه» از ردیف وضعیت پنجره‌ها حذف شد.</li></ul></div>
+    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۲۸ — جدید</span><h3>کارت فیلم و سریال و هشدار VPN</h3><time>۴ آذر ۱۴۰۵</time><ul><li>کارت تازهٔ «فیلم و سریال» اضافه شد؛ با لمس آن سایت فیلم 2 مدیا باز می‌شود.</li><li>اگر سایت بدون VPN در دسترس نباشد، پنجرهٔ هشدار «لطفاً VPN رو روشن کن» نمایش داده می‌شود تا با روشن کردن VPN دوباره تلاش کنید.</li><li>بررسی آپدیت سریع‌تر و مطمئن‌تر شد؛ نسخهٔ تازه بدون کش مرورگر و CDN دریافت می‌شود و به‌محض پیدا شدن، اعلان آپدیت می‌آید.</li><li>در پنجرهٔ آب و هوا متن وضعیت «زنده • آخرین آپدیت ساعت …» حذف شد و دکمهٔ تازه‌سازی هم مثل نرخ ارز فقط آیکون شد.</li></ul></div>
   </div>
 </template>
 
@@ -1382,6 +1390,17 @@ a.feat{text-decoration:none}
     <div class="uv-verline">نسخه فعلی شما: <span id="uvCurVer">—</span> ← نسخه تازه: <b id="uvNewVer2">—</b></div>
     <button class="btn primary" id="uvNow" type="button">🔄 آپدیت الان</button>
     <button class="btn" id="uvLater" type="button">بعداً</button>
+  </div>
+</div>
+
+<!-- VPN WARNING — same glass window, backdrop and spring animation as the site-update prompt above; appears when the site's server cannot be reached at all (host filtered, no VPN) -->
+<div class="uv-back" id="vpnBack">
+  <div class="uv-card" role="dialog" aria-modal="true" aria-labelledby="vpnTitle">
+    <div class="upd-icon vpn-icon" aria-hidden="true"><span class="upd-ring"></span><span class="upd-ring r2"></span><span class="upd-core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 2.6v5.2c0 4.6-3 7.8-7 9.2-4-1.4-7-4.6-7-9.2V5.6z"/><circle cx="12" cy="10" r="1.8" fill="currentColor" stroke="none"/><path d="M12 11.6v3.2"/></svg></span><span class="upd-dot"></span></div>
+    <h3 id="vpnTitle">لطفاً VPN رو روشن کن</h3>
+    <p>اتصال به سرور سایت برقرار نشد. سایت روی سرور خارجی میزبانی می‌شود و از داخل ایران بدون VPN باز نمی‌شود؛ <b>VPN را روشن کنید</b> و با دکمهٔ زیر دوباره تلاش کنید.</p>
+    <button class="btn primary" id="vpnRetry" type="button">🔄 بررسی دوباره</button>
+    <button class="btn" id="vpnLater" type="button">بعداً</button>
   </div>
 </div>
 
@@ -2033,7 +2052,7 @@ function paintLiveNotes(){
   var cn=document.getElementById("curLiveNote");
   if(cn){ cn.className="live-note"+(LIVE.curOk?" ok":""); cn.innerHTML="<span class='ln-dot' aria-hidden='true'></span><span>"+(LIVE.curOk?("زنده • آخرین آپدیت ساعت "+liveClock(LIVE.curAt)):"نرخ‌های ثبت‌شدهٔ امروز")+"</span><button type='button' aria-label='تازه‌سازی'><svg viewBox='0 0 24 24' width='16' height='16' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' style='flex:none'><path d='M20 12a8 8 0 1 1-2.3-5.6M20 3v4h-4'/></svg></button>"; var cb=cn.querySelector("button"); if(cb)cb.addEventListener("click",function(){refreshCurrency();}); }
   var wn=document.getElementById("wxLiveNote");
-  if(wn){ wn.className="live-note"+(LIVE.wxOk?" ok":""); wn.innerHTML="<span class='ln-dot' aria-hidden='true'></span><span>"+(LIVE.wxOk?("زنده • آخرین آپدیت ساعت "+liveClock(LIVE.wxAt)):"اطلاعات ثبت‌شدهٔ امروز")+"</span><button type='button'>تازه‌سازی</button>"; var wb=wn.querySelector("button"); if(wb)wb.addEventListener("click",function(){var sx=document.getElementById("wxProvince"); refreshWeather(sx?+sx.value:0,true);}); }
+  if(wn){ wn.className="live-note"; wn.innerHTML="<button type='button' aria-label='تازه‌سازی'><svg viewBox='0 0 24 24' width='16' height='16' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' style='flex:none'><path d='M20 12a8 8 0 1 1-2.3-5.6M20 3v4h-4'/></svg></button>"; var wb=wn.querySelector("button"); if(wb)wb.addEventListener("click",function(){var sx=document.getElementById("wxProvince"); refreshWeather(sx?+sx.value:0,true);}); }
 }
 function fetchJsonT(url,ms){ return Promise.race([ fetch(url,{cache:"no-store"}).then(function(r){ if(!r.ok)throw new Error("http "+r.status); return r.json(); }), new Promise(function(_,rej){ setTimeout(function(){rej(new Error("timeout"));},ms||12000); }) ]); }
 /* --- currency: interbank JSON -> free-market toman targets --- */
@@ -2663,6 +2682,8 @@ function initUpdate(){
     if(prog)prog.style.width="0%";
     if(pctEl)pctEl.textContent="۰٪";
     checkBtn.disabled=true; checkBtn.style.opacity=".55"; checkBtn.textContent="⏳ در حال بررسی…";
+    /* v3.28: the check is real now — the latest published version is fetched cache-free (unique query + no-store) the moment the button is tapped, and the outcome below is whatever the server actually answered, not a canned «به‌روز است» */
+    var probe=fetchLatestVersion();
     var p=0;
     var iv=setInterval(function(){
       p=Math.min(100,p+Math.random()*13+6);
@@ -2673,14 +2694,23 @@ function initUpdate(){
       stepSpans.forEach(function(s,i){ s.classList.toggle("on",i<=si); });
       if(p>=100){
         clearInterval(iv);
-        setTimeout(function(){
-          if(loadEl)loadEl.hidden=true;
-          if(doneEl)doneEl.hidden=false;
-          checkBtn.disabled=false; checkBtn.style.opacity=""; checkBtn.textContent="🔄 بررسی دوباره";
-          busy=false;
-          showToast("✅ سایت شما به‌روز است — نسخه ۳٫۲۷ آخرین نسخه است.");
-          checkSiteUpdate();
-        },420);
+        probe.then(function(res){
+          setTimeout(function(){
+            if(loadEl)loadEl.hidden=true;
+            checkBtn.disabled=false; checkBtn.style.opacity=""; checkBtn.textContent="🔄 بررسی دوباره";
+            busy=false;
+            if(res.ok&&res.ver&&cmpVer(res.ver,SITE_VERSION)>0){
+              showToast("🎉 نسخه تازه پیدا شد: نسخه "+verFa(res.ver));
+              showUpdatePrompt(res.ver);
+            }else if(res.ok){
+              if(doneEl)doneEl.hidden=false;
+              showToast("✅ سایت شما به‌روز است — نسخه "+verFa(SITE_VERSION)+" آخرین نسخه است.");
+            }else{
+              showToast("⚠️ اتصال به سرور برقرار نشد؛ VPN را بررسی کنید.");
+              showVpnWarning();
+            }
+          },420);
+        });
       }
     },210);
   });
@@ -2778,7 +2808,7 @@ function openExpDetail(keys,cats,totalOut,tappedKey){
 }
 
 /* ===== SITE-UPDATE PROMPT (v3.19) — while the user is on the site, the page quietly re-reads its own published file; when a newer version number shows up there, a glass window in the site's own style appears and the user updates manually with its button (a real reload). «بعداً» dismisses it for this session. ===== */
-var SITE_VERSION="3.27";
+var SITE_VERSION="3.28";
 var VER_KEY="amir-dastyar-site-version";
 var uvBack=document.getElementById("uvBack"),uvShownFor=null,uvDismissed=false;
 function verFa(v){ return faNum(String(v).replace(".", "٫")); }
@@ -2809,23 +2839,80 @@ if(uvNowBtn)uvNowBtn.addEventListener("click",function(){
   setTimeout(function(){ window.location.reload(); },350);
 });
 if(uvLaterBtn)uvLaterBtn.addEventListener("click",function(){ uvDismissed=true; hideUpdatePrompt(); });
+/* v3.28: cache-free version fetch — a unique query string on every request plus no-store and no-cache headers, so neither the browser nor the CDN in between can hand back a stale copy. Resolves {ok:true,ver} when the server answered, {ok:false} when it could not be reached at all (e.g. the host is filtered and no VPN is on). */
+function bustUrl(){ return "index.html?__v="+Date.now().toString(36)+Math.floor(Math.random()*1e9).toString(36); }
+function fetchLatestVersion(){
+  return new Promise(function(resolve){
+    if(!window.fetch){ resolve({ok:false,ver:null}); return; }
+    var done=false;
+    var to=setTimeout(function(){ fin({ok:false,ver:null}); },9000);
+    function fin(res){ if(done)return; done=true; clearTimeout(to); resolve(res); }
+    try{
+      fetch(bustUrl(),{cache:"no-store",headers:{"Cache-Control":"no-cache","Pragma":"no-cache"}}).then(function(r){ return r.ok?r.text():""; }).then(function(txt){
+        if(!txt){ fin({ok:false,ver:null}); return; }
+        var m=/name="site-version" content="([0-9]+(?:\.[0-9]+)*)"/.exec(txt);
+        fin({ok:true,ver:m?m[1]:null});
+      }).catch(function(){ fin({ok:false,ver:null}); });
+    }catch(e){ fin({ok:false,ver:null}); }
+  });
+}
 function checkSiteUpdate(){
   if(uvDismissed||uvShownFor)return;
-  if(!window.fetch)return;
-  try{
-    fetch("index.html",{cache:"no-store"}).then(function(r){ return r.ok?r.text():""; }).then(function(txt){
-      if(!txt)return;
-      var m=/name="site-version" content="([0-9]+(?:\.[0-9]+)*)"/.exec(txt);
-      if(m&&cmpVer(m[1],SITE_VERSION)>0)showUpdatePrompt(m[1]);
-    }).catch(function(){});
-  }catch(e){}
+  fetchLatestVersion().then(function(res){
+    if(res.ok&&res.ver&&cmpVer(res.ver,SITE_VERSION)>0)showUpdatePrompt(res.ver);
+  });
 }
+/* ===== VPN WARNING (v3.28) — the site is hosted abroad and is filtered from inside Iran, so when the cache-free probe cannot reach the server at all, the visitor is most likely browsing without a VPN: a warning window in the exact look and spring animation of the site-update prompt asks them to turn the VPN on. Two failed probes in a row are required before it appears, so a momentary hiccup never triggers it; «بررسی دوباره» re-probes and closes the window the moment the server answers. ===== */
+var vpnBack=document.getElementById("vpnBack"),vpnShown=false,vpnDismissed=false;
+function showVpnWarning(){
+  if(!vpnBack||vpnShown||vpnDismissed)return;
+  if(uvBack&&uvBack.classList.contains("on"))return;
+  vpnShown=true;
+  vpnBack.classList.add("on");
+  requestAnimationFrame(function(){requestAnimationFrame(function(){ vpnBack.classList.add("open"); });});
+  if(navigator.vibrate)navigator.vibrate(14);
+}
+function hideVpnWarning(){
+  if(!vpnBack||!vpnBack.classList.contains("on"))return;
+  vpnBack.classList.remove("open");
+  setTimeout(function(){ vpnBack.classList.remove("on"); },380);
+}
+function probeVpn(){
+  if(vpnDismissed||vpnShown)return;
+  if(uvBack&&uvBack.classList.contains("on")){ setTimeout(probeVpn,15000); return; }
+  fetchLatestVersion().then(function(res){
+    if(res.ok||vpnDismissed||vpnShown)return;
+    setTimeout(function(){
+      if(vpnDismissed||vpnShown)return;
+      fetchLatestVersion().then(function(res2){ if(!res2.ok)showVpnWarning(); });
+    },1500);
+  });
+}
+var vpnRetryBtn=document.getElementById("vpnRetry"),vpnLaterBtn=document.getElementById("vpnLater");
+if(vpnRetryBtn)vpnRetryBtn.addEventListener("click",function(){
+  vpnRetryBtn.disabled=true;
+  var oldTxt=vpnRetryBtn.textContent;
+  vpnRetryBtn.textContent="⏳ در حال بررسی اتصال…";
+  fetchLatestVersion().then(function(res){
+    vpnRetryBtn.disabled=false; vpnRetryBtn.textContent=oldTxt;
+    if(res.ok){
+      vpnShown=false; hideVpnWarning();
+      showToast("✅ اتصال برقرار شد؛ سایت در دسترس است.");
+      if(res.ver&&cmpVer(res.ver,SITE_VERSION)>0)showUpdatePrompt(res.ver);
+    }else{
+      showToast("⚠️ هنوز اتصال برقرار نیست؛ VPN را روشن کنید و دوباره تلاش کنید.");
+      if(navigator.vibrate)navigator.vibrate(20);
+    }
+  });
+});
+if(vpnLaterBtn)vpnLaterBtn.addEventListener("click",function(){ vpnDismissed=true; hideVpnWarning(); });
 /* A returning visitor whose last-seen version is older than this build gets the prompt once, so they can confirm the update themselves; everyone else's seen-version is silently refreshed. */
 (function initVersionWatch(){
   var prev=storedSiteVer();
   if(prev&&cmpVer(SITE_VERSION,prev)>0){ showUpdatePrompt(SITE_VERSION); }
   else setStoredSiteVer(SITE_VERSION);
   setTimeout(checkSiteUpdate,3200);
+  setTimeout(probeVpn,6500);
   setInterval(checkSiteUpdate,60000);
   document.addEventListener("visibilitychange",function(){ if(!document.hidden)checkSiteUpdate(); });
   window.addEventListener("focus",checkSiteUpdate);
