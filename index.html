@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark" />
 <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
 <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)" />
-<meta name="site-version" content="3.25" />
+<meta name="site-version" content="3.27" />
 <title>AMIR Dastyar | امیر دستیار</title>
 <meta name="description" content="AMIR Dastyar — دستیار کاربردی ایران: آب‌وهوای استان‌ها با نمودار، نرخ ارز و طلا، اخبار، معدل دانشگاهی و ابزارها." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1061,6 +1061,43 @@ a.feat{text-decoration:none}
 .cal-ev-empty{color:var(--faint);font-size:.9rem;font-weight:700;padding:10px 2px 2px;line-height:1.9}
 .cal-ev-form{display:grid;gap:10px;margin-top:12px}
 .cal-ev-note{font-size:.76rem;color:var(--faint);margin:10px 0 0;line-height:1.8}
+/* === v3.26: Telegram-style framing inside windows — white rounded rows and cards, separated by gaps, on a light-gray window background (like Telegram's settings list). The weather scene's glass chip and the azan scene's live title bar + «اذان بعدی» chip are gone; the living skies, arcs, sun, moon, clouds, birds, rain and snow stay. === */
+:root{--tg-bg:#eceef1;--tg-card:#ffffff;--tg-shadow:0 1px 2px rgba(16,24,40,.05),0 6px 18px rgba(16,24,40,.05)}
+@media (prefers-color-scheme:dark){:root{--tg-bg:#0e0e11;--tg-card:#1d1d23;--tg-shadow:0 1px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.30)}}
+:root[data-theme="dark"]{--tg-bg:#0e0e11;--tg-card:#1d1d23;--tg-shadow:0 1px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.30)}
+:root[data-theme="light"]{--tg-bg:#eceef1;--tg-card:#ffffff;--tg-shadow:0 1px 2px rgba(16,24,40,.05),0 6px 18px rgba(16,24,40,.05)}
+/* Window surfaces become Telegram's light-gray settings background */
+.modal,.picker,.cd-sheet,.uv-card,.welcome-card,.boot-card{background:var(--tg-bg)}
+.modal-head,.cd-head{background:var(--tg-bg)}
+/* Grouped lists become one white rounded card, Telegram-settings style */
+.seg-list,#curList,.cd-list{background:var(--tg-card);border-radius:20px;box-shadow:var(--tg-shadow)}
+/* Standalone boxes and rows become separate white cards with gaps between them */
+.result,.chart-box,.note-card,.calc-disp,.gpa-row,.cal-occ,.cal-ev,.upd-load,.cd-big,.coin-wrap{background:var(--tg-card);border:1px solid transparent;box-shadow:var(--tg-shadow);border-radius:20px}
+.wx-cell,.fin-stat,.hourly .h,.tick-chip,.chart-tip,.cd-stat,.cd-sel,.azan-row{background:var(--tg-card);border:1px solid transparent;box-shadow:var(--tg-shadow)}
+.news-item{background:var(--tg-card);border-color:transparent;box-shadow:var(--tg-shadow)}
+.pdf-thumb{background:var(--tg-card)}
+.update-list .update{background:var(--tg-card);border-color:transparent}
+/* Fields and dropdowns are white cards on the gray background; fields nested inside a white card take the gray fill instead, so they stay visible */
+.modal input:not([type="range"]),.modal textarea{background:var(--tg-card);border:1.5px solid transparent;box-shadow:var(--tg-shadow)}
+.gs-btn{background-color:var(--tg-card);box-shadow:var(--tg-shadow)}
+.modal .gpa-row input:not([type="range"]),.modal .cal-ev-form input:not([type="range"]){background:var(--tg-bg);box-shadow:none}
+.cal-day,.cal-nav{background:var(--tg-card)}
+.calc-pad button{background:var(--tg-card);box-shadow:var(--tg-shadow)}
+.calc-sci button{background:var(--tg-card)}
+.modal .btn:not(.primary){background:var(--tg-card);border-color:transparent;box-shadow:var(--tg-shadow)}
+/* Loose row lists (weekly forecast, transactions, expense categories) sit inside one white card each */
+#wxWeek,#expList,#expCats{background:var(--tg-card);border-radius:20px;padding:4px 14px;box-shadow:var(--tg-shadow)}
+#expCats{padding:8px 14px}
+/* Picker menu rows: separate white cards like Telegram's lists */
+.picker-opt{background-color:var(--tg-card);background-image:none;border-radius:16px;margin-bottom:8px;padding:13px 14px;box-shadow:var(--tg-shadow)}
+.picker-opt:last-child{margin-bottom:0}
+.picker-opt.sel{background-color:rgba(10,132,255,.12)}
+/* Progress tracks stay visible on both the gray background and white cards */
+.progress,.cat-track,.range-track{background:rgba(120,135,160,.22);border-color:transparent}
+/* The currency window's manual refresh button carries a refresh icon next to its label */
+.live-note button{display:inline-flex;align-items:center;gap:5px;background:var(--tg-card)}
+/* v3.27: the currency window's refresh button is icon-only — a round button showing just the refresh glyph, no text label */
+#curLiveNote button{width:34px;height:34px;min-height:34px;padding:0;justify-content:center;border-radius:50%}
 </style>
 </head>
 <body>
@@ -1070,7 +1107,7 @@ a.feat{text-decoration:none}
     <div class="upd-hero">
       <div class="upd-icon" aria-hidden="true"><span class="upd-ring"></span><span class="upd-ring r2"></span><span class="upd-core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6.5 11 12 5.5 17.5 11"/><path d="M5 21h14" stroke-width="2.4"/></svg></span><span class="upd-dot"></span></div>
       <div class="upd-name">AMIR Dastyar</div>
-      <span class="upd-ver">نسخه ۳٫۲۵</span>
+      <span class="upd-ver">نسخه ۳٫۲۷</span>
       <p class="upd-sub">سایت در حال آماده‌سازی است؛ چند لحظه صبر کنید تا همه ابزارها بارگذاری شوند.</p>
     </div>
     <div class="upd-load" id="bootLoad">
@@ -1106,7 +1143,7 @@ a.feat{text-decoration:none}
   </div>
   <div class="edit-bar" id="editBar" hidden><span>حالت ویرایش کارت‌ها — هر کارت را بگیرید و بکشید تا جایش عوض شود.</span><button type="button" id="editDone">تمام شد</button></div>
 
-  <footer>نسخه ۳٫۲۵ • <span dir="ltr" style="font-weight:700">Created by Amir</span> • © ۱۴۰۵</footer>
+  <footer>نسخه ۳٫۲۷ • <span dir="ltr" style="font-weight:700">Created by Amir</span> • © ۱۴۰۵</footer>
 </main>
 
 <!-- BOTTOM LIQUID-GLASS CAPSULE NAV -->
@@ -1124,8 +1161,9 @@ a.feat{text-decoration:none}
 </div>
 
 <template id="tpl-weather">
+  <div class="live-note" id="wxLiveNote"></div>
   <label class="f wx-select">استان<select id="wxProvince"></select></label>
-  <div class="wx-scene sky-day" id="wxScene"><div class="wx-anim" id="wxAnim" aria-hidden="true"></div><div class="scene-chip"><div><div class="chip-city" id="wxOvCity">—</div><div class="chip-cond" id="wxOvCond">—</div></div><div class="chip-temp" id="wxOvTemp">—</div></div></div>
+  <div class="wx-scene sky-day" id="wxScene"><div class="wx-anim" id="wxAnim" aria-hidden="true"></div></div>
   <div class="wx-main"><div><div class="wx-temp" id="wxTemp">—</div></div><div><div class="wx-cond" id="wxCond">—</div><div class="wx-sub" id="wxRange">—</div><div class="wx-sub" id="wxFeels">—</div></div></div>
   <div class="wx-grid">
     <div class="wx-cell"><span>رطوبت</span><b id="wxHum">—</b></div>
@@ -1145,7 +1183,6 @@ a.feat{text-decoration:none}
   <div class="wx-sec">🗓️ پیش‌بینی ۷ روز آینده</div>
   <div class="wx-legend">نوار رنگی = بازهٔ دما از کمینه تا بیشینه • 🌧 = مقدار باران (میلی‌متر) • ❄️ = مقدار برف (سانتی‌متر)</div>
   <div id="wxWeek"></div>
-  <div class="live-note" id="wxLiveNote"></div>
 </template>
 
 <template id="tpl-currency">
@@ -1208,7 +1245,7 @@ a.feat{text-decoration:none}
 
 <template id="tpl-azan">
   <label class="f wx-select">استان<select id="azProvince"></select></label>
-  <div class="azan-scene sky-day" id="azScene"><div class="az-anim" id="azAnim" aria-hidden="true"></div><div class="azan-arc"></div><div class="azan-sun" id="azSun"></div><div class="azan-moon" id="azMoon" hidden></div><div class="azan-mosque" aria-hidden="true">🕌</div><div class="scene-chip"><div><div class="chip-cond">اذان بعدی</div><div class="chip-city" id="azOvName">—</div></div><div class="chip-temp" id="azOvTime">--:--</div></div><div class="scene-head"><span class="live-dot" aria-hidden="true"></span><span class="live-tag">زنده</span><div class="scene-txt"><div class="scene-title" id="azSceneTitle">مسیر زنده خورشید</div></div><div class="scene-row2"><div class="scene-sub" id="azSceneSub">—</div><span class="scene-clock" id="azSceneClock">--:--:--</span></div></div></div>
+  <div class="azan-scene sky-day" id="azScene"><div class="az-anim" id="azAnim" aria-hidden="true"></div><div class="azan-arc"></div><div class="azan-sun" id="azSun"></div><div class="azan-moon" id="azMoon" hidden></div><div class="azan-mosque" aria-hidden="true">🕌</div></div>
   <div style="text-align:center"><div style="color:var(--muted);font-weight:700" id="azToday">—</div><div style="font-weight:900;font-size:1.1rem" id="azNextName">—</div><div class="azan-count" id="azCount">--:--:--</div><div class="progress" style="max-width:340px;margin:6px auto 0"><i id="azProg"></i></div></div>
   <div id="azList" style="margin-top:16px"></div>
 </template>
@@ -1278,7 +1315,7 @@ a.feat{text-decoration:none}
   <div class="upd-hero">
     <div class="upd-icon" aria-hidden="true"><span class="upd-ring"></span><span class="upd-ring r2"></span><span class="upd-core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6.5 11 12 5.5 17.5 11"/><path d="M5 21h14" stroke-width="2.4"/></svg></span><span class="upd-dot"></span></div>
     <div class="upd-name">AMIR Dastyar</div>
-    <span class="upd-ver">نسخه ۳٫۲۵</span>
+    <span class="upd-ver">نسخه ۳٫۲۷</span>
     <p class="upd-sub">برای دریافت تازه‌ترین امکانات و بهبودها، آپدیت را بررسی کنید.</p>
   </div>
   <div class="upd-load" id="updLoad" hidden>
@@ -1286,12 +1323,12 @@ a.feat{text-decoration:none}
     <div class="upd-bar"><i id="updProg"></i></div>
     <div class="upd-steps"><span>اتصال</span><span>بررسی نسخه</span><span>دریافت اطلاعات</span><span>آماده‌سازی</span></div>
   </div>
-  <div class="upd-done" id="updDone" hidden><span class="upd-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>سایت شما به‌روز است؛ نسخه ۳٫۲۵ آخرین نسخه است.</span></div>
+  <div class="upd-done" id="updDone" hidden><span class="upd-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>سایت شما به‌روز است؛ نسخه ۳٫۲۷ آخرین نسخه است.</span></div>
   <button class="btn primary" id="updCheck" type="button" style="width:100%;justify-content:center;margin-top:14px">🔄 بررسی و آپدیت</button>
   <div id="updChangelogWrap">
   <h4>📣 تازه‌های سایت</h4>
   <div class="update-list">
-    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۲۵ — جدید</span><h3>نام‌های تازهٔ کارت‌ها و «آپدیت سایت»</h3><time>۴ آذر ۱۴۰۵</time><ul><li>نام کارت‌ها ساده و کوتاه شد: «آب و هوا»، «نرخ ارز»، «اخبار»، «محاسبه معدل» و «ماشین حساب» — هم روی خود کارت‌ها و هم در عنوان پنجره‌ای که باز می‌شود.</li><li>«بروزرسانی» در نوار پایین به «آپدیت» تغییر کرد و عنوان پنجره‌اش «آپدیت سایت» شد؛ دکمه‌ها و متن‌های داخل همان پنجره هم با نام تازه هماهنگ شدند.</li></ul></div>
+    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۲۷ — جدید</span><h3>رفع مشکل جابه‌جایی کارت‌ها</h3><time>۴ آذر ۱۴۰۵</time><ul><li>سیستم جابه‌جایی کارت‌ها در حالت ویرایش از نو ساخته شد؛ حالا کارت دقیقاً زیر انگشت حرکت می‌کند و کارت‌ها دیگر روی هم نمی‌افتند و جایشان به‌هم نمی‌ریزد.</li><li>بخش تازه‌سازی در پنجرهٔ آب و هوا به بالای پنجره منتقل شد.</li><li>دکمهٔ تازه‌سازی در پنجرهٔ نرخ ارز فقط آیکون شد و عبارت «تازه‌سازی خودکار هر … دقیقه» از ردیف وضعیت پنجره‌ها حذف شد.</li></ul></div>
   </div>
   <button class="btn primary" id="updSeenBtn" type="button" style="margin-top:4px">متوجه شدم</button>
   </div>
@@ -1299,7 +1336,7 @@ a.feat{text-decoration:none}
 
 <template id="tpl-changelog">
   <div class="update-list">
-    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۲۵ — جدید</span><h3>نام‌های تازهٔ کارت‌ها و «آپدیت سایت»</h3><time>۴ آذر ۱۴۰۵</time><ul><li>نام کارت‌ها ساده و کوتاه شد: «آب و هوا»، «نرخ ارز»، «اخبار»، «محاسبه معدل» و «ماشین حساب» — هم روی خود کارت‌ها و هم در عنوان پنجره‌ای که باز می‌شود.</li><li>«بروزرسانی» در نوار پایین به «آپدیت» تغییر کرد و عنوان پنجره‌اش «آپدیت سایت» شد؛ دکمه‌ها و متن‌های داخل همان پنجره هم با نام تازه هماهنگ شدند.</li></ul></div>
+    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۲۷ — جدید</span><h3>رفع مشکل جابه‌جایی کارت‌ها</h3><time>۴ آذر ۱۴۰۵</time><ul><li>سیستم جابه‌جایی کارت‌ها در حالت ویرایش از نو ساخته شد؛ حالا کارت دقیقاً زیر انگشت حرکت می‌کند و کارت‌ها دیگر روی هم نمی‌افتند و جایشان به‌هم نمی‌ریزد.</li><li>بخش تازه‌سازی در پنجرهٔ آب و هوا به بالای پنجره منتقل شد.</li><li>دکمهٔ تازه‌سازی در پنجرهٔ نرخ ارز فقط آیکون شد و عبارت «تازه‌سازی خودکار هر … دقیقه» از ردیف وضعیت پنجره‌ها حذف شد.</li></ul></div>
   </div>
 </template>
 
@@ -1648,32 +1685,50 @@ var suppressCardClick=false;
   var doneBtn=document.getElementById("editDone");
   if(doneBtn)doneBtn.addEventListener("click",exitEdit);
   cards.forEach(function(c){ var p=c.querySelector(".edit-pencil"); if(p)p.addEventListener("click",function(e){ e.stopPropagation(); exitEdit(); }); });
-  /* Drag to reorder. On touch screens a drag only survives when the browser leaves the gesture to the page from its very first pixel: in edit mode the cards carry touch-action:none (v3.17 CSS), so the long-press merely OPENS edit mode and the reorder drag itself runs on the next press, fully owned by the page. With a mouse there is no gesture-stealing, so the drag may begin inside the same press that opened edit mode. */
+  /* Drag to reorder (v3.27 — rebuilt). The previous version measured positions with getBoundingClientRect() while FLIP transforms were still in flight and fed the dragged card's own live rect back into its transform on every move, so quick successive swaps corrupted each other's measurements: cards ended up displaced, overlapping, or flown away from the finger, and a stale FLIP cleanup timer could clear a newer swap's transform. This version never reads a transformed rect: the dragged card follows the pure pointer delta from the press point, hit-testing and the FLIP glide run on layout geometry only (offsetLeft/offsetTop, which transforms cannot affect), each swap compensates the dragged card's transform by its own layout shift so it stays exactly under the finger, and a per-card generation token guards every timed cleanup. In edit mode a non-passive touchmove guard also stops the browser from stealing the press for page scrolling once the long-press has opened edit mode. */
   grid.addEventListener("contextmenu",function(e){e.preventDefault();});
+  grid.addEventListener("touchmove",function(e){ if(grid.classList.contains("editing")&&e.cancelable)e.preventDefault(); },{passive:false});
   cards.forEach(function(card){
-    var sx=0,sy=0,holdTimer=null,dragging=false,pid=null,ptype="",tx=0,ty=0,grabDX=0,grabDY=0;
+    var sx=0,sy=0,holdTimer=null,dragging=false,pid=null,ptype="",dx=0,dy=0,compX=0,compY=0;
     function clearHold(){ if(holdTimer){clearTimeout(holdTimer);holdTimer=null;} }
-    function startDrag(px,py){
+    function applyDrag(){ card.style.transform="translate("+(dx+compX)+"px,"+(dy+compY)+"px) scale(1.045)"; }
+    function startDrag(){
       if(dragging)return;
       dragging=true; suppressCardClick=true;
-      var r=card.getBoundingClientRect();
-      grabDX=px-r.left; grabDY=py-r.top; tx=0; ty=0;
+      dx=0; dy=0; compX=0; compY=0;
+      card._dragGen=(card._dragGen||0)+1; /* invalidate any pending settle/FLIP cleanup for this card */
+      card.style.transition="";
       card.classList.add("dragging");
       try{card.setPointerCapture(pid);}catch(err){}
     }
-    /* Swap the dragged card with a sibling, gliding the other cards into their new slots (FLIP) instead of letting them jump */
+    /* Layout rect of a card in viewport coordinates, built from offset geometry only — transforms (FLIP glide, wiggle, the drag itself) never distort it */
+    function layoutRect(el){
+      var gr=grid.getBoundingClientRect(),lx,ly;
+      if(el.offsetParent===grid){ lx=gr.left+grid.clientLeft+el.offsetLeft; ly=gr.top+grid.clientTop+el.offsetTop; }
+      else { lx=gr.left+(el.offsetLeft-grid.offsetLeft); ly=gr.top+(el.offsetTop-grid.offsetTop); }
+      return {left:lx,top:ly,width:el.offsetWidth,height:el.offsetHeight};
+    }
+    /* Swap the dragged card with a sibling: siblings glide into their new slots (FLIP measured on layout offsets), and the dragged card's transform is compensated by its own layout shift so it does not jump */
     function swapWith(sib,after){
+      if(sib===card)return;
+      if(after){ if(sib.nextElementSibling===card)return; }
+      else { if(sib.previousElementSibling===card)return; }
       var sibs=Array.prototype.slice.call(grid.querySelectorAll(".feat:not(.dragging)"));
-      var before=sibs.map(function(s){return s.getBoundingClientRect();});
-      if(after){ if(sib.nextSibling===card)return; grid.insertBefore(card,sib.nextSibling); }
-      else { if(sib.previousSibling===card||sib===card)return; grid.insertBefore(card,sib); }
+      var before=sibs.map(function(s){return [s.offsetLeft,s.offsetTop];});
+      var cL=card.offsetLeft,cT=card.offsetTop;
+      if(after)grid.insertBefore(card,sib.nextElementSibling);
+      else grid.insertBefore(card,sib);
+      compX+=cL-card.offsetLeft; compY+=cT-card.offsetTop;
+      applyDrag();
       sibs.forEach(function(s,i){
-        var b=before[i],a=s.getBoundingClientRect(),ox=b.left-a.left,oy=b.top-a.top;
+        var ox=before[i][0]-s.offsetLeft,oy=before[i][1]-s.offsetTop;
         if(!ox&&!oy)return;
+        var gen=(s._dragGen=(s._dragGen||0)+1);
         s.style.transition="none"; s.style.transform="translate("+ox+"px,"+oy+"px)";
         requestAnimationFrame(function(){ requestAnimationFrame(function(){
-          s.style.transition="transform .3s cubic-bezier(.22,1,.36,1)"; s.style.transform="";
-          setTimeout(function(){ s.style.transition=""; s.style.transform=""; },340);
+          if(s._dragGen!==gen)return;
+          s.style.transition="transform .28s cubic-bezier(.22,1,.36,1)"; s.style.transform="";
+          setTimeout(function(){ if(s._dragGen===gen){ s.style.transition=""; s.style.transform=""; } },330);
         }); });
       });
     }
@@ -1686,7 +1741,7 @@ var suppressCardClick=false;
         holdTimer=null;
         enterEdit();
         suppressCardClick=true; /* the release that ends this press must not open the card */
-        if(ptype==="mouse")startDrag(sx,sy);
+        if(ptype==="mouse")startDrag();
         if(navigator.vibrate)navigator.vibrate(12);
       },380);
     });
@@ -1694,36 +1749,41 @@ var suppressCardClick=false;
       if(pid===null||e.pointerId!==pid)return;
       var mx=e.clientX-sx,my=e.clientY-sy;
       if(!dragging){
-        if(grid.classList.contains("editing")){ if(Math.abs(mx)+Math.abs(my)>7)startDrag(e.clientX,e.clientY); else return; }
+        if(grid.classList.contains("editing")){ if(Math.abs(mx)+Math.abs(my)>7)startDrag(); else return; }
         else { if(Math.abs(mx)+Math.abs(my)>12)clearHold(); return; }
       }
       if(e.cancelable)e.preventDefault();
-      /* find the sibling under the pointer and swap live */
+      dx=mx; dy=my;
+      /* find the sibling whose layout slot is under the pointer and swap with it — at most one swap per move; after the swap the dragged card owns that slot, so the same spot cannot trigger a swap back */
       var sibs=Array.prototype.slice.call(grid.querySelectorAll(".feat:not(.dragging)"));
       for(var i=0;i<sibs.length;i++){
-        var r=sibs[i].getBoundingClientRect();
-        if(e.clientX>=r.left-6&&e.clientX<=r.right+6&&e.clientY>=r.top-6&&e.clientY<=r.bottom+6){
+        var r=layoutRect(sibs[i]);
+        if(e.clientX>=r.left-4&&e.clientX<=r.left+r.width+4&&e.clientY>=r.top-4&&e.clientY<=r.top+r.height+4){
           var cx=r.left+r.width/2,cy=r.top+r.height/2,after;
-          if(e.clientY>cy+r.height*0.28)after=true;
-          else if(e.clientY<cy-r.height*0.28)after=false;
+          if(e.clientY>cy+r.height*0.24)after=true;
+          else if(e.clientY<cy-r.height*0.24)after=false;
           else after=e.clientX<cx; /* RTL: left half = later in order */
           swapWith(sibs[i],after);
           break;
         }
       }
-      /* keep the grabbed point of the card exactly under the finger — recomputed from the live rect on every move, so a DOM swap can never make the card jump */
-      var cr=card.getBoundingClientRect();
-      tx+=(e.clientX-grabDX)-cr.left; ty+=(e.clientY-grabDY)-cr.top;
-      card.style.transform="translate("+tx+"px,"+ty+"px) scale(1.045)";
+      applyDrag();
     });
     function endDrag(){
       clearHold();
-      if(dragging){ card.classList.remove("dragging"); card.style.transform=""; }
-      dragging=false; pid=null; tx=0; ty=0;
+      if(dragging){
+        card.classList.remove("dragging");
+        var gen=(card._dragGen=(card._dragGen||0)+1);
+        card.style.transition="transform .22s cubic-bezier(.22,1,.36,1)";
+        card.style.transform="";
+        setTimeout(function(){ if(card._dragGen===gen)card.style.transition=""; },260);
+      }
+      dragging=false; pid=null; dx=0; dy=0; compX=0; compY=0;
       if(suppressCardClick)setTimeout(function(){suppressCardClick=false;},90);
     }
     card.addEventListener("pointerup",endDrag);
     card.addEventListener("pointercancel",endDrag);
+    card.addEventListener("lostpointercapture",function(){ if(dragging)endDrag(); });
     card.addEventListener("pointerleave",function(){ if(!dragging)clearHold(); });
   });
 })();
@@ -1823,9 +1883,7 @@ function paintWx(idx){
   WXCTX.prov=w;
   var place=(w.c===w.p)?w.c:(w.c+" ("+w.p+")");
   document.getElementById("wxTemp").textContent=faNum(w.t)+"°";
-  var ovC=document.getElementById("wxOvCity"); if(ovC)ovC.textContent=place;
-  var ovT=document.getElementById("wxOvTemp"); if(ovT)ovT.textContent=faNum(w.t)+"°";
-  var ovD=document.getElementById("wxOvCond"); if(ovD)ovD.textContent=w.condFa;
+  /* v3.26: the glass chip on the weather scene is removed — the living sky alone fills the scene; city, condition and temperature live in the text block under it */
   document.getElementById("wxCond").textContent=w.condFa+" — "+place;
   document.getElementById("wxRange").textContent="بیشینه "+faNum(w.hi)+"° • کمینه "+faNum(w.lo)+"°";
   document.getElementById("wxFeels").textContent="دمای محسوس: "+faNum(w.feels!=null?w.feels:w.t)+"°";
@@ -1973,9 +2031,9 @@ var LIVE={curOk:false,curAt:0,wxOk:false,wxAt:0,curBusy:false};
 function liveClock(ts){var d=new Date(ts);return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")+":"+String(d.getSeconds()).padStart(2,"0");}
 function paintLiveNotes(){
   var cn=document.getElementById("curLiveNote");
-  if(cn){ cn.className="live-note"+(LIVE.curOk?" ok":""); cn.innerHTML="<span class='ln-dot' aria-hidden='true'></span><span>"+(LIVE.curOk?("زنده • آخرین آپدیت ساعت "+liveClock(LIVE.curAt)+" • تازه‌سازی خودکار هر ۳ دقیقه"):"نرخ‌های ثبت‌شدهٔ امروز • تازه‌سازی خودکار هر ۳ دقیقه")+"</span><button type='button'>تازه‌سازی</button>"; var cb=cn.querySelector("button"); if(cb)cb.addEventListener("click",function(){refreshCurrency();}); }
+  if(cn){ cn.className="live-note"+(LIVE.curOk?" ok":""); cn.innerHTML="<span class='ln-dot' aria-hidden='true'></span><span>"+(LIVE.curOk?("زنده • آخرین آپدیت ساعت "+liveClock(LIVE.curAt)):"نرخ‌های ثبت‌شدهٔ امروز")+"</span><button type='button' aria-label='تازه‌سازی'><svg viewBox='0 0 24 24' width='16' height='16' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' style='flex:none'><path d='M20 12a8 8 0 1 1-2.3-5.6M20 3v4h-4'/></svg></button>"; var cb=cn.querySelector("button"); if(cb)cb.addEventListener("click",function(){refreshCurrency();}); }
   var wn=document.getElementById("wxLiveNote");
-  if(wn){ wn.className="live-note"+(LIVE.wxOk?" ok":""); wn.innerHTML="<span class='ln-dot' aria-hidden='true'></span><span>"+(LIVE.wxOk?("زنده • آخرین آپدیت ساعت "+liveClock(LIVE.wxAt)+" • تازه‌سازی خودکار هر ۱۰ دقیقه"):"اطلاعات ثبت‌شدهٔ امروز • تازه‌سازی خودکار هر ۱۰ دقیقه")+"</span><button type='button'>تازه‌سازی</button>"; var wb=wn.querySelector("button"); if(wb)wb.addEventListener("click",function(){var sx=document.getElementById("wxProvince"); refreshWeather(sx?+sx.value:0,true);}); }
+  if(wn){ wn.className="live-note"+(LIVE.wxOk?" ok":""); wn.innerHTML="<span class='ln-dot' aria-hidden='true'></span><span>"+(LIVE.wxOk?("زنده • آخرین آپدیت ساعت "+liveClock(LIVE.wxAt)):"اطلاعات ثبت‌شدهٔ امروز")+"</span><button type='button'>تازه‌سازی</button>"; var wb=wn.querySelector("button"); if(wb)wb.addEventListener("click",function(){var sx=document.getElementById("wxProvince"); refreshWeather(sx?+sx.value:0,true);}); }
 }
 function fetchJsonT(url,ms){ return Promise.race([ fetch(url,{cache:"no-store"}).then(function(r){ if(!r.ok)throw new Error("http "+r.status); return r.json(); }), new Promise(function(_,rej){ setTimeout(function(){rej(new Error("timeout"));},ms||12000); }) ]); }
 /* --- currency: interbank JSON -> free-market toman targets --- */
@@ -2259,7 +2317,6 @@ function initAzan(){
     var w=PROV[idx],times=timesFor(idx);
     var now=new Date(); var tj=d2j(g2d(now.getFullYear(),now.getMonth()+1,now.getDate()));
     document.getElementById("azToday").textContent=FA_WD[now.getDay()]+" "+faNum(tj.jd)+" "+JMNAME[tj.jm-1]+" "+faNum(tj.jy)+" — "+w.c+" ("+w.p+")";
-    var azST=document.getElementById("azSceneTitle"); if(azST)azST.textContent="مسیر زنده خورشید — "+w.c;
     var list=document.getElementById("azList"); list.innerHTML="";
     var rows=[];
     times.forEach(function(t,i){ var d=document.createElement("div"); d.className="azan-row"; d.innerHTML="<span style='font-weight:800'>"+names[i]+"</span><span class='at'>"+azFmt(t)+"</span>"; list.appendChild(d); rows.push(d); });
@@ -2286,13 +2343,8 @@ function initAzan(){
       countEl.textContent=String(rh).padStart(2,"0")+":"+String(rm).padStart(2,"0")+":"+String(rs).padStart(2,"0");
       var span=nextT-prevT; progEl.style.width=(span>0?Math.min(100,Math.max(0,(cur-prevT)/span*100)):0)+"%";
       var sr=times[1],ss=times[4],pct=Math.min(1,Math.max(0,(cur-sr)/(ss-sr)));
-      /* The scene card's titled header is live: a real ticking clock plus how far the sun has travelled and what the next prayer is */
-      var azCk=document.getElementById("azSceneClock"); if(azCk)azCk.textContent=String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0")+":"+String(n.getSeconds()).padStart(2,"0");
-      var azSb=document.getElementById("azSceneSub"); if(azSb)azSb.textContent="طلوع "+azFmt(sr)+" • غروب "+azFmt(ss)+" • "+faNum(Math.round(pct*100))+"٪ از مسیر امروز خورشید گذشته";
-      /* v3.24: the scene sky follows the real time of day, the frosted chip on the scene carries the next prayer and its time, and at night the moon rides the arc instead of the sun */
+      /* v3.26: the scene's live title bar and its «اذان بعدی» glass chip are removed — the living sky, the sun-path arc and the sun/moon alone fill the scene; the next prayer and its countdown still show under it */
       paintSky();
-      var ovN=document.getElementById("azOvName"); if(ovN)ovN.textContent=nextName;
-      var ovT2=document.getElementById("azOvTime"); if(ovT2)ovT2.textContent=azFmt(nextT);
       if(cur<sr||cur>=ss){
         sunEl.style.display="none";
         if(moonEl){ moonEl.hidden=false; var np2=cur>=ss?(cur-ss)/((sr+1440)-ss):(cur+1440-ss)/((sr+1440)-ss); np2=Math.min(1,Math.max(0,np2)); moonEl.style.insetInlineStart="calc("+(5+np2*82)+"% - 18px)"; moonEl.style.top=(132-Math.sin(np2*Math.PI)*54)+"px"; }
@@ -2626,7 +2678,7 @@ function initUpdate(){
           if(doneEl)doneEl.hidden=false;
           checkBtn.disabled=false; checkBtn.style.opacity=""; checkBtn.textContent="🔄 بررسی دوباره";
           busy=false;
-          showToast("✅ سایت شما به‌روز است — نسخه ۳٫۲۵ آخرین نسخه است.");
+          showToast("✅ سایت شما به‌روز است — نسخه ۳٫۲۷ آخرین نسخه است.");
           checkSiteUpdate();
         },420);
       }
@@ -2726,7 +2778,7 @@ function openExpDetail(keys,cats,totalOut,tappedKey){
 }
 
 /* ===== SITE-UPDATE PROMPT (v3.19) — while the user is on the site, the page quietly re-reads its own published file; when a newer version number shows up there, a glass window in the site's own style appears and the user updates manually with its button (a real reload). «بعداً» dismisses it for this session. ===== */
-var SITE_VERSION="3.25";
+var SITE_VERSION="3.27";
 var VER_KEY="amir-dastyar-site-version";
 var uvBack=document.getElementById("uvBack"),uvShownFor=null,uvDismissed=false;
 function verFa(v){ return faNum(String(v).replace(".", "٫")); }
