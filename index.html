@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark" />
 <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
 <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)" />
-<meta name="site-version" content="3.23" />
+<meta name="site-version" content="3.24" />
 <title>AMIR Dastyar | امیر دستیار</title>
 <meta name="description" content="AMIR Dastyar — دستیار کاربردی ایران: آب‌وهوای استان‌ها با نمودار، نرخ ارز و طلا، اخبار، معدل دانشگاهی و ابزارها." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -270,8 +270,7 @@ footer{margin-top:44px;padding:10px 0 6px;text-align:center;color:var(--faint);f
 .wx-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .wx-chip{flex:1 1 28%;padding:9px 10px;border-radius:12px;border:1px solid var(--stroke);background:var(--select-glass);backdrop-filter:blur(18px) saturate(180%);-webkit-backdrop-filter:blur(18px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 6px 18px rgba(15,30,55,.07);color:var(--muted);font-weight:700;font-size:.9rem;min-height:46px;text-align:center}
 .wx-chip.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--accent-ink);border:none}
-.wx-scene{position:relative;height:150px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,rgba(56,189,248,.25),rgba(56,189,248,.05));border:1px solid var(--stroke);margin-bottom:14px}
-.wx-scene.night{background:linear-gradient(180deg,rgba(30,41,82,.5),rgba(30,41,82,.15))}
+.wx-scene{position:relative;height:172px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#1e8fe3 0%,#5db9f2 48%,#c2ecfd 100%);border:1px solid var(--stroke);margin-bottom:14px}
 .sun{position:absolute;top:18px;inset-inline-start:26px;width:64px;height:64px}
 .sun .core{position:absolute;inset:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fde68a,#f59e0b);box-shadow:0 0 34px rgba(245,158,11,.65)}
 .sun .rays{position:absolute;inset:0;animation:spinSlow 14s linear infinite}
@@ -282,10 +281,11 @@ footer{margin-top:44px;padding:10px 0 6px;text-align:center;color:var(--faint);f
 .cloud.c1{width:96px;height:30px;top:34px;inset-inline-start:110px}.cloud.c1::before{width:44px;height:44px;top:-22px;inset-inline-start:12px}.cloud.c1::after{width:32px;height:32px;top:-14px;inset-inline-start:48px}
 .cloud.c2{width:70px;height:22px;top:78px;inset-inline-start:40px;animation-delay:-3s;opacity:.7}.cloud.c2::before{width:32px;height:32px;top:-16px;inset-inline-start:10px}.cloud.c2::after{width:24px;height:24px;top:-10px;inset-inline-start:36px}
 @keyframes drift{from{transform:translateX(0)}to{transform:translateX(-22px)}}
-.rain i,.snow i{position:absolute;top:-14px;border-radius:99px;animation:fall linear infinite}
-.rain i{width:2px;height:13px;background:#38bdf8}
-.snow i{width:7px;height:7px;background:#fff;box-shadow:0 0 6px rgba(255,255,255,.8)}
-@keyframes fall{to{transform:translateY(170px)}}
+.rain i,.snow i{position:absolute;top:-14px;border-radius:99px}
+.rain i{width:2px;height:13px;background:rgba(125,211,252,.9);animation:rainFall linear infinite}
+.snow i{width:7px;height:7px;background:#fff;box-shadow:0 0 6px rgba(255,255,255,.8);animation:snowFall linear infinite}
+@keyframes rainFall{from{transform:translate3d(0,-16px,0)}to{transform:translate3d(-12px,196px,0)}}
+@keyframes snowFall{0%{transform:translate(0,-14px)}25%{transform:translate(7px,48px)}50%{transform:translate(-6px,100px)}75%{transform:translate(7px,150px)}100%{transform:translate(-5px,198px)}}
 .wx-main{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .wx-temp{font-size:3.2rem;font-weight:900;line-height:1.1}.wx-cond{font-size:1.2rem;font-weight:800}.wx-sub{color:var(--muted)}
 .wx-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
@@ -364,7 +364,7 @@ footer{margin-top:44px;padding:10px 0 6px;text-align:center;color:var(--faint);f
 .modal .form-grid{gap:14px}
 /* Smooth scrolling: no heavy blur on the home cards, decorative animations pause while scrolling */
 .feat{backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 4px 16px rgba(20,35,60,.08)}
-html.is-scrolling .jupiter,html.is-scrolling .jupiter .bands,html.is-scrolling .jupiter .orbit-1,html.is-scrolling .jupiter .orbit-2,html.is-scrolling .sun .rays,html.is-scrolling .cloud,html.is-scrolling .coin-inner{animation-play-state:paused!important}
+html.is-scrolling .jupiter,html.is-scrolling .jupiter .bands,html.is-scrolling .jupiter .orbit-1,html.is-scrolling .jupiter .orbit-2,html.is-scrolling .sun .rays,html.is-scrolling .sun .halo,html.is-scrolling .cloud,html.is-scrolling .bird,html.is-scrolling .bird svg,html.is-scrolling .coin-inner{animation-play-state:paused!important}
 /* === v3.5: reference-style dock + settings list + red close icons === */
 /* Bottom taskbar — like the reference dock: big rounded-square app tiles, label under each */
 .bottom-nav{border-radius:30px;padding:12px 14px 10px;width:min(470px,calc(100% - 24px));gap:6px;backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);box-shadow:0 22px 44px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.5),inset 0 -10px 22px rgba(255,255,255,.07)}
@@ -445,10 +445,10 @@ html.is-scrolling .jupiter,html.is-scrolling .jupiter .bands,html.is-scrolling .
 .cat-bar{display:grid;grid-template-columns:74px 1fr 86px;gap:9px;align-items:center;padding:6px 0;font-size:.88rem}
 .cat-track{height:10px;border-radius:99px;background:var(--field);border:1px solid var(--stroke);overflow:hidden}
 .cat-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .6s cubic-bezier(.22,1,.36,1)}
-.azan-scene{position:relative;height:132px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,rgba(14,122,95,.28),rgba(56,189,248,.10));border:1px solid var(--stroke);margin-bottom:14px}
-.azan-arc{position:absolute;inset-inline:34px;top:22px;height:110px;border:2px dashed rgba(245,158,11,.5);border-bottom:none;border-radius:110px 110px 0 0}
-.azan-sun{position:absolute;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fde68a,#f59e0b);box-shadow:0 0 26px rgba(245,158,11,.7);transition:inset-inline-start 1s ease,top 1s ease}
-.azan-mosque{position:absolute;bottom:0;inset-inline:0;text-align:center;font-size:2rem;line-height:1;opacity:.85}
+.azan-scene{position:relative;height:132px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#1e8fe3 0%,#5db9f2 48%,#c2ecfd 100%);border:1px solid var(--stroke);margin-bottom:14px}
+.azan-arc{position:absolute;inset-inline:34px;top:22px;height:110px;border:2px dashed rgba(255,255,255,.55);border-bottom:none;border-radius:110px 110px 0 0}
+.azan-sun{position:absolute;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fde68a,#f59e0b);box-shadow:0 0 26px rgba(245,158,11,.7);transition:inset-inline-start 1s ease,top 1s ease;z-index:2}
+.azan-mosque{position:absolute;bottom:8px;inset-inline-end:12px;font-size:1.45rem;line-height:1;opacity:.85;z-index:2}
 .azan-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 12px;border-radius:14px;border:1.5px solid transparent;margin-bottom:8px;background:var(--field)}
 .azan-row.next{background:rgba(45,212,191,.13);border-color:var(--accent);animation:azanPulse 2.2s ease-in-out infinite}
 @keyframes azanPulse{0%,100%{box-shadow:0 0 0 0 rgba(45,212,191,.25)}50%{box-shadow:0 0 0 6px rgba(45,212,191,0)}}
@@ -956,8 +956,8 @@ a.feat{text-decoration:none}
 .star{position:absolute;border-radius:50%;background:#fff;animation:twinkle 2.6s ease-in-out infinite;pointer-events:none}
 @keyframes twinkle{0%,100%{opacity:.25}50%{opacity:1}}
 /* Azan scene special motion: the sun glows in pulses along its arc and the dashed path breathes; the scene is taller so the titled header never covers the sun */
-.azan-scene{height:152px}
-.azan-arc{top:38px;height:100px;animation:arcPulse 4s ease-in-out infinite}
+.azan-scene{height:176px}
+.azan-arc{top:52px;height:88px;animation:arcPulse 4s ease-in-out infinite}
 @keyframes arcPulse{0%,100%{opacity:.6}50%{opacity:1}}
 .azan-sun{animation:azanGlow 3s ease-in-out infinite}
 @keyframes azanGlow{0%,100%{box-shadow:0 0 18px rgba(245,158,11,.55)}50%{box-shadow:0 0 34px rgba(245,158,11,.92)}}
@@ -988,6 +988,48 @@ a.feat{text-decoration:none}
 .wk-chip.snow{background:rgba(147,197,253,.25)}
 .wk-chip.dry{color:var(--faint)}
 .wk-wind{font-size:.76rem;font-weight:700;color:var(--faint);white-space:nowrap;align-self:center}
+/* === v3.24: both scene cards become a living sky — the sky follows the real time of day (soft-orange dawn, blue noon, purple dusk, starry night), the sun rides a dashed sunrise-to-sunset arc with rotating rays and a breathing halo while the moon takes the same arc at night, clouds cross the whole sky and birds fly by now and then, rain and snow fall for real, and a frosted-glass chip on each scene carries the key info (city + big temperature on weather, next prayer + its time on azan) === */
+.wx-scene,.azan-scene{background-size:180% 180%}
+.azan-scene{animation:skyShift 18s ease-in-out infinite alternate}
+.sky-day{background:linear-gradient(180deg,#1e8fe3 0%,#5db9f2 48%,#c2ecfd 100%)}
+.sky-dawn{background:linear-gradient(180deg,#6f6fc0 0%,#d98a9e 40%,#f7a95c 74%,#ffd9a3 100%)}
+.sky-dusk{background:linear-gradient(180deg,#2c2760 0%,#6d4398 42%,#c65d7b 72%,#f59e6c 100%)}
+.sky-night{background:linear-gradient(180deg,#060b21 0%,#0e1a3f 55%,#1b2c5c 100%)}
+.wx-scene .cloud,.azan-scene .cloud{background:rgba(255,255,255,.94)}
+.sky-dusk .cloud{opacity:.75}
+.sky-night .cloud{opacity:.32}
+.cloud.c3{width:56px;height:18px;top:104px;inset-inline-start:180px;animation-delay:-5s;opacity:.55}
+.cloud.c3::before{width:26px;height:26px;top:-13px;inset-inline-start:8px}
+.cloud.c3::after{width:19px;height:19px;top:-8px;inset-inline-start:30px}
+.cloud.far{width:74px;height:24px;top:22px;left:-24%;animation:cloudCross 52s linear infinite;opacity:.85}
+.cloud.far::before{width:34px;height:34px;top:-17px;inset-inline-start:10px}
+.cloud.far::after{width:25px;height:25px;top:-11px;inset-inline-start:38px}
+.cloud.far.f2{width:58px;height:19px;top:58px;animation-duration:74s;animation-delay:-31s;opacity:.6}
+.cloud.far.f2::before{width:27px;height:27px;top:-13px;inset-inline-start:8px}
+.cloud.far.f2::after{width:20px;height:20px;top:-8px;inset-inline-start:30px}
+@keyframes cloudCross{from{left:-24%}to{left:104%}}
+.sun .halo{position:absolute;inset:-24px;border-radius:50%;background:radial-gradient(circle,rgba(253,224,71,.55) 0%,rgba(253,224,71,0) 68%);animation:haloPulse 3.4s ease-in-out infinite;pointer-events:none}
+@keyframes haloPulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.15);opacity:1}}
+.wx-arc{position:absolute;inset-inline:18%;top:34px;height:92px;border:2px dashed rgba(255,255,255,.5);border-bottom:none;border-radius:999px 999px 0 0;pointer-events:none}
+.az-anim{position:absolute;inset:0}
+.azan-sun .rays{position:absolute;inset:-10px;animation:spinSlow 16s linear infinite;pointer-events:none}
+.azan-sun .rays i{position:absolute;left:50%;top:0;width:3px;height:9px;margin-left:-1.5px;border-radius:99px;background:#f59e0b;transform-origin:1.5px 27px}
+.azan-sun::before{content:"";position:absolute;inset:-17px;border-radius:50%;background:radial-gradient(circle,rgba(253,224,71,.5) 0%,rgba(253,224,71,0) 68%);animation:haloPulse 3.4s ease-in-out infinite;pointer-events:none}
+.azan-moon{position:absolute;width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#fffbe6,#fde68a 60%,#fbbf24);box-shadow:0 0 24px rgba(253,224,71,.6);transition:inset-inline-start 1s ease,top 1s ease;z-index:2;animation:moonFloat 5s ease-in-out infinite}
+.azan-moon[hidden]{display:none}
+.bird{position:absolute;right:-34px;width:26px;height:13px;opacity:0;pointer-events:none;animation:birdFly 36s linear infinite;z-index:1}
+.bird svg{width:100%;height:100%;display:block;overflow:visible;animation:flap .55s ease-in-out infinite alternate}
+.bird path{fill:none;stroke:rgba(23,42,66,.8);stroke-width:2.2;stroke-linecap:round}
+.bird.b1{top:16%}
+.bird.b2{top:27%;width:19px;height:10px;animation-delay:-14s;animation-duration:44s}
+.bird.b3{top:10%;width:15px;height:8px;animation-delay:-26s;animation-duration:49s}
+@keyframes birdFly{0%{transform:translate(0,0);opacity:0}3%{opacity:.9}19%{transform:translate(-95vw,-12px);opacity:.9}23%{transform:translate(-110vw,-16px);opacity:0}100%{transform:translate(-110vw,-16px);opacity:0}}
+@keyframes flap{from{transform:scaleY(.5)}to{transform:scaleY(1.08)}}
+.scene-chip{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:5;display:flex;align-items:center;gap:12px;padding:7px 16px;border-radius:16px;background:rgba(255,255,255,.30);backdrop-filter:blur(14px) saturate(170%);-webkit-backdrop-filter:blur(14px) saturate(170%);border:1px solid rgba(255,255,255,.5);box-shadow:0 10px 24px rgba(8,20,45,.18),inset 0 1px 0 rgba(255,255,255,.55);color:#0d2138;white-space:nowrap;max-width:calc(100% - 20px)}
+.scene-chip .chip-city{font-weight:900;font-size:.98rem;line-height:1.45}
+.scene-chip .chip-cond{font-size:.74rem;font-weight:700;opacity:.72;line-height:1.45}
+.scene-chip .chip-temp{font-size:1.8rem;font-weight:900;line-height:1.15;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion: reduce){.bird,.bird svg,.cloud.far,.sun .halo,.azan-sun .rays,.azan-sun::before,.azan-moon,.azan-scene{animation:none!important}}
 /* Site-update prompt — appears on its own while the user is on the site when a newer version is published; the user updates manually from it */
 .uv-back{position:fixed;inset:0;z-index:175;display:none;align-items:flex-end;justify-content:center;padding:12px 12px calc(12px + var(--sab));background:rgba(3,6,14,.55);opacity:0;transition:opacity .22s ease}
 .uv-back.on{display:flex}
@@ -1028,7 +1070,7 @@ a.feat{text-decoration:none}
     <div class="upd-hero">
       <div class="upd-icon" aria-hidden="true"><span class="upd-ring"></span><span class="upd-ring r2"></span><span class="upd-core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6.5 11 12 5.5 17.5 11"/><path d="M5 21h14" stroke-width="2.4"/></svg></span><span class="upd-dot"></span></div>
       <div class="upd-name">AMIR Dastyar</div>
-      <span class="upd-ver">نسخه ۳٫۲۳</span>
+      <span class="upd-ver">نسخه ۳٫۲۴</span>
       <p class="upd-sub">سایت در حال آماده‌سازی است؛ چند لحظه صبر کنید تا همه ابزارها بارگذاری شوند.</p>
     </div>
     <div class="upd-load" id="bootLoad">
@@ -1064,7 +1106,7 @@ a.feat{text-decoration:none}
   </div>
   <div class="edit-bar" id="editBar" hidden><span>حالت ویرایش کارت‌ها — هر کارت را بگیرید و بکشید تا جایش عوض شود.</span><button type="button" id="editDone">تمام شد</button></div>
 
-  <footer>نسخه ۳٫۲۳ • <span dir="ltr" style="font-weight:700">Created by Amir</span> • © ۱۴۰۵</footer>
+  <footer>نسخه ۳٫۲۴ • <span dir="ltr" style="font-weight:700">Created by Amir</span> • © ۱۴۰۵</footer>
 </main>
 
 <!-- BOTTOM LIQUID-GLASS CAPSULE NAV -->
@@ -1083,7 +1125,7 @@ a.feat{text-decoration:none}
 
 <template id="tpl-weather">
   <label class="f wx-select">استان<select id="wxProvince"></select></label>
-  <div class="wx-scene" id="wxScene"><div class="wx-anim" id="wxAnim" aria-hidden="true"></div></div>
+  <div class="wx-scene sky-day" id="wxScene"><div class="wx-anim" id="wxAnim" aria-hidden="true"></div><div class="scene-chip"><div><div class="chip-city" id="wxOvCity">—</div><div class="chip-cond" id="wxOvCond">—</div></div><div class="chip-temp" id="wxOvTemp">—</div></div></div>
   <div class="wx-main"><div><div class="wx-temp" id="wxTemp">—</div></div><div><div class="wx-cond" id="wxCond">—</div><div class="wx-sub" id="wxRange">—</div><div class="wx-sub" id="wxFeels">—</div></div></div>
   <div class="wx-grid">
     <div class="wx-cell"><span>رطوبت</span><b id="wxHum">—</b></div>
@@ -1166,7 +1208,7 @@ a.feat{text-decoration:none}
 
 <template id="tpl-azan">
   <label class="f wx-select">استان<select id="azProvince"></select></label>
-  <div class="azan-scene"><div class="azan-arc"></div><div class="azan-sun" id="azSun"></div><div class="azan-mosque" aria-hidden="true">🕌</div><div class="scene-head"><span class="live-dot" aria-hidden="true"></span><span class="live-tag">زنده</span><div class="scene-txt"><div class="scene-title" id="azSceneTitle">مسیر زنده خورشید</div></div><div class="scene-row2"><div class="scene-sub" id="azSceneSub">—</div><span class="scene-clock" id="azSceneClock">--:--:--</span></div></div></div>
+  <div class="azan-scene sky-day" id="azScene"><div class="az-anim" id="azAnim" aria-hidden="true"></div><div class="azan-arc"></div><div class="azan-sun" id="azSun"></div><div class="azan-moon" id="azMoon" hidden></div><div class="azan-mosque" aria-hidden="true">🕌</div><div class="scene-chip"><div><div class="chip-cond">اذان بعدی</div><div class="chip-city" id="azOvName">—</div></div><div class="chip-temp" id="azOvTime">--:--</div></div><div class="scene-head"><span class="live-dot" aria-hidden="true"></span><span class="live-tag">زنده</span><div class="scene-txt"><div class="scene-title" id="azSceneTitle">مسیر زنده خورشید</div></div><div class="scene-row2"><div class="scene-sub" id="azSceneSub">—</div><span class="scene-clock" id="azSceneClock">--:--:--</span></div></div></div>
   <div style="text-align:center"><div style="color:var(--muted);font-weight:700" id="azToday">—</div><div style="font-weight:900;font-size:1.1rem" id="azNextName">—</div><div class="azan-count" id="azCount">--:--:--</div><div class="progress" style="max-width:340px;margin:6px auto 0"><i id="azProg"></i></div></div>
   <div id="azList" style="margin-top:16px"></div>
 </template>
@@ -1236,7 +1278,7 @@ a.feat{text-decoration:none}
   <div class="upd-hero">
     <div class="upd-icon" aria-hidden="true"><span class="upd-ring"></span><span class="upd-ring r2"></span><span class="upd-core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6.5 11 12 5.5 17.5 11"/><path d="M5 21h14" stroke-width="2.4"/></svg></span><span class="upd-dot"></span></div>
     <div class="upd-name">AMIR Dastyar</div>
-    <span class="upd-ver">نسخه ۳٫۲۳</span>
+    <span class="upd-ver">نسخه ۳٫۲۴</span>
     <p class="upd-sub">برای دریافت تازه‌ترین امکانات و بهبودها، به‌روزرسانی را بررسی کنید.</p>
   </div>
   <div class="upd-load" id="updLoad" hidden>
@@ -1244,12 +1286,12 @@ a.feat{text-decoration:none}
     <div class="upd-bar"><i id="updProg"></i></div>
     <div class="upd-steps"><span>اتصال</span><span>بررسی نسخه</span><span>دریافت اطلاعات</span><span>آماده‌سازی</span></div>
   </div>
-  <div class="upd-done" id="updDone" hidden><span class="upd-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>سایت شما به‌روز است؛ نسخه ۳٫۲۳ آخرین نسخه است.</span></div>
+  <div class="upd-done" id="updDone" hidden><span class="upd-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>سایت شما به‌روز است؛ نسخه ۳٫۲۴ آخرین نسخه است.</span></div>
   <button class="btn primary" id="updCheck" type="button" style="width:100%;justify-content:center;margin-top:14px">🔄 بررسی و به‌روزرسانی</button>
   <div id="updChangelogWrap">
   <h4>📣 تازه‌های سایت</h4>
   <div class="update-list">
-    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۲۳ — جدید</span><h3>حذف نوار زندهٔ کارت آب‌وهوا، رویدادهای تقویم با ذخیره ماندگار و لینک درست خرید اینترنت</h3><time>۴ آذر ۱۴۰۵</time><ul><li>نوار عنوان زندهٔ روی کارت صحنهٔ آب‌وهوا — همان نوار شیشه‌ای با نقطهٔ «زنده»، عنوان شهر و ساعت که دورش خط کشیده بودید — به‌طور کامل حذف شد؛ حالا انیمیشن آسمان (خورشید، ابرها، باران و برف، و ماه و ستاره‌ها در شب) تمام کارت را پر می‌کند و هیچ نواری رویش را نمی‌گیرد.</li><li>تقویم شمسی حالا رویداد شخصی دارد: هر روزی را انتخاب کنید، در کادر «رویدادهای من» عنوان رویداد و ساعتش (اختیاری) را بنویسید و «ثبت و ذخیره رویداد» را بزنید. رویدادها روی همان دستگاه ذخیره می‌شوند و بعد از بستن و دوباره باز کردن سایت هم سر جایشان می‌مانند؛ روزهای دارای رویداد یک نقطهٔ آبی زیر عددشان دارند و هر رویداد را می‌شود با دکمهٔ ✕ حذف کرد.</li><li>لینک کارت «خرید بسته اینترنت» اصلاح شد: قبلاً صفحهٔ اصلی سایت ۷۲۴ باز می‌شد، حالا با زدن کارت مستقیم صفحهٔ خرید بسته اینترنت ۷۲۴ باز می‌شود تا همان‌جا بسته‌های اپراتورها را ببینید و بخرید. کارت «خرید شارژ» مثل قبل به صفحهٔ خرید شارژ ۷۲۴ می‌رود.</li><li>هر سه تغییر در مرورگرهای دسکتاپ هم اعمال شده‌اند: کارت آب‌وهوا آنجا هم بدون نوار زنده است، رویدادهای تقویم در پنجرهٔ وسط‌چین دسکتاپ هم ثبت و ذخیره می‌شوند و کارت اینترنت همان لینک درست را باز می‌کند.</li></ul></div>
+    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۲۴ — جدید</span><h3>صحنهٔ زندهٔ آسمان در آب‌وهوا و اذان: مسیر خورشید، آسمانِ هماهنگ با ساعت روز و شیشهٔ ماتِ اطلاعات</h3><time>۴ آذر ۱۴۰۵</time><ul><li>صحنهٔ زنده و کامل‌تر: خورشید با پرتوهای چرخان و هالهٔ نور می‌تابد، ابرها آرام از آسمان رد می‌شوند و گاهی چند پرنده پرواز می‌کنند؛ شب‌ها ماه و ستاره‌های چشمک‌زن می‌آیند، باران قطره‌های واقعی می‌بارد و برف دانه‌دانه و تاب‌خوران پایین می‌آید — و صحنه با وضعیت واقعی هوای استان انتخابی هماهنگ است.</li><li>قوس مسیر خورشید: در صحنهٔ آب‌وهوا هم قوس نیم‌دایرهٔ طلوع تا غروب اضافه شد و خورشید روی همان مسیر حرکت می‌کند؛ شب‌ها ماه جای آن را روی قوس می‌گیرد. صحنهٔ اذان هم همین مسیر را با خورشید پرتودار و ماه شبانه دارد.</li><li>آسمان بر اساس ساعت واقعی روز: رنگ آسمان هر دو صحنه با ساعت عوض می‌شود — صبح نارنجی ملایم، ظهر آبی، غروب بنفش و شب تیره با ستاره.</li><li>مینیمال ولی پر: روی صحنهٔ آب‌وهوا نام شهر و دمای بزرگ با شیشهٔ مات آمد تا فضای خالی پر شود؛ روی صحنهٔ اذان هم نام اذان بعدی و ساعتش با همان شیشهٔ مات روی صحنه نمایش داده می‌شود.</li><li>هر چهار تغییر در مرورگرهای دسکتاپ هم اعمال شده‌اند؛ صحنه‌ها آنجا هم زنده‌اند و با ساعت روز هماهنگ می‌شوند.</li></ul></div>
   </div>
   <button class="btn primary" id="updSeenBtn" type="button" style="margin-top:4px">متوجه شدم</button>
   </div>
@@ -1257,7 +1299,7 @@ a.feat{text-decoration:none}
 
 <template id="tpl-changelog">
   <div class="update-list">
-    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۲۳ — جدید</span><h3>حذف نوار زندهٔ کارت آب‌وهوا، رویدادهای تقویم با ذخیره ماندگار و لینک درست خرید اینترنت</h3><time>۴ آذر ۱۴۰۵</time><ul><li>نوار عنوان زندهٔ روی کارت صحنهٔ آب‌وهوا — همان نوار شیشه‌ای با نقطهٔ «زنده»، عنوان شهر و ساعت که دورش خط کشیده بودید — به‌طور کامل حذف شد؛ حالا انیمیشن آسمان (خورشید، ابرها، باران و برف، و ماه و ستاره‌ها در شب) تمام کارت را پر می‌کند و هیچ نواری رویش را نمی‌گیرد.</li><li>تقویم شمسی حالا رویداد شخصی دارد: هر روزی را انتخاب کنید، در کادر «رویدادهای من» عنوان رویداد و ساعتش (اختیاری) را بنویسید و «ثبت و ذخیره رویداد» را بزنید. رویدادها روی همان دستگاه ذخیره می‌شوند و بعد از بستن و دوباره باز کردن سایت هم سر جایشان می‌مانند؛ روزهای دارای رویداد یک نقطهٔ آبی زیر عددشان دارند و هر رویداد را می‌شود با دکمهٔ ✕ حذف کرد.</li><li>لینک کارت «خرید بسته اینترنت» اصلاح شد: قبلاً صفحهٔ اصلی سایت ۷۲۴ باز می‌شد، حالا با زدن کارت مستقیم صفحهٔ خرید بسته اینترنت ۷۲۴ باز می‌شود تا همان‌جا بسته‌های اپراتورها را ببینید و بخرید. کارت «خرید شارژ» مثل قبل به صفحهٔ خرید شارژ ۷۲۴ می‌رود.</li><li>هر سه تغییر در مرورگرهای دسکتاپ هم اعمال شده‌اند: کارت آب‌وهوا آنجا هم بدون نوار زنده است، رویدادهای تقویم در پنجرهٔ وسط‌چین دسکتاپ هم ثبت و ذخیره می‌شوند و کارت اینترنت همان لینک درست را باز می‌کند.</li></ul></div>
+    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۲۴ — جدید</span><h3>صحنهٔ زندهٔ آسمان در آب‌وهوا و اذان: مسیر خورشید، آسمانِ هماهنگ با ساعت روز و شیشهٔ ماتِ اطلاعات</h3><time>۴ آذر ۱۴۰۵</time><ul><li>صحنهٔ زنده و کامل‌تر: خورشید با پرتوهای چرخان و هالهٔ نور می‌تابد، ابرها آرام از آسمان رد می‌شوند و گاهی چند پرنده پرواز می‌کنند؛ شب‌ها ماه و ستاره‌های چشمک‌زن می‌آیند، باران قطره‌های واقعی می‌بارد و برف دانه‌دانه و تاب‌خوران پایین می‌آید — و صحنه با وضعیت واقعی هوای استان انتخابی هماهنگ است.</li><li>قوس مسیر خورشید: در صحنهٔ آب‌وهوا هم قوس نیم‌دایرهٔ طلوع تا غروب اضافه شد و خورشید روی همان مسیر حرکت می‌کند؛ شب‌ها ماه جای آن را روی قوس می‌گیرد. صحنهٔ اذان هم همین مسیر را با خورشید پرتودار و ماه شبانه دارد.</li><li>آسمان بر اساس ساعت واقعی روز: رنگ آسمان هر دو صحنه با ساعت عوض می‌شود — صبح نارنجی ملایم، ظهر آبی، غروب بنفش و شب تیره با ستاره.</li><li>مینیمال ولی پر: روی صحنهٔ آب‌وهوا نام شهر و دمای بزرگ با شیشهٔ مات آمد تا فضای خالی پر شود؛ روی صحنهٔ اذان هم نام اذان بعدی و ساعتش با همان شیشهٔ مات روی صحنه نمایش داده می‌شود.</li><li>هر چهار تغییر در مرورگرهای دسکتاپ هم اعمال شده‌اند؛ صحنه‌ها آنجا هم زنده‌اند و با ساعت روز هماهنگ می‌شوند.</li></ul></div>
   </div>
 </template>
 
@@ -1742,16 +1784,38 @@ var PROV=[
 function hourlyFor(w){ if(w.hr&&w.hr.length===24)return w.hr.slice(); var arr=[];for(var h=0;h<24;h++){var v=w.lo+(w.hi-w.lo)*Math.max(0,Math.sin((h-6)/24*Math.PI*1.9)); if(h<6||h>19)v=w.lo+((h+3)%5)*0.4; arr.push(Math.round(v*10)/10);} return arr;}
 function weekFor(w){var days=["امروز","پنجشنبه","جمعه","شنبه","یکشنبه","دوشنبه","سه‌شنبه"];var out=[];for(var i=0;i<7;i++){var dt=new Date(2026,10,25+i);var tj=d2j(g2d(dt.getFullYear(),dt.getMonth()+1,dt.getDate()));out.push({d:days[i],date:faNum(tj.jd)+" "+JMNAME[tj.jm-1],hi:(w.wkHi&&w.wkHi[i]!=null)?w.wkHi[i]:w.hi,lo:(w.wkLo&&w.wkLo[i]!=null)?w.wkLo[i]:w.lo,mm:(w.wkMm&&w.wkMm[i]!=null)?w.wkMm[i]:0,cm:(w.wkCm&&w.wkCm[i]!=null)?w.wkCm[i]:0,cond:(w.wkC&&w.wkC[i])?w.wkC[i]:(w.cond||"sun"),condFa:(w.wkCf&&w.wkCf[i])?w.wkCf[i]:(w.condFa||""),wind:(w.wkW&&w.wkW[i]!=null)?w.wkW[i]:0});}return out;}
 var WXCTX={prov:null,hrs:[],sel:0};
+/* v3.24 — one living-sky engine for both scene cards: the sky phase comes from the real clock measured against the province's own sunrise/sunset, and the same builder paints twinkling stars, clouds crossing the whole sky, occasional birds, real rain and swaying snow */
+function skyMin(t){ var e=enNum(String(t)).split(":"); return (+e[0])*60+(+e[1]); }
+function skyPhase(sr,ss,cur){ if(cur<sr-30||cur>=ss+35)return "night"; if(cur<sr+45)return "dawn"; if(cur<ss-60)return "day"; return "dusk"; }
+function sceneBits(phase,cond){
+  var html="";
+  if(phase==="night"){ var st=""; for(var q=0;q<16;q++){ var sz=2+((q*7)%3); st+='<span class="star" style="width:'+sz+'px;height:'+sz+'px;top:'+(6+((q*23)%62))+'%;inset-inline-start:'+(3+((q*29)%93))+'%;animation-delay:-'+((q*3)%24)/10+'s"></span>'; } html+=st; }
+  if(cond==="part"||cond==="cloud"||cond==="rain"||cond==="snow"||cond==="fog")html+='<div class="cloud c1"></div><div class="cloud c2"></div>';
+  if(cond==="cloud")html+='<div class="cloud c3"></div>';
+  if(cond==="sun"||cond==="part")html+='<div class="cloud far"></div>';
+  if(cond==="cloud"||cond==="rain")html+='<div class="cloud far f2"></div>';
+  if(phase!=="night"&&(cond==="sun"||cond==="part"||cond==="cloud")){
+    var bv='<svg viewBox="0 0 28 14" aria-hidden="true"><path d="M2 9 Q8 2 14 9 Q20 2 26 9"/></svg>';
+    html+='<span class="bird b1">'+bv+'</span><span class="bird b2">'+bv+'</span><span class="bird b3">'+bv+'</span>';
+  }
+  if(cond==="rain"){ html+='<div class="rain">'; for(var j=0;j<22;j++){ html+='<i style="inset-inline-start:'+(3+j*4.4)+'%;animation-duration:'+(0.65+((j*37)%45)/100)+'s;animation-delay:-'+((j*13)%12)/10+'s"></i>'; } html+='</div>'; }
+  if(cond==="snow"){ html+='<div class="snow">'; for(var k=0;k<18;k++){ var fs=5+((k*13)%4); html+='<i style="inset-inline-start:'+(4+k*5.3)+'%;width:'+fs+'px;height:'+fs+'px;animation-duration:'+(2.4+((k*29)%140)/100)+'s;animation-delay:-'+((k*17)%24)/10+'s"></i>'; } html+='</div>'; }
+  return html;
+}
 function buildScene(w){
-  var s=document.getElementById("wxAnim"); if(!s)return; var html="";
-  var nowH=new Date().getHours(),night=nowH>=19||nowH<6;
-  var scEl=document.getElementById("wxScene"); if(scEl)scEl.classList.toggle("night",night);
-  if(night){var st="";for(var q=0;q<12;q++){var sz=2+((q*7)%3);st+='<span class="star" style="width:'+sz+'px;height:'+sz+'px;top:'+(30+((q*23)%58))+'%;inset-inline-start:'+(4+((q*29)%90))+'%;animation-delay:-'+((q*3)%20)/10+'s"></span>';}html+=st;}
-  if(night&&(w.cond==="sun"||w.cond==="part")){html+='<div class="moon-el"></div>';}
-  else if(w.cond==="sun"||w.cond==="part"){var rays="";for(var i=0;i<8;i++)rays+='<i style="transform:rotate('+(i*45)+'deg)"></i>';html+='<div class="sun"><div class="rays">'+rays+'</div><div class="core"></div></div>';}
-  if(w.cond==="part"||w.cond==="cloud"||w.cond==="rain")html+='<div class="cloud c1"></div><div class="cloud c2"></div>';
-  if(w.cond==="rain"){html+='<div class="rain">';for(var j=0;j<16;j++){html+='<i style="inset-inline-start:'+(4+j*6)+'%;animation-duration:'+(0.7+((j*37)%50)/100)+'s;animation-delay:-'+((j*13)%10)/10+'s"></i>';}html+='</div>';}
-  if(w.cond==="snow"){html+='<div class="snow">';for(var k=0;k<14;k++){html+='<i style="inset-inline-start:'+(5+k*7)+'%;animation-duration:'+(2.2+((k*29)%120)/100)+'s;animation-delay:-'+((k*17)%20)/10+'s"></i>';}html+='</div>';}
+  var s=document.getElementById("wxAnim"); if(!s)return;
+  var now=new Date(),cur=now.getHours()*60+now.getMinutes();
+  var sr=skyMin(w.sr),ss=skyMin(w.ss),phase=skyPhase(sr,ss,cur);
+  var scEl=document.getElementById("wxScene"); if(scEl){ scEl.classList.remove("sky-dawn","sky-day","sky-dusk","sky-night","night"); scEl.classList.add("sky-"+phase); }
+  var html=sceneBits(phase,w.cond);
+  if(phase==="night"){
+    var np=cur>=ss?(cur-ss)/((sr+1440)-ss):(cur+1440-ss)/((sr+1440)-ss); np=Math.min(1,Math.max(0,np));
+    html+='<div class="wx-arc"></div><div class="moon-el" style="inset-inline-start:calc('+(18+np*64)+'% - 22px);top:'+(104-Math.sin(np*Math.PI)*92)+'px"></div>';
+  } else if(w.cond==="sun"||w.cond==="part"||w.cond==="cloud"){
+    var pct=Math.min(1,Math.max(0,(cur-sr)/(ss-sr))),rays="";
+    for(var i=0;i<8;i++)rays+='<i style="transform:rotate('+(i*45)+'deg)"></i>';
+    html+='<div class="wx-arc"></div><div class="sun" style="inset-inline-start:calc('+(18+pct*64)+'% - 32px);top:'+(94-Math.sin(pct*Math.PI)*92)+'px"><div class="halo"></div><div class="rays">'+rays+'</div><div class="core"></div></div>';
+  }
   s.innerHTML=html;
 }
 function paintWx(idx){
@@ -1759,6 +1823,9 @@ function paintWx(idx){
   WXCTX.prov=w;
   var place=(w.c===w.p)?w.c:(w.c+" ("+w.p+")");
   document.getElementById("wxTemp").textContent=faNum(w.t)+"°";
+  var ovC=document.getElementById("wxOvCity"); if(ovC)ovC.textContent=place;
+  var ovT=document.getElementById("wxOvTemp"); if(ovT)ovT.textContent=faNum(w.t)+"°";
+  var ovD=document.getElementById("wxOvCond"); if(ovD)ovD.textContent=w.condFa;
   document.getElementById("wxCond").textContent=w.condFa+" — "+place;
   document.getElementById("wxRange").textContent="بیشینه "+faNum(w.hi)+"° • کمینه "+faNum(w.lo)+"°";
   document.getElementById("wxFeels").textContent="دمای محسوس: "+faNum(w.feels!=null?w.feels:w.t)+"°";
@@ -2197,6 +2264,14 @@ function initAzan(){
     var rows=[];
     times.forEach(function(t,i){ var d=document.createElement("div"); d.className="azan-row"; d.innerHTML="<span style='font-weight:800'>"+names[i]+"</span><span class='at'>"+azFmt(t)+"</span>"; list.appendChild(d); rows.push(d); });
     var countEl=document.getElementById("azCount"),nameEl=document.getElementById("azNextName"),progEl=document.getElementById("azProg"),sunEl=document.getElementById("azSun");
+    var sceneEl=document.getElementById("azScene"),animEl=document.getElementById("azAnim"),moonEl=document.getElementById("azMoon"),lastPhase="";
+    if(sunEl&&!sunEl.firstChild){ var r8=""; for(var ri=0;ri<8;ri++)r8+='<i style="transform:rotate('+(ri*45)+'deg)"></i>'; sunEl.innerHTML='<span class="rays">'+r8+'</span>'; }
+    function paintSky(){
+      var n2=new Date(),ph=skyPhase(times[1],times[4],n2.getHours()*60+n2.getMinutes());
+      if(ph===lastPhase)return; lastPhase=ph;
+      if(sceneEl){ sceneEl.classList.remove("sky-dawn","sky-day","sky-dusk","sky-night"); sceneEl.classList.add("sky-"+ph); }
+      if(animEl)animEl.innerHTML=sceneBits(ph,w.cond);
+    }
     function tick(){
       if(!document.body.contains(countEl)){ clearInterval(azTimer); azTimer=null; return; }
       var n=new Date(); var cur=n.getHours()*60+n.getMinutes()+n.getSeconds()/60;
@@ -2213,9 +2288,20 @@ function initAzan(){
       var sr=times[1],ss=times[4],pct=Math.min(1,Math.max(0,(cur-sr)/(ss-sr)));
       /* The scene card's titled header is live: a real ticking clock plus how far the sun has travelled and what the next prayer is */
       var azCk=document.getElementById("azSceneClock"); if(azCk)azCk.textContent=String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0")+":"+String(n.getSeconds()).padStart(2,"0");
-      var azSb=document.getElementById("azSceneSub"); if(azSb)azSb.textContent=faNum(Math.round(pct*100))+"٪ از مسیر امروز خورشید گذشته • اذان بعدی: "+nextName+" ساعت "+azFmt(nextT);
-      sunEl.style.insetInlineStart="calc("+(6+pct*76)+"% - 17px)";
-      sunEl.style.top=(106-Math.sin(pct*Math.PI)*38)+"px";
+      var azSb=document.getElementById("azSceneSub"); if(azSb)azSb.textContent="طلوع "+azFmt(sr)+" • غروب "+azFmt(ss)+" • "+faNum(Math.round(pct*100))+"٪ از مسیر امروز خورشید گذشته";
+      /* v3.24: the scene sky follows the real time of day, the frosted chip on the scene carries the next prayer and its time, and at night the moon rides the arc instead of the sun */
+      paintSky();
+      var ovN=document.getElementById("azOvName"); if(ovN)ovN.textContent=nextName;
+      var ovT2=document.getElementById("azOvTime"); if(ovT2)ovT2.textContent=azFmt(nextT);
+      if(cur<sr||cur>=ss){
+        sunEl.style.display="none";
+        if(moonEl){ moonEl.hidden=false; var np2=cur>=ss?(cur-ss)/((sr+1440)-ss):(cur+1440-ss)/((sr+1440)-ss); np2=Math.min(1,Math.max(0,np2)); moonEl.style.insetInlineStart="calc("+(5+np2*82)+"% - 18px)"; moonEl.style.top=(132-Math.sin(np2*Math.PI)*54)+"px"; }
+      } else {
+        sunEl.style.display="";
+        if(moonEl)moonEl.hidden=true;
+        sunEl.style.insetInlineStart="calc("+(5+pct*82)+"% - 17px)";
+        sunEl.style.top=(132-Math.sin(pct*Math.PI)*54)+"px";
+      }
     }
     tick();
     if(azTimer)clearInterval(azTimer);
@@ -2540,7 +2626,7 @@ function initUpdate(){
           if(doneEl)doneEl.hidden=false;
           checkBtn.disabled=false; checkBtn.style.opacity=""; checkBtn.textContent="🔄 بررسی دوباره";
           busy=false;
-          showToast("✅ سایت شما به‌روز است — نسخه ۳٫۲۳ آخرین نسخه است.");
+          showToast("✅ سایت شما به‌روز است — نسخه ۳٫۲۴ آخرین نسخه است.");
           checkSiteUpdate();
         },420);
       }
@@ -2640,7 +2726,7 @@ function openExpDetail(keys,cats,totalOut,tappedKey){
 }
 
 /* ===== SITE-UPDATE PROMPT (v3.19) — while the user is on the site, the page quietly re-reads its own published file; when a newer version number shows up there, a glass window in the site's own style appears and the user updates manually with its button (a real reload). «بعداً» dismisses it for this session. ===== */
-var SITE_VERSION="3.23";
+var SITE_VERSION="3.24";
 var VER_KEY="amir-dastyar-site-version";
 var uvBack=document.getElementById("uvBack"),uvShownFor=null,uvDismissed=false;
 function verFa(v){ return faNum(String(v).replace(".", "٫")); }
