@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark" />
 <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
 <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)" />
-<meta name="site-version" content="3.30" />
+<meta name="site-version" content="3.31" />
 <title>AMIR Dastyar | امیر دستیار</title>
 <meta name="description" content="AMIR Dastyar — دستیار کاربردی ایران: آب‌وهوای استان‌ها با نمودار، نرخ ارز و طلا، اخبار، معدل دانشگاهی و ابزارها." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1107,6 +1107,15 @@ a.feat{text-decoration:none}
 .vpn-icon .upd-core{background:linear-gradient(145deg,#ffb03a,#f97316);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -10px 18px rgba(0,0,0,.16),0 16px 32px rgba(249,115,22,.35)}
 /* === v3.29: scrolling can no longer move cards — in edit mode a press must be held still briefly before its card lifts; a press that moves right away only scrolls the page (handled manually in the drag script, since cards keep touch-action:none for reliable dragging) and never reorders; while a card is actually being dragged the whole page is scroll-locked so the card stays exactly under the finger === */
 .feat-grid.editing .feat.dragging{touch-action:none}
+/* === v3.31: smooth drag & scroll — while a card is being dragged the edit-mode wiggle on every card is paused (a screenful of backdrop-blurred cards re-animating on every frame was the repaint load that made scrolling crawl mid-drag); the dragged card gets its own compositor layer so it glides without repainting the glass beneath it === */
+html.card-drag-lock .feat-grid.editing .feat{animation:none!important}
+html.card-drag-lock .feat.dragging{will-change:transform}
+/* === v3.31: the edit-mode bar floats — fixed above the bottom nav capsule and always on screen while editing (it no longer sits in the flow at the end of the page where it scrolled away); its drop shadow is removed so it casts nothing over the cards, and the page gains extra bottom room in edit mode so the last cards can scroll clear of the bar; the toast also rides higher while editing so it never lands on top of the bar === */
+.edit-bar{position:fixed;left:0;right:0;bottom:calc(92px + var(--sab));margin:0 auto;width:min(560px,calc(100% - 28px));z-index:95;box-shadow:none;animation:editBarIn .38s cubic-bezier(.22,1.27,.36,1) both}
+@keyframes editBarIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion: reduce){.edit-bar{animation:none}}
+body:has(.feat-grid.editing){padding-bottom:calc(216px + var(--sab))}
+body:has(.feat-grid.editing) .toast{bottom:calc(238px + var(--sab))}
 html.card-drag-lock{overscroll-behavior:none}
 html.card-drag-lock .feat{touch-action:none!important}
 html.card-drag-lock .feat-grid{touch-action:none}
@@ -1120,7 +1129,7 @@ html.card-drag-lock .feat-grid{touch-action:none}
     <div class="upd-hero">
       <div class="upd-icon" aria-hidden="true"><span class="upd-ring"></span><span class="upd-ring r2"></span><span class="upd-core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6.5 11 12 5.5 17.5 11"/><path d="M5 21h14" stroke-width="2.4"/></svg></span><span class="upd-dot"></span></div>
       <div class="upd-name">AMIR Dastyar</div>
-      <span class="upd-ver">نسخه ۳٫۳۰</span>
+      <span class="upd-ver">نسخه ۳٫۳۱</span>
       <p class="upd-sub">سایت در حال آماده‌سازی است؛ چند لحظه صبر کنید تا همه ابزارها بارگذاری شوند.</p>
     </div>
     <div class="upd-load" id="bootLoad">
@@ -1157,7 +1166,7 @@ html.card-drag-lock .feat-grid{touch-action:none}
   </div>
   <div class="edit-bar" id="editBar" hidden><span>حالت ویرایش کارت‌ها — برای جابه‌جایی، هر کارت را کمی نگه دارید و بعد بکشید؛ کشیدن سریع فقط صفحه را اسکرول می‌کند.</span><button type="button" id="editDone">تمام شد</button></div>
 
-  <footer>نسخه ۳٫۳۰ • <span dir="ltr" style="font-weight:700">Created by Amir</span> • © ۱۴۰۵</footer>
+  <footer>نسخه ۳٫۳۱ • <span dir="ltr" style="font-weight:700">Created by Amir</span> • © ۱۴۰۵</footer>
 </main>
 
 <!-- BOTTOM LIQUID-GLASS CAPSULE NAV -->
@@ -1329,7 +1338,7 @@ html.card-drag-lock .feat-grid{touch-action:none}
   <div class="upd-hero">
     <div class="upd-icon" aria-hidden="true"><span class="upd-ring"></span><span class="upd-ring r2"></span><span class="upd-core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6.5 11 12 5.5 17.5 11"/><path d="M5 21h14" stroke-width="2.4"/></svg></span><span class="upd-dot"></span></div>
     <div class="upd-name">AMIR Dastyar</div>
-    <span class="upd-ver">نسخه ۳٫۳۰</span>
+    <span class="upd-ver">نسخه ۳٫۳۱</span>
     <p class="upd-sub">برای دریافت تازه‌ترین امکانات و بهبودها، آپدیت را بررسی کنید.</p>
   </div>
   <div class="upd-load" id="updLoad" hidden>
@@ -1337,12 +1346,12 @@ html.card-drag-lock .feat-grid{touch-action:none}
     <div class="upd-bar"><i id="updProg"></i></div>
     <div class="upd-steps"><span>اتصال</span><span>بررسی نسخه</span><span>دریافت اطلاعات</span><span>آماده‌سازی</span></div>
   </div>
-  <div class="upd-done" id="updDone" hidden><span class="upd-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>سایت شما به‌روز است؛ نسخه ۳٫۳۰ آخرین نسخه است.</span></div>
+  <div class="upd-done" id="updDone" hidden><span class="upd-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>سایت شما به‌روز است؛ نسخه ۳٫۳۱ آخرین نسخه است.</span></div>
   <button class="btn primary" id="updCheck" type="button" style="width:100%;justify-content:center;margin-top:14px">🔄 بررسی و آپدیت</button>
   <div id="updChangelogWrap">
   <h4>📣 تازه‌های سایت</h4>
   <div class="update-list">
-    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۳۰ — جدید</span><h3>لینک تازهٔ کارت فیلم و سریال</h3><time>۴ آذر ۱۴۰۵</time><ul><li>لینک کارت «فیلم و سریال» به نشانی تازهٔ f2mw.top تغییر کرد تا همیشه به سایت فعال فیلم و سریال برسید.</li></ul></div>
+    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۳۱ — جدید</span><h3>جابه‌جایی روان‌تر کارت‌ها</h3><time>۴ آذر ۱۴۰۵</time><ul><li>کندی اسکرول موقع جابه‌جایی کارت‌ها برطرف شد؛ حالا کشیدن کارت و اسکرول لبهٔ صفحه در حالت ویرایش نرم و سریع است و کارت دقیقاً زیر انگشت حرکت می‌کند. نوار «حالت ویرایش» هم شناور شد و هنگام اسکرول همیشه بالای ناوبری پایین صفحه می‌ماند.</li></ul></div>
   </div>
   <button class="btn primary" id="updSeenBtn" type="button" style="margin-top:4px">متوجه شدم</button>
   </div>
@@ -1350,7 +1359,7 @@ html.card-drag-lock .feat-grid{touch-action:none}
 
 <template id="tpl-changelog">
   <div class="update-list">
-    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۳۰ — جدید</span><h3>لینک تازهٔ کارت فیلم و سریال</h3><time>۴ آذر ۱۴۰۵</time><ul><li>لینک کارت «فیلم و سریال» به نشانی تازهٔ f2mw.top تغییر کرد تا همیشه به سایت فعال فیلم و سریال برسید.</li></ul></div>
+    <div class="update glass" style="box-shadow:none"><span class="ver">نسخه ۳٫۳۱ — جدید</span><h3>جابه‌جایی روان‌تر کارت‌ها</h3><time>۴ آذر ۱۴۰۵</time><ul><li>کندی اسکرول موقع جابه‌جایی کارت‌ها برطرف شد؛ حالا کشیدن کارت و اسکرول لبهٔ صفحه در حالت ویرایش نرم و سریع است و کارت دقیقاً زیر انگشت حرکت می‌کند. نوار «حالت ویرایش» هم شناور شد و هنگام اسکرول همیشه بالای ناوبری پایین صفحه می‌ماند.</li></ul></div>
   </div>
 </template>
 
@@ -1711,16 +1720,34 @@ var suppressCardClick=false;
   if(doneBtn)doneBtn.addEventListener("click",exitEdit);
   cards.forEach(function(c){ var p=c.querySelector(".edit-pencil"); if(p)p.addEventListener("click",function(e){ e.stopPropagation(); exitEdit(); }); });
   /* Drag to reorder (v3.29 \u2014 scroll can no longer move cards). The reported bug: while trying to reorder, any scroll gesture moved/reordered cards instead. Causes in the old build: (1) in edit mode EVERY touch on a card became a drag after 7px and a grid-wide touchmove guard killed page scrolling entirely, so a scroll attempt on a card (the grid fills the screen) always turned into a card drag; (2) a long-press that entered edit mode could be armed by a slow scroll, because nothing cancelled the hold timer when the page actually scrolled; (3) drag deltas and hit-testing were computed in viewport (client) coordinates, so any page scroll during a drag shifted the geometry and swapped cards on its own. Fix: gestures are disambiguated \u2014 a press in edit mode must be held still briefly (lift timer) before it becomes a drag, while a press that moves right away is treated purely as a scroll (the lift is cancelled and the page is scrolled manually by the move deltas, nothing reorders); any real page scroll cancels a pending long-press/lift; all drag maths runs in document coordinates (client + scroll), so scrolling can never feed the transform or the swap test; while a card is actually being dragged the page is scroll-locked (document touchmove/wheel guards + card-drag-lock class) and dragging to the top/bottom edge auto-scrolls deliberately, with the document-coordinate maths keeping the card glued to the finger. */
+  /* v3.31 — «scrolling gets slow while moving cards»: three performance causes, all in the drag path. (1) pointermove ran the transform write + full sibling hit-test synchronously on every event (several per frame on fast screens), and the hit-test re-measured the grid rect for every sibling — the main thread fell behind the finger. Now pointermove only records the position and one rAF callback per frame applies the transform and tests swaps, with the grid rect measured once per test. (2) Edge auto-scroll stepped a fixed px per 16ms timer tick, so its real speed depended on the timer/refresh rate (half speed at 60Hz); it is now distance-per-second based. (3) In edit mode every card runs the infinite wiggle animation over backdrop-blurred glass, so during a drag the browser repainted the whole screenful of blurred cards on every scroll frame; the wiggle is paused while a drag is active (card-drag-lock) and the dragged card gets will-change:transform. Gesture rules from v3.29 are unchanged. */
   grid.addEventListener("contextmenu",function(e){e.preventDefault();});
   var anyCardDrag=false;
   document.addEventListener("touchmove",function(e){ if(anyCardDrag&&e.cancelable)e.preventDefault(); },{passive:false});
   document.addEventListener("wheel",function(e){ if(anyCardDrag&&e.cancelable)e.preventDefault(); },{passive:false});
   cards.forEach(function(card){
-    var sx=0,sy=0,sDocX=0,sDocY=0,scrollAtDown=0,holdTimer=null,liftTimer=null,dragging=false,scrolling=false,lastSX=0,lastSY=0,pid=null,ptype="",dx=0,dy=0,compX=0,compY=0,lastCX=0,lastCY=0,asTimer=null;
+    var sx=0,sy=0,sDocX=0,sDocY=0,scrollAtDown=0,holdTimer=null,liftTimer=null,dragging=false,scrolling=false,lastSX=0,lastSY=0,pid=null,ptype="",dx=0,dy=0,compX=0,compY=0,lastCX=0,lastCY=0,asTimer=null,frameId=0,frameQueued=false;
     function clearHold(){ if(holdTimer){clearTimeout(holdTimer);holdTimer=null;} }
     function clearLift(){ if(liftTimer){clearTimeout(liftTimer);liftTimer=null;} }
     function clearTimers(){ clearHold(); clearLift(); }
     function applyDrag(){ card.style.transform="translate("+(dx+compX)+"px,"+(dy+compY)+"px) scale(1.045)"; }
+    /* v3.31: pointermove only records the finger; the transform write + swap test run once per animation frame. The old handler did both synchronously on EVERY pointermove — several per frame on fast screens — and each checkSwap re-measured every sibling, so the main thread fell behind the finger and both the drag and the page scroll felt slow and sticky. */
+    function queueFrame(){
+      if(frameQueued)return;
+      frameQueued=true;
+      frameId=requestAnimationFrame(runFrame);
+    }
+    function cancelFrame(){
+      if(frameId)cancelAnimationFrame(frameId);
+      frameId=0; frameQueued=false;
+    }
+    function runFrame(){
+      frameQueued=false; frameId=0;
+      if(!dragging)return;
+      dx=(lastCX+window.scrollX)-sDocX; dy=(lastCY+window.scrollY)-sDocY;
+      checkSwap(lastCX+window.scrollX,lastCY+window.scrollY,lastCX,lastCY);
+      applyDrag();
+    }
     function lockScroll(on){
       anyCardDrag=on;
       document.documentElement.classList.toggle("card-drag-lock",on);
@@ -1728,6 +1755,7 @@ var suppressCardClick=false;
     function startDrag(){
       if(dragging)return;
       clearLift();
+      cancelFrame();
       dragging=true; suppressCardClick=true;
       dx=0; dy=0; compX=0; compY=0;
       lastCX=sx; lastCY=sy;
@@ -1741,12 +1769,11 @@ var suppressCardClick=false;
       stopAutoScroll();
       asTimer=setInterval(autoScrollStep,16);
     }
-    /* Layout rect of a card in DOCUMENT coordinates, built from offset geometry only — transforms (FLIP glide, wiggle, the drag itself) never distort it, and adding the grid's own document position makes it immune to page scroll */
-    function layoutRect(el){
-      var gr=grid.getBoundingClientRect();
-      var gDocL=gr.left+window.scrollX, gDocT=gr.top+window.scrollY, lx, ly;
-      if(el.offsetParent===grid){ lx=gDocL+grid.clientLeft+el.offsetLeft; ly=gDocT+grid.clientTop+el.offsetTop; }
-      else { lx=gDocL+(el.offsetLeft-grid.offsetLeft); ly=gDocT+(el.offsetTop-grid.offsetTop); }
+    /* Layout rect of a card in DOCUMENT coordinates, built from offset geometry only — transforms (FLIP glide, wiggle, the drag itself) never distort it, and adding the grid's own document position makes it immune to page scroll. v3.31: the grid's viewport rect is measured ONCE per hit-test and handed in (org) — the old version re-measured it for every sibling, forcing a fresh layout read per card on every pointermove. */
+    function layoutRect(el,org){
+      var lx, ly;
+      if(el.offsetParent===grid){ lx=org.x+grid.clientLeft+el.offsetLeft; ly=org.y+grid.clientTop+el.offsetTop; }
+      else { lx=org.x+(el.offsetLeft-grid.offsetLeft); ly=org.y+(el.offsetTop-grid.offsetTop); }
       return {left:lx,top:ly,width:el.offsetWidth,height:el.offsetHeight};
     }
     /* Swap the dragged card with a sibling: siblings glide into their new slots (FLIP measured on layout offsets), and the dragged card's transform is compensated by its own layout shift so it does not jump */
@@ -1776,8 +1803,10 @@ var suppressCardClick=false;
     /* Hit-test the pointer (document coordinates) against sibling slots — at most one swap per call; after a swap the dragged card owns that slot, so the same spot cannot trigger a swap back */
     function checkSwap(docX,docY,clientX,clientY){
       var sibs=Array.prototype.slice.call(grid.querySelectorAll(".feat:not(.dragging)"));
+      var gr=grid.getBoundingClientRect();
+      var org={x:gr.left+window.scrollX,y:gr.top+window.scrollY};
       for(var i=0;i<sibs.length;i++){
-        var r=layoutRect(sibs[i]);
+        var r=layoutRect(sibs[i],org);
         if(docX>=r.left-4&&docX<=r.left+r.width+4&&docY>=r.top-4&&docY<=r.top+r.height+4){
           var cx=r.left+r.width/2,cy=r.top+r.height/2,after;
           if(docY>cy+r.height*0.24)after=true;
@@ -1788,20 +1817,26 @@ var suppressCardClick=false;
         }
       }
     }
-    /* Deliberate edge auto-scroll while dragging: holding the card near the top/bottom edge scrolls the page; because dx/dy are document deltas, the card stays glued to the finger and swaps follow the finger, not the scroll */
-    function stopAutoScroll(){ if(asTimer){clearInterval(asTimer);asTimer=null;} }
+    /* Deliberate edge auto-scroll while dragging: holding the card near the top/bottom edge scrolls the page; because dx/dy are document deltas, the card stays glued to the finger and swaps follow the finger, not the scroll. v3.31: the step is frame-rate independent — distance past the edge (px) × elapsed seconds — so it covers the same ground per second at 60Hz and 120Hz alike; the old fixed px-per-tick step literally halved in speed on 60Hz screens, which is exactly the «scroll gets slow while I move cards» report. The swap test + transform run through the same per-frame queue as the pointer path, so an auto-scroll tick never does its own extra layout pass. */
+    var asLastT=0;
+    function stopAutoScroll(){ if(asTimer){clearInterval(asTimer);asTimer=null;} asLastT=0; }
     function autoScrollStep(){
       if(!dragging)return;
-      var vh=window.innerHeight,edge=78,step=0;
-      if(lastCY<edge)step=-Math.max(2,Math.ceil((edge-lastCY)/5));
-      else if(lastCY>vh-edge)step=Math.max(2,Math.ceil((lastCY-(vh-edge))/5));
+      var now=(window.performance&&performance.now)?performance.now():Date.now();
+      var dt=asLastT?Math.min(50,now-asLastT):16.7;
+      asLastT=now;
+      var vh=window.innerHeight,edge=78,over=0;
+      if(lastCY<edge)over=-(edge-lastCY);
+      else if(lastCY>vh-edge)over=lastCY-(vh-edge);
+      if(!over)return;
+      /* ease in from ~140px/s just inside the edge to ~1100px/s at the very edge of the screen */
+      var speed=140+960*Math.min(1,Math.abs(over)/edge);
+      var step=Math.round(over/Math.abs(over)*speed*dt/1000);
       if(!step)return;
       var beforeY=window.scrollY;
       window.scrollBy(0,step);
       if(window.scrollY===beforeY)return;
-      dx=(lastCX+window.scrollX)-sDocX; dy=(lastCY+window.scrollY)-sDocY;
-      checkSwap(lastCX+window.scrollX,lastCY+window.scrollY,lastCX,lastCY);
-      applyDrag();
+      queueFrame();
     }
     card.addEventListener("pointerdown",function(e){
       if(e.button!==undefined&&e.button!==0)return;
@@ -1841,13 +1876,12 @@ var suppressCardClick=false;
         else { if(Math.abs(mCliX)+Math.abs(mCliY)>12)clearHold(); return; }
       }
       if(e.cancelable)e.preventDefault();
-      dx=mDocX; dy=mDocY;
-      checkSwap(docX,docY,e.clientX,e.clientY);
-      applyDrag();
+      queueFrame(); /* v3.31: record-only — runFrame applies the transform + swap test once per frame */
     });
     function endDrag(){
       clearTimers();
       stopAutoScroll();
+      cancelFrame();
       if(dragging){
         lockScroll(false);
         card.classList.remove("dragging");
@@ -2870,7 +2904,7 @@ function openExpDetail(keys,cats,totalOut,tappedKey){
 }
 
 /* ===== SITE-UPDATE PROMPT (v3.19) — while the user is on the site, the page quietly re-reads its own published file; when a newer version number shows up there, a glass window in the site's own style appears and the user updates manually with its button (a real reload). «بعداً» dismisses it for this session. ===== */
-var SITE_VERSION="3.30";
+var SITE_VERSION="3.31";
 var VER_KEY="amir-dastyar-site-version";
 var uvBack=document.getElementById("uvBack"),uvShownFor=null,uvDismissed=false;
 function verFa(v){ return faNum(String(v).replace(".", "٫")); }
