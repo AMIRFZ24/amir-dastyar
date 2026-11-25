@@ -1,4 +1,4 @@
-/* AMIR Dastyar — service worker (v3.41)
+/* AMIR Dastyar — service worker (v3.42)
    Caches the app shell (the page itself, the manifest and the icons) so the
    installed app opens instantly, like a native app, and still opens when
    the phone is offline. Since v3.41 page loads are stale-while-revalidate:
@@ -9,8 +9,11 @@
    expects: the version-check probes (?__v=) and the update button's
    cache-busting reload (?__upd=). Live data inside the page (weather,
    rates, news) keeps coming from the network whenever there is a
-   connection; only the shell is served from the cache. */
-var CACHE = "amir-dastyar-shell-v3.41";
+   connection; only the shell is served from the cache. v3.42: the cache
+   name moves with the site version, so installing this worker deletes the
+   previous shell outright — one less way for an old build to linger and
+   re-ask for an update it already has. */
+var CACHE = "amir-dastyar-shell-v3.42";
 var SHELL = [
   "./",
   "./index.html",
